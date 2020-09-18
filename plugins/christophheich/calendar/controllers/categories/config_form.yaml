@@ -1,0 +1,10 @@
+name: Categories
+form: $/christophheich/calendar/models/category/fields.yaml
+modelClass: ChristophHeich\Calendar\Models\Category
+defaultRedirect: christophheich/calendar/categories
+create:
+    redirect: 'christophheich/calendar/categories/update/:id'
+    redirectClose: christophheich/calendar/categories
+update:
+    redirect: christophheich/calendar/categories
+    redirectClose: christophheich/calendar/categories

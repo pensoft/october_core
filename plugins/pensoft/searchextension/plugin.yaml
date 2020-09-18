@@ -1,0 +1,4 @@
+plugin:
+    name: 'pensoft.searchextension::lang.plugin.name'
+    description: 'pensoft.searchextension::lang.plugin.description'
+    author: Pensoft

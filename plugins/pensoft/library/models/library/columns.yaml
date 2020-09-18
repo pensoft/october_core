@@ -1,0 +1,36 @@
+columns:
+    title:
+        label: Title
+        type: text
+        searchable: true
+        sortable: true
+    authors:
+        label: authors
+        type: text
+        sortable: true
+    year:
+        label: year
+        type: text
+        sortable: true
+    volume_issue:
+        label: volume_issue
+        type: text
+        sortable: true
+    publisher:
+        label: publisher
+        type: text
+        sortable: true
+    pages:
+        label: pages
+        type: number
+    doi:
+        label: doi
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+        sortable: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        sortable: true

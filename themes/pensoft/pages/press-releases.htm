@@ -1,0 +1,62 @@
+title = "Press releases"
+url = "/media-center/press-releases"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "media_center.jpg"
+
+[builderList mediaPressReleasesList]
+modelClass = "pensoft\Media\Models\Pressreleases"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\Pressreleases;
+
+function onStart(){
+	$this['mediaPressreleasesList'] =  Pressreleases::get();
+}
+?>
+==
+<div class="container">
+	<div class="row">
+		{% set records = mediaPressreleasesList %}
+		{% set displayColumn = mediaPressreleasesList.displayColumn %}
+		{% set noRecordsMessage = mediaPressreleasesList.noRecordsMessage %}
+		{% set detailsPage = mediaPressreleasesList.detailsPage %}
+		{% set detailsKeyColumn = mediaPressreleasesList.detailsKeyColumn %}
+		{% set detailsUrlParameter = mediaPressreleasesList.detailsUrlParameter %}
+
+		{% for record in records %}
+		{# Use spaceless tag to remove spaces inside the A tag. #}
+		{% spaceless %}
+		<div class="news-item">
+			<div class="news-container">
+				<div class="news-title">
+					<h3 class="card-title"><a href="http://maia.pensoft.com/news/maia-meets-project-kip-inca-maia">{{record.name}}</a></h3>
+				</div>
+				<div class="text-published">{{record.date|date('j F Y')}}</div>
+				<div class="body">{{record.description}}</div>
+				<div class="row link">
+					{% if record.link %}
+						<div class="col-xs-3"><a class="btn-link" href="{{record.link}}">EurekAlert!</a></div>
+					{% endif %}
+					{% if record.link_cordis %}
+						<div class="col-xs-3"><a class="btn-link" href="{{record.link_cordis}}">CORDIS Wire</a></div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		{% endspaceless %}
+		{% else %}
+		{{ noRecordsMessage }}
+		{% endfor %}
+	</div>
+</div>

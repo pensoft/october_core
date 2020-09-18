@@ -1,0 +1,93 @@
+title = "Library"
+url = "/library"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[library]
+==
+<?php
+    use Pensoft\Library\Models\Library;
+    use Rych\ByteSize\ByteSize;
+    use Pensoft\Library\Classes\ZipFiles;
+
+    public function onStart()
+    {
+        $this->prepareVars();
+    }
+
+    public function prepareVars(){
+        $options = post('Filter', []);
+        $library = Library::isVisible()->listFrontEnd($options);
+        $this['records'] = $library->get();
+        $this['sortOptions'] = Library::$allowSortingOptions;
+        $this['sortTypesOptions'] = Library::$allowSortTypesOptions;
+        $this['total_file_size_bites'] = $this['records']->reduce(function($carry, $item){
+            if($item->file){
+                return $carry + $item->file->file_size;
+            }
+            return $carry;
+        }, 0);
+        $this['total_file_size'] = (new ByteSize())->format($this['total_file_size_bites']);
+    }
+
+    public function onFilterRecords(){
+        $this->prepareVars();
+    }
+    public function onKor(){
+        $zip = (new ZipFiles(new Library))->downloadFiles();
+        header("Content-type: application/zip");
+        header("Content-Disposition: attachment; filename=publications.zip");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        readfile($zip);
+        exit;
+    }
+?>
+==
+
+
+<div class="container">
+    {%if total_file_size_bites%}
+        <div class="row center-xs mb-1">
+            <div class="col-xs">
+                {{ form_open({request: 'onKor'}) }}
+                    <button type="submit" href="#" class="btn btn-secondary">Download all publications ({{total_file_size}})</button>
+                {{ form_close() }}
+            </div>
+        </div>
+    {%endif%}
+
+    {{ form_ajax('onFilterRecords', { update: {'components/libraries': '#partialLibraries'} }) }}
+
+        <div id="libraryForm" class="ui form libraryForm">
+            <div class="row">
+                <div class="col-xs">
+                    <div class="field">
+                        <select name="Filter[sort]">
+                            {% for code,option in sortOptions %}
+                            <option value="{{code}}">{{option}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs">
+                    <div class="field">
+                        <select name="Filter[type]">
+                            <option selected>All types of documents</option>
+                            {% for code,option in sortTypesOptions %}
+                                <option value="{{code}}">{{option}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    {{ form_close() }}
+
+    <div id="partialLibraries">
+        {% partial 'components/libraries' %}
+    </div>
+</div>

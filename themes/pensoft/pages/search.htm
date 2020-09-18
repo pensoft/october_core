@@ -1,0 +1,32 @@
+title = "search"
+url = "/search"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[searchResults]
+resultsPerPage = 30
+showProviderBadge = 1
+noResultsMessage = "Your search returned no results."
+visitPageMessage = "Visit page"
+==
+<?php
+    function onInit()
+    {
+        //\Event::listen('offline.sitesearch.results', function ($results) {
+        // return $results->filter(...);
+        // return $results->sortByDesc('model.custom_attribute');
+        //});
+    }
+?>
+==
+<div class="container">
+    <div class="row">
+        <div class="col-xs">
+            <h2>Search results for {{ searchResults.query }}</h2>
+            
+            {% component 'searchResults' %}
+        </div>
+    </div>
+</div>

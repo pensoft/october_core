@@ -1,0 +1,74 @@
+[menu]
+start = "id-12"
+activeNode = 0
+listItemClasses = "nav-item"
+primaryClasses = "navbar-nav"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 2
+==
+<nav class="pr-1 pl-1 navbar fixed " id="headernavbar">
+    <a href="{{'home'|page}}" class="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}');">
+        
+    </a>
+    <span class="pr p-hamburger large navbar-toggler mr-1"></span>
+    
+        <div class="navbar-collapse collapse " id="headerNavbarNav" style="display: none;">
+            {% component 'menu' %}
+            
+            <div id="search" class="search" >
+                <form class="input-group align-items-start" action="{{ 'search' | page }}" method="get">
+                    <input class="form-control search" name="q" type="text" autocomplete="on">
+                    <button class="btn search btn-link pr p-search1 big text-white" style="margin-top:0; width:auto; padding-left:1rem; padding-right:1rem;" type="submit"></button>
+                </form>
+            </div>
+        </div>
+    
+</nav>
+
+
+
+{% if this.theme.header_image %}
+<div class="header-image {{page_id}}">
+    {%if this.page.header_image %}
+        <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}');"></div>
+    {%else%}
+        <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}');"></div>
+    {%endif%}
+    <div class="jumbotron px-1">
+        <h1 class="underline white">{%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
+        {% if page_id == 'home' and tag_line %}
+            <p>{{tag_line}}</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+
+{% if user %}
+    <script>$(document).trigger('profile')</script>
+    <script>$(document).trigger('signout')</script>
+{% else %}
+    <script>$(document).trigger('signin')</script>
+{% endif %}
+<script>
+    var button = document.querySelector('.navbar-toggler');
+    var headerNavbarNav = document.querySelector('#headerNavbarNav')
+    var headernavbar = document.querySelector('#headernavbar');
+    button.addEventListener('click', function(event){
+        event.stopPropagation();
+        
+        event.target.classList.toggle("collapsed")
+        if(event.target.classList.contains('collapsed')){
+            headernavbar.classList.remove('fixed')
+            document.documentElement.scrollTop = 0;
+            $(headerNavbarNav).stop(false, true).slideDown(function(){
+            });
+        }else{
+            $(headerNavbarNav).stop(false, true).slideUp(function () {
+                headernavbar.classList.add('fixed')
+            });
+        }
+    })
+
+
+</script>

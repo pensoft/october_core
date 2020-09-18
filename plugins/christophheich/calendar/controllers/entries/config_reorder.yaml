@@ -1,0 +1,4 @@
+title: Entries
+modelClass: ChristophHeich\Calendar\Models\Entry
+toolbar:
+    buttons: reorder_toolbar

@@ -1,0 +1,29 @@
+title = "Partners"
+url = "/partners"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Maya_Partners.jpg"
+
+[partners]
+maxItems = 100
+
+[profile_records]
+show-category-title = 1
+category = 2
+maxItems = 10
+==
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<img src="{{'interactive-map.svg'|media}}"/> 
+		</div>
+	</div>
+    <div class="row">
+    	{% component 'partners' %}
+    </div>
+    <div class="row">
+        {% component 'profile_records' %}
+    </div>	
+</div>

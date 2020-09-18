@@ -1,0 +1,10 @@
+name: Events
+form: $/christophheich/calendar/models/event/fields.yaml
+modelClass: ChristophHeich\Calendar\Models\Event
+defaultRedirect: christophheich/calendar/events
+create:
+    redirect: 'christophheich/calendar/events/update/:id'
+    redirectClose: christophheich/calendar/events
+update:
+    redirect: christophheich/calendar/events
+    redirectClose: christophheich/calendar/events

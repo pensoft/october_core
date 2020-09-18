@@ -1,0 +1,76 @@
+title = "News"
+url = "/news/:id?|[a-zA-Z\-0-9]"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Maya_News.jpg"
+
+[list]
+maxItems = 10
+==
+<?php
+function urlencode($string){
+    return trim(urlencode($string));
+}
+function onStart()
+{
+    $this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->first();
+    $this['is_detail_page'] = $this['article'] ? true : false;
+    $this['allow_share'] = $this['article']['allow_share'] == 'yes' ? true : false;
+    if($this['is_detail_page'] and $this['allow_share']){
+        $this['page_url'] = $this->pageUrl('');
+        $this['encoded_title'] = urlencode($this['article']['title']);
+        $this['slug'] = $this['article']['slug'];
+        \BennoThommo\Meta\Meta::set('twitter:card', 'summary');
+        \BennoThommo\Meta\Meta::set('twitter:title', $this['article']['title']);
+        \BennoThommo\Meta\Meta::set('twitter:description', str_limit(Html::strip($this['article']['content']), 255));
+        \BennoThommo\Meta\Meta::set('og:title', $this['article']['title']);
+        \BennoThommo\Meta\Meta::set('og:description', str_limit(Html::strip($this['article']['content']), 255) );
+        \BennoThommo\Meta\Meta::set('og:type', 'article');
+        \BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
+        if($this['article']['cover']){
+            \BennoThommo\Meta\Meta::set('twitter:image', $this['article']['cover']->getThumb(300, 300, ['mode' => 'crop']));
+            
+            \BennoThommo\Meta\Meta::set('og:image', $this['article']['cover']->getThumb(600, 314, ['mode' => 'crop']));
+            \BennoThommo\Meta\Meta::set('og:image:width', 600);
+            \BennoThommo\Meta\Meta::set('og:image:height', 314);
+        }
+
+    }
+}
+?>
+==
+<div class="container">
+    {% if is_detail_page %}
+        <div class="row">
+            <div class="col-xs-12">
+                {% if article.cover %}
+                    <img class="content left" src="{{ article.cover|crop_image|resize(500, false, { mode: 'crop' }) }}" />
+                    
+                {% endif %}
+
+                <div class="news-title">
+                    <h1><a href="{{__SELF__.getUrl(article, this.page.id)}}" />{{article.title}}</a></h1>
+                    {% if article.allow_share == 'yes' %}
+                        <div class="share-btn"><span class="mr-1">share</span> <i id="share-{{slug}}" class="pr p-share1"></i></div>
+                    {% endif %}
+                </div>
+
+                <p class="text-published">{{article.published_at}}</p>
+                <div class="content">
+                    {{article.content|raw}}
+                </div>
+            </div>
+        </div>
+        <script>
+            createTippy('#share-{{slug}}', {content: '<div class="icons">{% if this.theme.facebook %}<a class="fb-xfbml-parse-ignore pr p-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" ></a>{% endif %}{% if this.theme.twitter %}<a class="pr p-twitter" href="https://twitter.com/intent/tweet?text={{encoded_title}}{{page_url}}" target="_blank"></a>{% endif %}{% if this.theme.linkedin %}<a class="pr p-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank"></a>{% endif %}</div>'})
+        </script>
+    {% else %}
+        <div class="row">
+            <div class="col-xs">
+                {% component 'list' %}
+            </div>
+        </div>
+    {% endif %}
+</div>

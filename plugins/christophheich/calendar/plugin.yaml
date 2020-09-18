@@ -1,0 +1,36 @@
+plugin:
+    name: 'christophheich.calendar::lang.plugin.name'
+    description: 'christophheich.calendar::lang.plugin.description'
+    author: 'Christoph Heich'
+    icon: oc-icon-calendar-o
+    homepage: ''
+permissions:
+    christophheich.calendar.manage_entries:
+        tab: 'christophheich.calendar::lang.plugin.name'
+        label: 'christophheich.calendar::lang.calendar.manage_entries'
+    christophheich.calendar.manage_events:
+        tab: 'christophheich.calendar::lang.plugin.name'
+        label: 'christophheich.calendar::lang.calendar.manage_events'
+    christophheich.calendar.manage_categories:
+        tab: 'christophheich.calendar::lang.plugin.name'
+        label: 'christophheich.calendar::lang.calendar.manage_categories'
+navigation:
+    calendar:
+        label: 'christophheich.calendar::lang.plugin.name'
+        url: christophheich/calendar/entries
+        icon: icon-calendar-o
+        permissions:
+            - christophheich.calendar.manage_entries
+        sideMenu:
+            entries:
+                label: 'christophheich.calendar::lang.calendar.entries'
+                url: christophheich/calendar/entries
+                icon: icon-cubes
+            events:
+                label: 'christophheich.calendar::lang.calendar.events'
+                url: christophheich/calendar/events
+                icon: icon-cube
+            categories:
+                label: 'christophheich.calendar::lang.calendar.categories'
+                url: christophheich/calendar/categories
+                icon: icon-bars

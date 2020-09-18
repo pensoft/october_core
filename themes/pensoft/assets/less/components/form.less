@@ -1,0 +1,61 @@
+.ui.form {
+    .field + .field {
+        margin-top: 1rem;
+    }
+    .fields {
+        display: flex;
+        margin: 0 -.5rem;
+        flex-direction: column;
+
+        .field + .field {
+            margin-top: 1rem;
+        }
+
+        &.inline {
+            flex-direction: row;
+            .field {
+                margin-top: 0;
+            }
+        }
+        .field {
+            padding-left: .5rem;
+            padding-right: .5rem;
+            clear: both;
+            margin: 0;
+        }
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        &.inline {
+            flex-direction: row;
+            width: auto;
+            input, textarea {
+                width: auto;
+            }
+        }
+        & > label {
+            display: block;
+            margin: 0 0 .3rem 0;
+            font-weight: 600;
+        }
+        & > input, textarea, select {
+            display: block;
+            width: 100%;
+            font-size: @font-size;
+            color: @dark-color;
+            background-color: @white-color;
+            box-sizing: border-box;
+            padding: .7rem 1rem;
+            .line-height();
+            .rounded();
+            .border(@border-line-width, @border-line-style, @border-color );
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    
+}

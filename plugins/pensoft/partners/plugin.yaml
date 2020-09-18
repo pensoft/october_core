@@ -1,0 +1,11 @@
+plugin:
+    name: 'pensoft.partners::lang.plugin.name'
+    description: 'pensoft.partners::lang.plugin.description'
+    author: Pensoft
+    icon: oc-icon-hand-o-up
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Partners
+        url: pensoft/partners/partners
+        icon: icon-hand-o-up

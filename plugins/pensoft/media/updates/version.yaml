@@ -1,0 +1,29 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table pensoft_media_logos'
+    - builder_table_create_pensoft_media_logos.php
+1.0.3:
+    - 'Created table pensoft_media_flyers'
+    - builder_table_create_pensoft_media_flyers.php
+1.0.4:
+    - 'Created table pensoft_media_newsletters'
+    - builder_table_create_pensoft_media_newsletters.php
+1.0.5:
+    - 'Created table pensoft_media_presentations'
+    - builder_table_create_pensoft_media_presentations.php
+1.0.6:
+    - 'Created table pensoft_media_pressreleases'
+    - builder_table_create_pensoft_media_pressreleases.php
+1.0.7:
+    - 'Created table pensoft_media_videos'
+    - builder_table_create_pensoft_media_videos.php
+1.0.8:
+    - 'Updated table pensoft_media_newsletters'
+    - builder_table_update_pensoft_media_newsletters.php
+1.0.9:
+    - 'Updated table pensoft_media_videos'
+    - builder_table_update_pensoft_media_videos.php
+1.0.10:
+    - 'Updated table pensoft_media_pressreleases'
+    - builder_table_update_pensoft_media_pressreleases.php

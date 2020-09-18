@@ -1,0 +1,16 @@
+plugin:
+    name: 'pensoft.cardprofiles::lang.plugin.name'
+    description: 'pensoft.cardprofiles::lang.plugin.description'
+    author: pensoft
+    icon: oc-icon-users
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'Profile cards'
+        url: pensoft/cardprofiles/category
+        icon: icon-users
+        sideMenu:
+            side-menu-item:
+                label: 'Items'
+                url: pensoft/cardprofiles/profiles
+                icon: icon-users

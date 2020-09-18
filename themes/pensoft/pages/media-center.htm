@@ -1,0 +1,72 @@
+title = "Media center"
+url = "/media-center"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "media_center.jpg"
+==
+<?php
+use Pensoft\Media\Models\MediaLogos;
+use Pensoft\Media\Models\Flyers;
+use Pensoft\Media\Models\Newsletters;
+use Pensoft\Media\Models\Presentations;
+use Pensoft\Media\Models\Pressreleases;
+use Pensoft\Media\Models\Videos;
+
+function onStart(){
+	$this['logos'] =  MediaLogos::get();
+	$this['flyers'] =  Flyers::get();
+	$this['newsletters'] =  Newsletters::get();
+	$this['presentations'] =  Presentations::get();
+	$this['pressreleases'] =  Pressreleases::get();
+	$this['videos'] =  Videos::get();
+}
+
+?>
+==
+<div class="container">
+    <div class="row">
+		{% if logos.count() %}
+        <div class="col-sm-4 col-xs-12  mt-md-0 mt-1">
+            <div align="center"><img src="{{'pensoft/icons_media_center_Logo.svg'|media}}"height="80" /></div>
+            <a href="/media-center/logo" class=" btn btn-secondary large fluid">Logo</a>
+        </div>
+		{% endif %}
+		{% if flyers.count() %}
+        <div class="col-sm-4 col-xs-12 mt-md-0 mt-1">
+			<div align="center"><img src="{{'pensoft/icons_media_center_Brochure.svg'|media}}"height="80" /></div>
+            <a href="/media-center/flyer" class="btn btn-secondary large fluid">Flyer</a>
+        </div>
+		{% endif %}
+		{% if newsletters.count() %}
+        <div class="col-sm-4 col-xs-12 mt-md-0 mt-1">
+			<div align="center"><img src="{{'pensoft/icons_media_center_Newsletters.svg'|media}}"height="80" /></div>
+            <a href="/media-center/newsletters" class=" btn btn-secondary large fluid">Newsletters</a>
+        </div>
+		{% endif %}
+    </div>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+    <div class="row">
+		{% if presentations.count() %}
+        <div class="col-sm-4 col-xs-12 mt-md-0 mt-1">
+			<div align="center"><img src="{{'pensoft/icons_media_center_Presentation_template.svg'|media}}"height="80" /></div>
+            <a href="/media-center/presentation" class="btn btn-secondary large fluid">Presentation</a>
+        </div>
+		{% endif %}
+		{% if pressreleases.count() %}
+        <div class="col-sm-4 col-xs-12 mt-md-0 mt-1">
+			<div align="center"><img src="{{'pensoft/icons_media_center_Press_Releases.svg'|media}}"height="80" /></div>
+            <a href="/media-center/press-releases" class="btn btn-secondary large fluid">Press Releases</a>
+        </div>
+		{% endif %}
+		{% if videos.count() %}
+        <div class="col-sm-4 col-xs-12 mt-md-0 mt-1">
+			<div align="center"><img src="{{'pensoft/icons_media_center_Video.svg'|media}}"height="80" /></div>
+            <a href="/media-center/videos" class="btn btn-secondary large fluid">Videos</a>
+        </div>
+		{% endif %}
+    </div>
+	<p>&nbsp;</p>
+</div>

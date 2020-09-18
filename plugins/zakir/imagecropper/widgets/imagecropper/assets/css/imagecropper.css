@@ -1,0 +1,46 @@
+.image-cropper-popup .img-outer-container {
+  text-align: center;
+}
+.image-cropper-popup .img-container {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #ededed;
+}
+.image-cropper-popup .img-container img {
+  max-width: 100%;
+  max-height: 1000px;
+}
+.image-cropper-popup canvas {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.image-cropper-popup canvas:hover {
+  cursor: crosshair;
+}
+.image-cropper-trigger {
+  position: absolute;
+  display: block;
+  bottom: 0px;
+  left: 0px;
+  width: 35px;
+  height: 35px;
+  background: url('../images/crosshairs-orange-crop.png') no-repeat center;
+  background-size: cover;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  border-bottom-left-radius:  3px;
+}
+.image-cropper-trigger:hover,
+.image-cropper-trigger:active,
+.image-cropper-trigger:cropper {
+  opacity: 1;
+  text-decoration: none;
+}
+.image-cropper-popup #show_width,.image-cropper-popup #show_height{
+    width: 120px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}

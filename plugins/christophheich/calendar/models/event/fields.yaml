@@ -1,0 +1,26 @@
+fields:
+    identifier:
+        label: 'christophheich.calendar::lang.event.identifier'
+        span: auto
+        type: number
+        comment: 'christophheich.calendar::lang.event.identifierComment'
+    sectionEvent:
+        label: 'christophheich.calendar::lang.event.sectionEvent'
+        span: full
+        type: section
+    title:
+        label: 'christophheich.calendar::lang.event.title'
+        span: auto
+        required: 1
+        type: text
+        comment: 'christophheich.calendar::lang.event.titleComment'
+    description:
+        label: 'christophheich.calendar::lang.event.description'
+        span: auto
+        type: text
+        comment: 'christophheich.calendar::lang.event.descriptionComment'
+    color:
+        label: 'christophheich.calendar::lang.event.color'
+        span: auto
+        type: colorpicker
+        commentAbove: 'christophheich.calendar::lang.event.colorComment'

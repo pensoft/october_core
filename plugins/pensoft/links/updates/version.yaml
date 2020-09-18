@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table pensoft_links_link'
+    - builder_table_create_pensoft_links_link.php
+1.0.3:
+    - 'Created table pensoft_links_category'
+    - builder_table_create_pensoft_links_category.php

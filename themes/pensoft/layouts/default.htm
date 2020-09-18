@@ -1,0 +1,89 @@
+description = "Default layout"
+
+[SeoCmsPage]
+
+[session]
+security = "all"
+
+[metaList]
+includePageMeta = 1
+escape = 1
+
+[googleTracker]
+
+[cookieBanner]
+include_css = 1
+update_partial = "gdpr"
+update_selector = "#gdpr-reload"
+cookie_manager_page = "cookies"
+==
+{% component 'cookieBanner' %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% component 'SeoCmsPage' %} 
+    {% if this.theme.site_icon %}
+    <link rel="icon" type="{{this.theme.site_icon.getContentType()}}" href="{{this.theme.site_icon.getPath()}}">
+    {% endif %}
+    <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet">
+    <link href="{{ ['assets/css/scale.css']|theme }}" rel="stylesheet">
+    <link href="{{ ['assets/css/light.css']|theme }}" rel="stylesheet">
+    <script src="{{ 'assets/js/jquery.js'|theme }}"></script>
+    <script src="{{ 'assets/js/popper.min.js'|theme }}"></script>
+    <script src="{{ 'assets/js/tippy-bundle.umd.min.js'|theme}}"></script>
+    <script src="{{ 'assets/js/app.js'|theme }}"></script>
+    <script type="text/javascript" src="{{ 'assets/js/slick.min.js'|theme }}"></script>
+    
+    {% component 'metaList' %}
+    {% styles %}
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="X0nPVr3s"></script>
+    <!-- Header -->
+    <header id="layout-header">
+        {% partial 'site/header'
+            site_name=this.theme.site_name
+            tag_line=this.theme.tag_line
+            page_title=this.page.title
+            page_id=this.page.id
+        %}
+    </header>
+
+    <!-- Content -->
+    <section id="layout-content">
+        {% page %}
+        {% component 'googleTracker' %}
+    </section>
+
+    {% if this.theme.enable_footer %}
+    <!-- Footer -->
+    <footer id="layout-footer">
+        {% partial 'site/footer' 
+            enable_social_media=this.theme.social_media 
+            enable_facebook=this.theme.facebook
+            facebook_url=this.theme.facebook_url
+            enable_twitter=this.theme.twitter
+            twitter_url=this.theme.twitter_url
+            enable_linkedin=this.theme.linkedin
+            linkedin_url=this.theme.linkedin_url
+            footer_funds_flag=this.theme.footer_funds_flag.getPath()
+            footer_funds_text=this.theme.footer_funds_text
+        %}
+    </footer>
+    {% endif %}
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    {% framework extras %}
+    {% scripts %}
+	<div id="gdpr-reload">
+		{% partial 'gdpr' %}
+	</div>
+</body>
+
+</html>

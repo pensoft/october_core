@@ -1,0 +1,21 @@
+<div class="topLevelContent">
+    <div class="holder">
+        <a id="past_events" name="past_events" class="item-anchor"></a>
+        <div class="flex justify-content-start align-items-center">
+            <h2 id="past_events" class="mr-1">{{'Past events'|_}}</h2>
+            <div class="text-right my-1">
+                <select class="form-control" name="year" data-request="{{__SELF__}}::onTest"
+                    data-request-update="'pass-event-entries': '#MyPastEntries'">
+                    {% for item in PastEvents.getEntryEndYears %}
+                    <option value="{{item.year}}" {% if item.is_selected %} selected {% endif %}>{{item.year}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<!-- Result container -->
+<div class="cards justify-content-start" id="MyPastEntries">
+    {% partial "pass-event-entries" %}
+</div>

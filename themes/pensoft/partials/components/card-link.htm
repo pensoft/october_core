@@ -1,0 +1,18 @@
+<!-- Params
+url, title, image, content
+-->
+<div class="link">
+    <div class="link-header">
+        <a title="{{title}}" class="link-title" href="{{url}}" target="_blank">
+            {{title}}
+        </a>
+        {% if image %}
+            <a title="{{title}}" class="link-image" href="{{url}}" target="_blank">
+                <img src="{{image}}" alt="{{title}}" />
+            </a>
+        {% endif %}
+    </div>
+    <div class="link-body">
+        {{content|raw}}
+    </div>
+</div>

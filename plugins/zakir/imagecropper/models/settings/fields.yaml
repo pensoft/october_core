@@ -1,0 +1,6 @@
+tabs:
+  fields:
+    is_enable:
+      label: Enable Image Cropper
+      type: switch
+      tab: Image Cropper

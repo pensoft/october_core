@@ -1,0 +1,30 @@
+title = "Forgot"
+url = "/forgot"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Maya_Login.jpg"
+
+[resetPassword]
+paramCode = "code"
+==
+
+
+<div class="container">
+    {% if not user %}
+
+    <div class="row">
+
+        <div class="col-md-6" style="margin: 0 auto;">
+            {% if resetPassword.code == null %}
+                {% partial 'components/resetpassword/restore' %}
+            {% else %}
+            {% partial 'components/resetpassword/reset' %}
+            {% endif %}
+        </div>
+
+    </div>
+
+    {% endif %}
+</div>

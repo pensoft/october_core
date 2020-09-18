@@ -1,0 +1,68 @@
+title = "Logo"
+url = "/media-center/logo"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "media_center.jpg"
+
+[builderList mediaLogosList]
+modelClass = "pensoft\Media\Models\MediaLogos"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\MediaLogos;
+
+function onStart(){
+	$this['mediaLogosList'] =  MediaLogos::get();
+}
+?>
+==
+<div class="container">
+	{% set records = mediaLogosList %}
+	{% set displayColumn = mediaLogosList.displayColumn %}
+	{% set noRecordsMessage = mediaLogosList.noRecordsMessage %}
+	{% set detailsPage = mediaLogosList.detailsPage %}
+	{% set detailsKeyColumn = mediaLogosList.detailsKeyColumn %}
+	{% set detailsUrlParameter = mediaLogosList.detailsUrlParameter %}
+
+	{% for record in records %}
+	{# Use spaceless tag to remove spaces inside the A tag. #}
+	{% spaceless %}
+		{% if record.logo_image %}
+			<div class="row">
+				<div class="col-xs-12">
+						<p><img src="{{record.logo_image.thumb(305,200,{'mode':'crop'})}}" title="{{record.name}}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				{% if record.file_jpg %}
+					<div class="col-xs-12 col-lg-4">
+						<div class="media-btn_broshure_and_poster"><a class="download  btn btn-secondary large fluid" href="{{record.file_jpg.path}}" target="_blank">Download .jpg</a></div>
+					</div>
+				{% endif %}
+				{% if record.file_png %}
+				<div class="col-xs-12 col-lg-4">
+					<div class="media-btn_broshure_and_poster"><a class="download  btn btn-secondary large fluid" href="{{record.file_png.path}}" target="_blank">Download .png</a></div>
+				</div>
+				{% endif %}
+				{% if record.file_eps %}
+				<div class="col-xs-12 col-lg-4">
+					<div class="media-btn_broshure_and_poster"><a class="download  btn btn-secondary large fluid" href="{{record.file_eps.path}}" target="_blank">Download .eps</a></div>
+				</div>
+				{% endif %}
+			</div>
+		{% endif %}
+
+	{% endspaceless %}
+	{% else %}
+	{{ noRecordsMessage }}
+	{% endfor %}
+</div>

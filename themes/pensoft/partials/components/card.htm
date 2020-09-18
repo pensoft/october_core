@@ -1,0 +1,37 @@
+==
+function onStart()
+{
+    $this['border'] = $this['border'] ?: true;
+    $this['image_position'] = $this['image_position'] ?: "top";
+    if($this['card_horizontal']){
+        $this['class'] .= $this['class'] ? " horizontal" : "horizontal";
+    }
+}
+==
+
+<div class="card {%if not border%}no-border{%endif%} {% if class %}{{class}}{% endif %}" {% if style %} style="{{style}}" {% endif %}>
+    {% if href %}
+    <a href="{{href}}">
+    {% endif %}
+    {% if header %}
+        <div class="card-header">{{header}}</div>
+    {% endif %}
+    {% if image %}
+        <img class="{% if image_position %}card-img-{{image_position}}{% endif %}" src="{{image}}">
+    {% endif %}
+    {% if body or title %}
+    <div class="card-body">
+        {% if title %}
+            <h3 class="card-title">{{title}}</h3>
+        {% endif %}
+        {{body|raw}}
+    </div>
+    {% endif %}
+    {% if footer %}
+        <div class="card-footer">{{footer}}</div>
+    {% endif %}
+
+    {% if href %}
+    </a>
+    {%endif %}
+    </div>

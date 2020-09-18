@@ -1,0 +1,11 @@
+
+<div class="list">
+
+    {% for item in __SELF__.getPartners() %}
+        {% partial "components/list.htm"
+            image=item.cover.getPath()
+            body=item.content
+        %}
+    {% endfor %}
+
+</div>

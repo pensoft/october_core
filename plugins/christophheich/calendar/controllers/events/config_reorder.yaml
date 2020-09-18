@@ -1,0 +1,4 @@
+title: Events
+modelClass: ChristophHeich\Calendar\Models\Event
+toolbar:
+    buttons: reorder_toolbar

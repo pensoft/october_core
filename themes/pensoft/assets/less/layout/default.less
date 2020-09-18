@@ -1,0 +1,51 @@
+.container {
+    max-width: 100%;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    margin-right: auto;
+    margin-left: auto;
+
+    .breakpoint-small({
+        max-width: 540px;
+    });
+    .breakpoint-medium({
+        max-width: 720px;
+    });
+    .breakpoint-large({
+        max-width: 960px;
+    });
+    .breakpoint-huge({
+        max-width: 1140px;
+    });
+}
+
+.container-fluid {
+    width: 100%;
+}
+
+.fixed-top,.fixed-bottom,.fixed-right,.fixed-left {
+    position: fixed;
+}
+.fixed-top {
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.fixed-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.fixed-right {
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+.fixed-left {
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+.row + .row {
+    margin-top: 0.5rem;
+}

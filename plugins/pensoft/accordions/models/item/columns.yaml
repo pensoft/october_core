@@ -1,0 +1,18 @@
+columns:
+    accordion:
+        label: Category
+        relation: accordion
+        select: name
+    title:
+        label: title
+        type: text
+        searchable: true
+    prefix:
+        label: prefix
+        type: text
+        searchable: true
+    body:
+        label: body
+        type: partial
+        searchable: true
+        path: ~/plugins/pensoft/accordions/partials/_body_column.htm

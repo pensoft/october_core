@@ -1,0 +1,8 @@
+[
+    {
+        "app_url": "http://project2.zhelezov.pensoft.com/",
+        "time": 10,
+        "message": "WARNING: Please be advised that our website will be down for a while, due to scheduled maintenance which is planned to start anytime now. We will be back soon. Thank you for your patience!",
+        "retry": 60
+    }
+]

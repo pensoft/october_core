@@ -1,0 +1,46 @@
+{% if __SELF__.property("default") %}
+    {% put scripts %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('{{ __SELF__.alias }}');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    plugins: [ 'dayGrid', 'list', 'bootstrap' ],
+                    header: {
+                        left:   'today,prev,next',
+                        center: 'title',
+                        right:  'dayGridMonth,dayGridWeek,dayGridDay,list'
+                    },
+                    locale: '{{ __SELF__.property("language") }}',
+                    events: {
+                        url: document.location.origin + '/api/christophheich/calendar/feed/{{ __SELF__.property("limit") }}',
+                        method: 'GET',
+                        
+                        rendering: 'inverse-background',
+                        failure: function() {
+                            alert('there was an error while fetching events!');
+                        }
+                    },
+                    eventClick: function(info) {
+                        info.jsEvent.preventDefault();
+
+                        if (info.event.url.length) {
+                            return window.open(info.event.url);
+                        }else if(info.event.extendedProps.slug) {
+                            // return window.open('/{{ __SELF__.property("language") }}/events/' + info.event.extendedProps.slug);
+                            let url = '/{{ __SELF__.property("language") }}/events/' + info.event.extendedProps.slug;
+                            location.href = url;
+                            return false;
+                        }
+                    },
+                    eventRender: function(info) {
+                        info.el.setAttribute('title', info.event.extendedProps.description.replace(/<[^>]*>?/gm, ''));
+                    },
+                });
+
+                calendar.render();
+            });
+        </script>
+    {% endput %}
+{% endif %}
+<div id='{{ __SELF__.alias }}'></div>

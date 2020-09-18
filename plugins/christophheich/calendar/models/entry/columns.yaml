@@ -1,0 +1,19 @@
+columns:
+    title:
+        label: 'christophheich.calendar::lang.entry.title'
+        type: text
+        sortable: true
+    description:
+        label: 'christophheich.calendar::lang.entry.description'
+        type: partial
+        sortable: true
+        path: ~/plugins/christophheich/calendar/models/entry/_description_column.htm
+    start:
+        label: 'christophheich.calendar::lang.entry.start'
+        type: date
+        sortable: true
+    end:
+        label: 'christophheich.calendar::lang.entry.end'
+        type: date
+        invisible: false
+        sortable: true

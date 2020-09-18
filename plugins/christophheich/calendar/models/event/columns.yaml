@@ -1,0 +1,17 @@
+columns:
+    title:
+        label: 'christophheich.calendar::lang.event.title'
+        type: text
+        sortable: true
+    description:
+        label: 'christophheich.calendar::lang.event.description'
+        type: text
+        sortable: true
+    color:
+        label: 'christophheich.calendar::lang.event.color'
+        type: text
+        sortable: true
+    identifier:
+        label: 'christophheich.calendar::lang.event.identifier'
+        type: text
+        sortable: true

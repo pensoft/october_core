@@ -1,0 +1,22 @@
+fields:
+    identifier:
+        label: 'christophheich.calendar::lang.category.identifier'
+        span: auto
+        required: 1
+        type: number
+        comment: 'christophheich.calendar::lang.category.identifierComment'
+    sectionCategory:
+        label: 'christophheich.calendar::lang.category.sectionCategory'
+        span: full
+        type: section
+    title:
+        label: 'christophheich.calendar::lang.category.title'
+        span: auto
+        required: 1
+        type: text
+        comment: 'christophheich.calendar::lang.category.titleComment'
+    description:
+        label: 'christophheich.calendar::lang.category.description'
+        span: auto
+        type: text
+        comment: 'christophheich.calendar::lang.category.descriptionComment'

@@ -1,0 +1,34 @@
+title = "Register"
+url = "/register"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Maya_Login.jpg"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+==
+<div class="container">
+    {% if not user %}
+    
+        <div class="row center-xs">
+    
+            <div class="col-md-6">
+                {% partial 'components/account/register' %}
+            </div>
+    
+        </div>
+    
+    {% else %}
+    
+        {% partial 'components/account/activation_check' %}
+    
+        {% partial 'components/account/update' %}
+    
+        {% partial 'components/account/deactivate_link' %}
+    
+    {% endif %}
+</div>

@@ -1,0 +1,57 @@
+title = "Presentation"
+url = "/media-center/presentation"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "media_center.jpg"
+
+[builderList mediaPresentationsList]
+modelClass = "pensoft\Media\Models\Presentations"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\Presentations;
+
+function onStart(){
+	$this['mediaPresentatoinsList'] =  Presentations::get();
+}
+?>
+==
+<div class="container">
+	<div class="row">
+		{% set records = mediaPresentatoinsList %}
+		{% set displayColumn = mediaPresentatoinsList.displayColumn %}
+		{% set noRecordsMessage = mediaPresentatoinsList.noRecordsMessage %}
+		{% set detailsPage = mediaPresentatoinsList.detailsPage %}
+		{% set detailsKeyColumn = mediaPresentatoinsList.detailsKeyColumn %}
+		{% set detailsUrlParameter = mediaPresentatoinsList.detailsUrlParameter %}
+
+		{% for record in records %}
+		{# Use spaceless tag to remove spaces inside the A tag. #}
+		{% spaceless %}
+		{% if record.presentation_image %}
+		<div class="col-xs-12 col-lg-4">
+			<div class="story broshure_and_poster">
+				<p align="center"><a href="{{record.file.path}}" target="_blank"><img src="{{record.presentation_image.thumb(305,200,{'mode':'crop'})}}" title="{{record.name}}> </a></p>
+			</div>
+			{% if record.file %}
+			<div class="media-btn_broshure_and_poster"><a class="download  btn btn-secondary large fluid" href="{{record.file.path}}" target="_blank">Download presentation</a></div>
+
+			<div class="media-size">{{record.file.extension | uppercase}} {{record.file.size }}</div>
+			{% endif %}
+		</div>
+		{% endif %}
+
+		{% endspaceless %}
+		{% else %}
+		{{ noRecordsMessage }}
+		{% endfor %}
+	</div>
+</div>

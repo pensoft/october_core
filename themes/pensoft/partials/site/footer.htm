@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row nowrap text-light d-flex justify-content-between align-items-center flex-column flex-lg-row">
+        {% if (footer_funds_flag != null or footer_funds_text != '') %}
+        <div class="funding flex-column my-1 my-lg-0 flex-lg-row px-1">
+            {% if footer_funds_flag %}
+                <img class="text mr-0 mr-lg-1" style="height:50px;" src="{{ footer_funds_flag }}"/>
+            {% endif %}
+            {% if footer_funds_text %}
+                <span class="mt-1 mt-lg-0 text-justify">{{footer_funds_text}}</span>
+            {%endif %}
+        </div>
+        {% endif %}
+        {% if (enable_social_media) %}
+        <div class="social-networks px-1">
+            <div class="icons">
+                {% if enable_facebook %}
+                    <a href="{{facebook_url}}" class="text-white pr p-facebook " target="_blank" ></a>
+                {% endif %}
+                {% if enable_twitter %}
+                    <a href="{{twitter_url}}" class="text-white pr p-twitter" target="_blank" ></a>
+                {% endif %}
+                {% if enable_linkedin %}
+                    <a  href="{{linkedin_url}}"class="text-white pr p-linkedin" target="_blank" ></a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="powered-by my-1 my-lg-0 px-1"><span class="mr-1">Designed and powered by</span><img class="text" src="{{ 'assets/images/pensoft-logo.svg'|theme }}"/></div>
+    </div>
+</div>

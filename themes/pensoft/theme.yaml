@@ -1,0 +1,315 @@
+name: "Pensoft Theme"
+author: "PensoftTeam"
+homepage: "https://pensoft.net"
+description: "Demonstrates the basic concepts of the front-end theming."
+previewImage: "assets/images/preview.png"
+require:
+    - AnandPatel.SeoExtension
+    - RainLab.Sitemap
+form:
+    tabs:
+        defaultTab: 'General settings'
+        fields:
+            site_logo:
+                label: logo
+                comment: Select logo
+                type: fileupload
+                mode: image
+                imageWidth: 250
+                imageHeight: 100
+                thumbOptions:
+                    mode: crop
+                    offset:
+                        - 0
+                        - 0
+                    quality: 90
+                    sharpen: 0
+                    interlace: false
+                    extension: auto
+            site_name:
+                label: Site name
+                comment: The website name as it should appear on the front-end
+                default: Pensoft projects
+            tag_line:
+                label: Tagline
+                default: My first project website
+            author:
+                label: Author
+                default: 
+            site_icon:
+                label: Site icon
+                comment: Add new site icon, your theme recomends a icon size of 32x32
+                type: fileupload
+                mode: image
+                imageWidth: 32
+                imageHeight: 32
+                fileTypes: ico,png
+                thumbOptions:
+                    mode: crop
+                    offset:
+                        - 0
+                        - 0
+                    quality: 90
+                    sharpen: 0
+                    interlace: false
+                    extension: auto
+            subscribe:
+                label: Subscribe link
+                default:
+            feedback:
+                label: Feedback email
+                default:
+            header_image:
+                label: Header image
+                comment: Add new image, your theme recomends a header size of 1600 x 200
+                type: fileupload
+                mode: image
+                imageWidth: 400
+                imageHeight: 133
+                thumbOptions:
+                    mode: crop
+                    offset:
+                        - 0
+                        - 0
+                    quality: 90
+                    sharpen: 0
+                    interlace: false
+                    extension: auto
+                tab: 'Header'
+            
+            enable_footer:
+                label: Enable footer
+                type: switch
+                span: left
+                default: true
+                tab: 'Footer'
+
+            footer_funds_flag:
+                label: Funds flag
+                comment: Add new image, your theme recomends a flag size of 60 x 60
+                type: fileupload
+                mode: image
+                imageWidth: 60
+                imageHeight: 60
+                fileTypes: svg,png,jpg
+                span: left
+                thumbOptions:
+                    mode: crop
+                    offset:
+                        - 0
+                        - 0
+                    quality: 90
+                    sharpen: 0
+                    interlace: false
+                    extension: auto
+                tab: 'Footer'
+            footer_funds_text:
+                label: Funds text
+                default: This project receives funding from the European Union's Horizon [:year] research and innovation programme under grant agreement No [:number].
+                span: right
+                tab: 'Footer'
+
+            social_media:
+                label: Enable social media links
+                type: switch
+                default: false
+                tab: 'Social Media'
+
+            facebook_section:
+                label: Facebook
+                type: section
+                tab: 'Social Media'
+            facebook:
+                label: Enable link to Facebook profile
+                type: switch
+                default: false
+                tab: 'Social Media'
+            facebook_url:
+                label: Input the url to your Facebook page.
+                tab: 'Social Media'
+                trigger:
+                    action: show
+                    field: facebook
+                    condition: checked
+            # facebook_custom_icon:
+            #     label: Check to use default icon.
+            #     type: checkbox
+            #     default: true
+            #     tab: 'Social Media'
+            #     trigger:
+            #         action: show
+            #         field: facebook
+            #         condition: checked
+            # facebook_image_icon:
+            #     label: Current header
+            #     comment: Add new image, your theme recomends 32x32
+            #     type: fileupload
+            #     mode: image
+            #     imageWidth: 32
+            #     imageHeight: 32
+            #     fileTypes: jpg,png
+            #     mimeTypes: image
+            #     tab: 'Social Media'
+            #     trigger:
+            #         action: show
+            #         field: facebook
+            #         condition: checked
+            #     thumbOptions:
+            #         mode: crop
+            #         offset:
+            #             - 0
+            #             - 0
+            #         quality: 90
+            #         sharpen: 0
+            #         interlace: false
+            #         extension: auto
+
+            twitter_section:
+                label: Twitter
+                type: section
+                tab: 'Social Media'
+            twitter:
+                label: Enable link to Twitter profile
+                type: switch
+                default: false
+                tab: 'Social Media'
+            twitter_url:
+                label: Input the url to your Twitter page.
+                tab: 'Social Media'
+                trigger:
+                    action: show
+                    field: twitter
+                    condition: checked
+            # twitter_custom_icon:
+            #     label: Check to use default icon.
+            #     type: checkbox
+            #     default: true
+            #     tab: 'Social Media'
+            #     trigger:
+            #         action: show
+            #         field: twitter
+            #         condition: checked
+            # twitter_image_icon:
+            #     label: Current header
+            #     comment: Add new image, your theme recomends 32x32
+            #     type: fileupload
+            #     mode: image
+            #     imageWidth: 32
+            #     imageHeight: 32
+            #     fileTypes: jpg,png
+            #     mimeTypes: image
+            #     tab: 'Social Media'
+            #     trigger:
+            #         action: show
+            #         field: twitter
+            #         condition: checked
+            #     thumbOptions:
+            #         mode: crop
+            #         offset:
+            #             - 0
+            #             - 0
+            #         quality: 90
+            #         sharpen: 0
+            #         interlace: false
+            #         extension: auto
+
+            linkedin_section:
+                label: Linkedin
+                type: section
+                tab: 'Social Media'
+            linkedin:
+                label: Enable link to Linkedin profile
+                type: switch
+                default: false
+                tab: 'Social Media'
+            linkedin_url:
+                label: Input the url to your Linkedin page.
+                tab: 'Social Media'
+                trigger:
+                    action: show
+                    field: linkedin
+                    condition: checked
+            # linkedin_custom_icon:
+            #     label: Check to use default icon.
+            #     type: checkbox
+            #     default: true
+            #     tab: 'Social Media'
+            #     trigger:
+            #         action: show
+            #         field: linkedin
+            #         condition: checked
+            # linkedin_image_icon:
+            #     label: Current header
+            #     comment: Add new image, your theme recomends 32x32
+            #     type: fileupload
+            #     mode: image
+            #     imageWidth: 32
+            #     imageHeight: 32
+            #     fileTypes: jpg,png
+            #     mimeTypes: image
+            #     tab: 'Social Media'
+            #     trigger:
+            #         action: show
+            #         field: linkedin
+            #         condition: checked
+            #     thumbOptions:
+            #         mode: crop
+            #         offset:
+            #             - 0
+            #             - 0
+            #         quality: 90
+            #         sharpen: 0
+            #         interlace: false
+            #         extension: auto
+            
+            font_size:
+                label: Font size
+                tab: 'Typography'
+                default: medium
+                assetVar: 'font-size'
+            line_height:
+                label: Line height
+                tab: 'Typography'
+                default: normal
+                assetVar: 'line-height'
+            letter_spacing:
+                label: Letter spacing
+                tab: 'Typography'
+                default: normal
+                assetVar: 'letter-spacing'
+            font_family:
+                label: Font family
+                tab: 'Typography'
+                type: dropdown
+                assetVar: 'font-family'
+                default: roboto
+                options:
+                    roboto: Roboto
+                    muli: Muli
+                    helvetica: Helvetica
+                    
+            background:
+                label: Background color
+                comment: Select a custom color to use as background
+                default: '#FFFFFF'
+                type: colorpicker
+                assetVar: 'background-color'
+                tab: 'Colors'
+            primary_color:
+                label: Primary color
+                comment: Select a custom color to use as primary
+                default: '#FFFFFF'
+                type: colorpicker
+                assetVar: 'primary-color'
+                tab: 'Colors'
+            secondary_color:
+                label: Secondary color
+                comment: Select a custom color to use as secondary
+                default: '#FFFFFF'
+                type: colorpicker
+                assetVar: 'secondary-color'
+                tab: 'Colors'
+
+
+
+            

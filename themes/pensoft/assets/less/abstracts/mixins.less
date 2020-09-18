@@ -1,0 +1,111 @@
+.border-radius-top-left(@top-left: 5px){
+    border-top-left-radius: @top-left;
+    -moz-border-top-left-radius: @top-left;
+    -webkit-border-top-left-radius: @top-left;
+}
+.border-radius-top-right(@top-right: 5px){
+    border-top-right-radius: @top-right;
+    -moz-border-top-right-radius: @top-right;
+    -webkit-border-top-right-radius: @top-right;
+}
+.border-radius-bottom-right(@bottom-right: 5px){
+    border-bottom-right-radius: @bottom-right;
+    -moz-border-bottom-right-radius: @bottom-right;
+    -webkit-border-bottom-right-radius: @bottom-right;
+}
+.border-radius-bottom-left(@bottom-left: 5px){
+    border-bottom-left-radius: @bottom-left;
+    -moz-border-bottom-left-radius: @bottom-left;
+    -webkit-border-bottom-left-radius: @bottom-left;
+}
+.border-radius (@top-left: 5px, @top-right: 5px, @bottom-right:5px, @bottom-left:5px){
+    border-radius: @top-left @top-right @bottom-right @bottom-left;
+    -moz-border-radius: @top-left @top-right @bottom-right @bottom-left;
+    -webkit-border-radius: @top-left @top-right @bottom-right @bottom-left;
+}
+
+.rounded (@radius: @rounded-base){
+    .border-radius(@radius, @radius, @radius, @radius)
+}
+.rounded-tl (@radius: @rounded-base){
+    .border-radius-top-left(@radius);
+}
+.rounded-tr (@radius: @rounded-base){
+    .border-radius-top-right(@radius);
+}
+.rounded-br (@radius: @rounded-base){
+    .border-radius-bottom-right(@radius);
+}
+.rounded-bl (@radius: @rounded-base){
+    .border-radius-bottom-left(@radius);
+}
+.rounded-l (@radius: @rounded-base){
+    .rounded-tl(@radius);
+    .rounded-bl(@radius);
+}
+.rounded-r (@radius: @rounded-base){
+    .rounded-tr(@radius);
+    .rounded-br(@radius);
+}
+
+.border(@line-width: @border-line-width, @line-style: @border-line-style, @color: @border-color){
+  border: @line-width @line-style @color;
+}
+.border-bottom(@line-width: @border-line-width, @line-style: @border-line-style, @color: @border-color){
+  border-bottom: @line-width @line-style @color;
+}
+.border-top(@line-width: @border-line-width, @line-style: @border-line-style, @color: @border-color){
+  border-top: @line-width @line-style @color;
+}
+.border-left(@line-width: @border-line-width, @line-style: @border-line-style, @color: @border-color){
+  border-left: @line-width @line-style @color;
+}
+.border-right(@line-width: @border-line-width, @line-style: @border-line-style, @color: @border-color){
+  border-right: @line-width @line-style @color;
+}
+
+.box-shadow (@x, @y, @blur, @spread, @color){
+    -webkit-box-shadow: @x @y @blur @spread @color;
+    -moz-box-shadow: @x @y @blur @spread @color;
+    box-shadow: @x @y @blur @spread @color;
+}
+
+.opacity (@value: @opacity-base){
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=@{value})";
+    filter: alpha(opacity=@value);
+    -moz-opacity: @value / 100;
+    -khtml-opacity: @value / 100;
+    opacity: @value / 100;
+}
+
+.transition(@transition: all linear .2s) {
+  -webkit-transition: @transition;
+  -moz-transition: @transition;
+  transition: @transition;
+}
+
+.breakpoint-small(@rules) {
+  @media screen and (min-width: @breakpoint-small-min-width) { @rules(); }
+}
+.breakpoint-medium(@rules) {
+  @media screen and (min-width: @breakpoint-medium-min-width) { @rules(); }
+}
+.breakpoint-large(@rules) {
+  @media screen and (min-width: @breakpoint-large-min-width) { @rules(); }
+}
+.breakpoint-huge(@rules) {
+  @media screen and (min-width: @breakpoint-huge-min-width) { @rules(); }
+}
+
+.breakpoint-small-down(@rules) {
+  @media screen and (max-width: @breakpoint-small-max-width) { @rules(); }
+}
+.breakpoint-medium-down(@rules) {
+  @media screen and (max-width: @breakpoint-medium-max-width) { @rules(); }
+}
+.breakpoint-large-down(@rules) {
+  @media screen and (max-width: @breakpoint-large-max-width) { @rules(); }
+}
+.breakpoint-huge-down(@rules) {
+  @media screen and (max-width: @breakpoint-huge-max-width) { @rules(); }
+}

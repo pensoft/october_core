@@ -1,0 +1,11 @@
+name: Entries
+modelClass: ChristophHeich\Calendar\Models\Entry
+form: $/christophheich/calendar/models/entry/fields.yaml
+defaultRedirect: christophheich/calendar/entries
+create:
+    redirect: 'christophheich/calendar/entries/update/:id'
+    redirectClose: christophheich/calendar/entries
+update:
+    redirect: christophheich/calendar/entries
+    redirectClose: christophheich/calendar/entries
+preview: {  }

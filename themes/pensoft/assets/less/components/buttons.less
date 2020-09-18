@@ -1,0 +1,121 @@
+[type=button]:not(:disabled), 
+[type=reset]:not(:disabled), 
+[type=submit]:not(:disabled), 
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    box-sizing: border-box;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: @padding-base-space * 0.75 @padding-base-space;
+    .font-size();
+    .line-height();
+    .rounded();
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    .breakpoint-small-down({
+        width: 100%;
+        margin-top: @margin-base-space;
+        padding-left: 0;
+        padding-right: 0;
+    });
+    word-break: break-all;
+
+    &.search {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    &.no-padding {
+        padding: 0!important;
+    }
+
+    &.small, &.large, &.huge {
+
+    }
+    &.small {
+      .line-height(0.8);
+    }
+    &.large {
+      .line-height(2.5);
+    }
+    &.huge {
+      .line-height(3);
+    }
+
+    &.btn-bold {
+        font-weight: 800;
+    }
+}
+
+.btn.fluid {
+    width: 100%;
+}
+.btn.fluid +.btn.fluid {
+    margin-top: @margin-base-space;
+}
+
+.btn.disabled, .btn:disabled {
+    .opacity()
+}
+
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.btn-primary {
+    color: @white-color;
+    background-color: @primary-color;
+    border-color: @primary-color;
+}
+.btn-secondary {
+    color: @white-color;
+    background-color: @secondary-color;
+    border-color: @secondary-color;
+}
+.btn-success {
+    color: @white-color;
+    background-color: @success-color;
+    border-color: @success-color;
+}
+.btn-danger {
+    color: @white-color;
+    background-color: @danger-color;
+    border-color: @danger-color;
+}
+.btn-warning {
+    color: @white-color;
+    background-color: @warning-color;
+    border-color: @warning-color;
+}
+.btn-info {
+    color: @white-color;
+    background-color: @info-color;
+    border-color: @info-color;
+}
+.btn-light {
+    color: @dark-color;
+    background-color: @light-color;
+    border-color: @light-color;
+}
+.btn-dark {
+    color: @white-color;
+    background-color: @dark-color;
+    border-color: @dark-color;
+}
+.btn-link {
+    color: @primary-color;
+}

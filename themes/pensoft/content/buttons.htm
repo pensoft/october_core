@@ -1,0 +1,53 @@
+<h3 class="my-2">colors</h3>
+
+<div class="row mt-1">
+    <div class="col-xs">
+        <button type="button" class="btn btn-primary" disabled>Primary</button>
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-dark">Dark</button>
+        <button type="button" class="btn btn-link">Link</button>
+    </div>
+</div>
+
+<h3 class="my-2">fluid</h3>
+<div class="row">
+    <div class="col-xs">
+        <button type="button" class="btn btn-info fluid">Info</button>
+        <button type="button" class="btn btn-light fluid">Light</button>
+        <button type="button" class="btn btn-dark fluid">Dark</button>
+    </div>
+</div>
+
+<h3 class="my-2">group</h3>
+<div class="row">
+    <div class="col-xs">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-secondary">Secondary</button>
+            <button type="button" class="btn btn-success">Secondary</button>
+        </div>
+    </div>
+</div>
+
+<h3 class="my-2">Popper</h3>
+
+<div class="row">
+    <div class="col-xs">
+        <button id="myButton" type="button" class="btn btn-primary">Primary</button>
+    </div>
+</div>
+<script>
+    tippy('#myButton', {
+        content: '<div class="icons"><span class= "pr p-home" ></span><span class="pr p-pencil"></span><span class="pr p-quill"></span><span class="pr p-diamonds"></span><span class="pr p-camera"></span></div>',
+        allowHTML: true,
+        interactive: true,
+        animation: 'scale',
+        theme: 'light',
+    });
+</script>

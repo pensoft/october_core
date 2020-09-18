@@ -1,0 +1,8 @@
+<div class="timeline vertical">
+    {% for entry in __SELF__.getLatestEntries() %}
+        <div class="timeline-item">
+            <a href="/events/{{entry.slug}}" class="timeline-header text-primary">{{entry.event_date}}</a>
+            <a href="/events/{{entry.slug}}" class="timeline-body">{{entry.title}}</a>
+        </div>
+    {% endfor %}
+</div>

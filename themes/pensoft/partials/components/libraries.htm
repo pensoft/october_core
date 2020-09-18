@@ -1,0 +1,34 @@
+{% for record in records %}
+<div class="library-container">
+    <h2>{{ record.title }}</h2>
+    {% partial "components/libraries-content" label="Authors:" value=record.authors %}
+    {% partial "components/libraries-content" label="Status:" value=record.status %}
+    {% partial "components/libraries-content" label="Year:" value=record.year %}
+
+    {% partial "components/libraries-content" label="Journal:" value=record.journal %}
+    {% partial "components/libraries-content" label="Proceedings:" value=record.proceedings_title %}
+    {% partial "components/libraries-content" label="Journal:" value=record.monograph_title %}
+    {% partial "components/libraries-content" label="Journal:" value=record.deliverable_title %}
+    {% partial "components/libraries-content" label="Journal:" value=record.project_title %}
+
+    {% partial "components/libraries-content" label="Volume/Issue:" value=record.volume_issue %}
+    {% partial "components/libraries-content" label="Publisher:" value=record.publisher  %}
+    {% partial "components/libraries-content" label="Place:" value=record.place  %}
+    {% partial "components/libraries-content" label="Due Date (month):" value=record.due_date  %}
+    {% partial "components/libraries-content" label="City:" value=record.city  %}
+    {% partial "components/libraries-content" label="Pages:" value=record.pages  %}
+    {% partial "components/libraries-content" label="URL/DOI:" value=record.doi is_link=true  %}
+
+    {%if record.file%}
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="mt-1 d-flex justify-content-between align-items-center">
+                <a target="_blank" href="{{record.file.path()}}" class="btn btn-secondary">Download </a>
+                <span> ({{record.filesize}})</span>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+</div>
+{% endfor %}

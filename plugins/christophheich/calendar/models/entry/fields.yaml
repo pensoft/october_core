@@ -1,0 +1,248 @@
+fields:
+    title:
+        label: 'christophheich.calendar::lang.entry.title'
+        span: left
+        required: 1
+        type: text
+        comment: 'christophheich.calendar::lang.entry.titleComment'
+    slug:
+        label: Slug
+        span: right
+        preset:
+            field: title
+            type: ''
+        required: 1
+        type: text
+    all_day:
+        label: 'christophheich.calendar::lang.entry.allDay'
+        span: full
+        type: switch
+        comment: 'christophheich.calendar::lang.entry.allDayComment'
+    start:
+        label: 'christophheich.calendar::lang.entry.start'
+        mode: datetime
+        span: left
+        dependsOn: {  }
+        trigger:
+            action: disable
+            field: all_day
+            condition: checked
+        type: datepicker
+        comment: 'christophheich.calendar::lang.entry.startComment'
+    place: 
+        label: 'christophheich.calendar::lang.entry.place'
+        span: right
+        type: text
+    url:
+        label: 'christophheich.calendar::lang.entry.url'
+        span: right
+        type: text
+        comment: 'christophheich.calendar::lang.entry.urlComment'
+    end:
+        label: 'christophheich.calendar::lang.entry.end'
+        mode: datetime
+        span: left
+        dependsOn: {  }
+        trigger:
+            action: disable
+            field: all_day
+            condition: checked
+        type: datepicker
+        comment: 'christophheich.calendar::lang.entry.endComment'
+    time_format:
+        label: 'christophheich.calendar::lang.entry.timeFormat'
+        span: right
+        placeholder: 'H(:mm)'
+        type: text
+        comment: 'christophheich.calendar::lang.entry.timeFormatComment'
+        hidden: true
+    description:
+        label: 'christophheich.calendar::lang.entry.description'
+        span: left
+        type: richeditor
+        comment: 'christophheich.calendar::lang.entry.descriptionComment'
+        size: autogrow
+    identifier:
+        label: 'christophheich.calendar::lang.entry.identifier'
+        span: right
+        type: number
+        comment: 'christophheich.calendar::lang.entry.identifierComment'
+        hidden: false
+    cover_image:
+        label: 'pensoft.content::lang.plugin.cover'
+        mode: image
+        imageWidth: '200'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: right
+        type: fileupload
+    sectionPeriod:
+        label: 'christophheich.calendar::lang.entry.sectionPeriod'
+        span: full
+        type: section
+        hidden: true
+    display_event_time:
+        label: 'christophheich.calendar::lang.entry.displayEventTime'
+        span: auto
+        trigger:
+            action: hide
+            field: all_day
+            condition: checked
+        type: checkbox
+        comment: 'christophheich.calendar::lang.entry.displayEventTimeComment'
+        hidden: true
+    display_event_end:
+        label: 'christophheich.calendar::lang.entry.displayEventEnd'
+        span: auto
+        trigger:
+            action: hide
+            field: all_day
+            condition: checked
+        type: checkbox
+        comment: 'christophheich.calendar::lang.entry.displayEventEndComment'
+        hidden: true
+    sectionOptional:
+        label: Optional
+        span: full
+        type: section
+        hidden: true
+    rendering:
+        label: 'christophheich.calendar::lang.entry.rendering'
+        options:
+            background: background
+            inverseBackground: inverse-background
+        emptyOption: '-- default --'
+        span: auto
+        type: dropdown
+        comment: 'christophheich.calendar::lang.entry.renderingComment'
+        hidden: true
+    index:
+        label: 'christophheich.calendar::lang.entry.id'
+        span: auto
+        placeholder: '0'
+        type: number
+        comment: 'christophheich.calendar::lang.entry.idComment'
+        hidden: false
+    constraint:
+        label: 'christophheich.calendar::lang.entry.constraint'
+        span: auto
+        disabled: 1
+        hidden: 1
+        type: text
+    dow:
+        label: 'christophheich.calendar::lang.entry.dow'
+        span: auto
+        placeholder: '[ 1, 2, 3, 4 ]'
+        type: text
+        comment: 'christophheich.calendar::lang.entry.dowComment'
+        hidden: true
+    class_name:
+        label: 'christophheich.calendar::lang.entry.className'
+        span: auto
+        type: text
+        comment: 'christophheich.calendar::lang.entry.classNameComment'
+        hidden: true
+    source:
+        label: 'christophheich.calendar::lang.entry.source'
+        span: full
+        type: text
+        comment: 'christophheich.calendar::lang.entry.sourceComment'
+        hidden: true
+    overlap:
+        label: 'christophheich.calendar::lang.entry.overlap'
+        span: auto
+        type: checkbox
+        comment: 'christophheich.calendar::lang.entry.overlapComment'
+        hidden: true
+    editable:
+        label: 'christophheich.calendar::lang.entry.editable'
+        span: left
+        type: checkbox
+        comment: 'christophheich.calendar::lang.entry.editableComment'
+        hidden: true
+    resource_editable:
+        label: 'christophheich.calendar::lang.entry.resourceEditable'
+        span: auto
+        type: checkbox
+        comment: 'christophheich.calendar::lang.entry.resourceEditableComment'
+        hidden: true
+    start_editable:
+        label: 'christophheich.calendar::lang.entry.startEditable'
+        span: auto
+        trigger:
+            action: hide
+            field: editable
+            condition: checked
+        type: checkbox
+        comment: 'christophheich.calendar::lang.entry.startEditableComment'
+        hidden: true
+    duration_editable:
+        label: 'christophheich.calendar::lang.entry.durationEditable'
+        span: auto
+        trigger:
+            action: hide
+            field: editable
+            condition: checked
+        type: checkbox
+        comment: 'christophheich.calendar::lang.entry.durationEditableComment'
+        hidden: true
+    sectionColorStyling:
+        label: 'christophheich.calendar::lang.entry.sectionColorStyling'
+        span: full
+        type: section
+        hidden: true
+    styling_reset_switch:
+        label: 'christophheich.calendar::lang.entry.stylingResetSwitch'
+        span: full
+        disabled: 1
+        hidden: 1
+        trigger:
+            action: empty
+            field: styling_reset_switch
+            condition: checked
+        type: switch
+        comment: 'christophheich.calendar::lang.entry.stylingResetSwitchComment'
+        hidden: true
+    color:
+        label: 'christophheich.calendar::lang.entry.color'
+        span: auto
+        trigger:
+            action: empty
+            field: styling_reset_switch
+            condition: checked
+        type: colorpicker
+        availableColors: myColorList
+        commentAbove: 'christophheich.calendar::lang.entry.colorComment'
+        hidden: false
+    text_color:
+        label: 'christophheich.calendar::lang.entry.textcolor'
+        span: auto
+        trigger:
+            action: empty
+            field: styling_reset_switch
+            condition: checked
+        type: colorpicker
+        commentAbove: 'christophheich.calendar::lang.entry.textColorComment'
+        hidden: true
+    background_color:
+        label: 'christophheich.calendar::lang.entry.backgroundColor'
+        span: auto
+        trigger:
+            action: empty
+            field: styling_reset_switch
+            condition: checked
+        type: colorpicker
+        commentAbove: 'christophheich.calendar::lang.entry.backgroundColorComment'
+        hidden: true
+    border_color:
+        label: 'christophheich.calendar::lang.entry.borderColor'
+        span: auto
+        trigger:
+            action: empty
+            field: styling_reset_switch
+            condition: checked
+        type: colorpicker
+        commentAbove: 'christophheich.calendar::lang.entry.borderColorComment'
+        hidden: true

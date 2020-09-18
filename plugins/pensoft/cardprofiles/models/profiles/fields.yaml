@@ -1,0 +1,42 @@
+fields:
+    names:
+        label: Names
+        span: auto
+        type: text
+    slug:
+        label: Slug
+        span: auto
+        preset:
+            field: names
+            type: slug
+        type: text
+    content:
+        label: Content
+        size: ''
+        span: left
+        type: richeditor
+    category:
+        label: Category
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    country:
+        label: Country
+        span: right
+        type: text
+    position:
+        label: Position
+        span: right
+        type: text
+    avatar:
+        label: avatar
+        mode: image
+        imageHeight: 260
+        imageWidth: 260
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: right
+        type: fileupload

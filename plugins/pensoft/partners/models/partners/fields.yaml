@@ -1,0 +1,16 @@
+fields:
+    cover:
+        label: Image
+        span: auto
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        imageWidth: '270'
+        type: fileupload
+    content:
+        label: Content
+        size: ''
+        span: auto
+        type: richeditor

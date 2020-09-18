@@ -1,0 +1,5 @@
+plugin:
+    name: 'pensoft.maintenance::lang.plugin.name'
+    description: 'pensoft.maintenance::lang.plugin.description'
+    author: Pensoft
+    homepage: ''
