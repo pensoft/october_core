@@ -26,6 +26,10 @@ class Library extends Model
     const TYPE_DELIVERABLE = 5;
     const TYPE_REPORT = 6;
 
+	const SORT_TYPE_DELIVERABLES = 1;
+	const SORT_TYPE_RELEVANT_PUBLICATIONS = 2;
+	const SORT_TYPE_PROJECT_PUBLICATIONS = 3;
+
     public static $allowSortingOptions = [
         'title asc' => 'Title (asc)',
         'title desc' => 'Title (desc)',
@@ -36,9 +40,9 @@ class Library extends Model
     ];
 
     public static $allowSortTypesOptions = [
-        1 => 'Deliverables',
-        2 => 'Relevant Publications',
-        3 => 'MAIA Publications',
+		self::SORT_TYPE_DELIVERABLES => 'Deliverables',
+		self::SORT_TYPE_RELEVANT_PUBLICATIONS => 'Relevant Publications',
+		self::SORT_TYPE_PROJECT_PUBLICATIONS => 'MAIA Publications',
     ];
 
     /**
@@ -113,14 +117,14 @@ class Library extends Model
         );
 
         switch ($type){
-			case 1:
+			case self::SORT_TYPE_DELIVERABLES:
 				$query->where('type', (int)self::TYPE_DELIVERABLE);
 				break;
-			case 2:
-				$query->where('type', 1)->where('derived', 0);
+			case self::SORT_TYPE_RELEVANT_PUBLICATIONS:
+				$query->where('type', 1)->where('derived', self::DERIVED_NO);
 				break;
-			case 3:
-				$query->where('type', 1)->where('derived', 1);
+			case self::SORT_TYPE_PROJECT_PUBLICATIONS:
+				$query->where('type', 1)->where('derived', self::DERIVED_YES);
 				break;
 		}
 

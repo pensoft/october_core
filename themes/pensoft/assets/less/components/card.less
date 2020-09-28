@@ -17,6 +17,10 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
+
+    .card-body {
+        background: #eff1f3;
+    }
 }
 
 .card-new-item + .card-new-item {
@@ -150,9 +154,13 @@
     }
 
     .card-img, .card-img-top {
+        .rounded-tl(calc(@rounded-base - 1px));
+        .rounded-tr(calc(@rounded-base - 1px));
     }
     
     .card-header + .card-img, .card-header + .card-img-top {
+        .rounded-tl(0);
+        .rounded-tr(0);
     }
 
     .card-img-left {
@@ -181,7 +189,6 @@
         flex: 1 1 auto;
         min-height: 1px;
         padding: 1.25rem;
-        background: #eff1f3;
     }
 
     .card-title {

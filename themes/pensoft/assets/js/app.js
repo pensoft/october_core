@@ -128,7 +128,9 @@ async function onLoadedDomContent(){
 
 function handleSVGMapMouseMove(event) {
 	var countryId = $(event.target).attr('class');
-	var tooltip = document.getElementById("tooltip");
+	var countryName = $(event.target).attr('title');
+	var tooltip = $("#tooltip");
+	tooltip.show();
 	switch (countryId) {
 		case "BG":
 		case "GR":
@@ -144,16 +146,16 @@ function handleSVGMapMouseMove(event) {
 		case "NO":
 			break;
 		default:
-			return tooltip.classList.remove("active");
+			return tooltip.removeClass("active");
 	}
 
 	var x = event.clientX;
 	var y = event.clientY;
 
-	tooltip.style.left = (x + 20) + "px";
-	tooltip.style.top = (y - 20) + "px";
-	tooltip.innerHTML = $(event.target).attr('title');
-	tooltip.classList.add("active");
+	tooltip.css({top: (y - 20), left: (x + 20)});
+
+	tooltip.html(countryName);
+	tooltip.addClass("active");
 
 }
 
@@ -166,8 +168,9 @@ function filterSVGMap(pCountryElem) {
 	$('html, body').animate({
 		scrollTop: $("#partnersListDiv").offset().top - 100
 	}, 1000);
-	var tooltip = document.getElementById("tooltip");
+	var tooltip = $("#tooltip");
 	tooltip.hide();
+
 }
 
 
