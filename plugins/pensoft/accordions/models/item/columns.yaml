@@ -16,3 +16,7 @@ columns:
         type: partial
         searchable: true
         path: ~/plugins/pensoft/accordions/partials/_body_column.htm
+    sort_order:
+      label: order
+      type: text
+      searchable: true

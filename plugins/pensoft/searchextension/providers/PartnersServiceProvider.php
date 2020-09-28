@@ -21,7 +21,7 @@ class PartnersServiceProvider extends ResultsProvider
             $result->title     = '';
             $result->text      = $match->content;
             $result->url       = $controller->pageUrl('partners');
-            $result->thumb     = $match->cover;
+            // $result->thumb     = $match->cover;
             $result->model     = $match;
             $result->meta      = [];
 

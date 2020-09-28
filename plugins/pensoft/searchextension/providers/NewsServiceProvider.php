@@ -22,7 +22,7 @@ class NewsServiceProvider extends ResultsProvider {
             $result->title     = $match->title;
             $result->text      = $match->content;
             $result->url       = $controller->pageUrl('news', ['id' => $match->slug]);
-            $result->thumb     = $match->cover;
+            // $result->thumb     = $match->cover;
             $result->model     = $match;
             // $result->meta      = [
             //     'some_data' => $match->some_other_property,

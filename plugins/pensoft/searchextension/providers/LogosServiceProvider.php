@@ -21,7 +21,7 @@ class LogosServiceProvider extends ResultsProvider
             $result->title     = $match->name;
             $result->text      = $match->content ?: '';
             $result->url       = $controller->pageUrl('logo');
-            $result->thumb     = $match->logo_image;
+            // $result->thumb     = $match->logo_image;
             $result->model     = $match;
             $result->meta      = [];
 

@@ -21,7 +21,7 @@ class NewslettersServiceProvider extends ResultsProvider
             $result->title     = $match->name;
             $result->text      = $match->content ?: '';
             $result->url       = $controller->pageUrl('newsletters');
-            $result->thumb     = $match->newsletter_image;
+            // $result->thumb     = $match->newsletter_image;
             $result->model     = $match;
             $result->meta      = [];
 

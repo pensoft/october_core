@@ -33,4 +33,17 @@ class PartnerList extends ComponentBase
 		}
 		return Partners::get();
 	}
+
+	public function onFilterSVGMap()
+	{
+		if(post('country')){
+			$this->page['partners'] = Partners::where('country_id', post('country'))->get();
+		}else{
+			$this->page['partners'] = $this->getPartners();
+		}
+
+		return [
+			'#partnersListDiv' => $this->renderPartial('partnerslist')
+		];
+	}
 }

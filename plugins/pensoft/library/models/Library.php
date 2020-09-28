@@ -29,23 +29,16 @@ class Library extends Model
     public static $allowSortingOptions = [
         'title asc' => 'Title (asc)',
         'title desc' => 'Title (desc)',
-        'authors asc' => 'Author(s) (asc)',
-        'authors desc' => 'Author(s) (desc)',
         'year asc' => 'Year (asc)',
         'year desc' => 'Year (desc)',
-        'doi asc' => 'URL/DOI (asc)',
-        'doi desc' => 'URL/DOI (desc)',
         'type asc' => 'Type (asc)',
         'type desc' => 'Type (desc)',
     ];
 
     public static $allowSortTypesOptions = [
-        self::TYPE_JOURNAL_PAPER => 'Journal Paper',
-        self::TYPE_PROCEEDINGS_PAPER => 'Proceedings Paper',
-        self::TYPE_BOOK_CHAPTER => 'Book Chapter',
-        self::TYPE_BOOK => 'Book',
-        self::TYPE_DELIVERABLE => 'Deliverable',
-        self::TYPE_REPORT => 'Report',
+        1 => 'Deliverables',
+        2 => 'Relevant Publications',
+        3 => 'MAIA Publications',
     ];
 
     /**
@@ -118,10 +111,18 @@ class Library extends Model
                 'type' => 0,
             ], $options)
         );
-        
-        if(in_array($type, array_keys(self::$allowSortTypesOptions))){
-            $query->where('type', (int)$type);
-        }
+
+        switch ($type){
+			case 1:
+				$query->where('type', (int)self::TYPE_DELIVERABLE);
+				break;
+			case 2:
+				$query->where('type', 1)->where('derived', 0);
+				break;
+			case 3:
+				$query->where('type', 1)->where('derived', 1);
+				break;
+		}
 
         if(in_array($sort, array_keys(self::$allowSortingOptions))){
             $parts = explode(' ', $sort);

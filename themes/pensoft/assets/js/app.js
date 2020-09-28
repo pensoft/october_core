@@ -10,6 +10,9 @@ var keepFooter = function(documentHasScroll){
     }
 }
 
+function isBreakpointLarge(){
+    return window.innerWidth <= 991;
+}
 
 window.addEventListener('scroll', function (e) {
     var headernavbar = document.getElementById("headernavbar");
@@ -50,14 +53,9 @@ function createTippy(element, options){
     });
 }
 
-function cardCarousel(){
+function cardCarousel(object){
     return new Promise(resolve => {
-        $('#card-carousel').slick({
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            autoplay: true,
-            autoplaySpeed: 6000,
-        });
+        $('#card-carousel').slick(object);
         resolve()
     });
 }
@@ -95,6 +93,16 @@ function autoRequestFormLibrary(){
 function init() {
     window.addEventListener('resize', function () {
         keepFooter(documentHasScroll());
+        if (isBreakpointLarge()){
+            $('#card-carousel').slick('unslick');
+        }else{
+            cardCarousel({
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                autoplay: true,
+                autoplaySpeed: 6000,
+            });
+        }
     });
     document.addEventListener('DOMContentLoaded', function () {
         onLoadedDomContent();
@@ -106,11 +114,61 @@ function init() {
 }
 
 async function onLoadedDomContent(){
-    await cardCarousel();
+    if (!isBreakpointLarge()) {
+        await cardCarousel({
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            autoplay: true,
+            autoplaySpeed: 6000,
+        });
+    }
     keepFooter(documentHasScroll());
 }
 
 
+function handleSVGMapMouseMove(event) {
+	var countryId = $(event.target).attr('class');
+	var tooltip = document.getElementById("tooltip");
+	switch (countryId) {
+		case "BG":
+		case "GR":
+		case "CZ":
+		case "DE":
+		case "NL":
+		case "BE":
+		case "FR":
+		case "ES":
+		case "GB":
+		case "SE":
+		case "FI":
+		case "NO":
+			break;
+		default:
+			return tooltip.classList.remove("active");
+	}
+
+	var x = event.clientX;
+	var y = event.clientY;
+
+	tooltip.style.left = (x + 20) + "px";
+	tooltip.style.top = (y - 20) + "px";
+	tooltip.innerHTML = $(event.target).attr('title');
+	tooltip.classList.add("active");
+
+}
+
+function filterSVGMap(pCountryElem) {
+	$.request('onFilterSVGMap',
+		{
+			update: { partnerslist: '#partnersListDiv'},
+			data: {country: pCountryElem},
+		});
+	$('html, body').animate({
+		scrollTop: $("#partnersListDiv").offset().top - 100
+	}, 1000);
+	var tooltip = document.getElementById("tooltip");
+	tooltip.hide();
+}
 
 
 init()

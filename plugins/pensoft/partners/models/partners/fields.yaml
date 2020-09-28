@@ -14,3 +14,9 @@ fields:
         size: ''
         span: auto
         type: richeditor
+    country:
+        label: Country
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation

@@ -1,0 +1,9 @@
+<div class="list" id="partnersListDiv">
+	{% for item in partners %}
+		{% partial "components/list.htm"
+			image=item.cover.getPath()
+			body=item.content
+		%}
+	{% endfor %}
+
+</div>
