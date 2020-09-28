@@ -2,8 +2,8 @@
 <div class="library-container">
     <h2>{{ record.title }}</h2>
     {% partial "components/libraries-content" label="Authors:" value=record.authors %}
-    {% partial "components/libraries-content" label="Status:" value=record.status %}
-    {% partial "components/libraries-content" label="Year:" value=record.year %}
+    {% partial "components/libraries-content" label="Status:" value=record.status_attr %}
+    {% partial "components/libraries-content" label="Year:" value=record.year_attr %}
 
     {% partial "components/libraries-content" label="Journal:" value=record.journal %}
     {% partial "components/libraries-content" label="Proceedings:" value=record.proceedings_title %}

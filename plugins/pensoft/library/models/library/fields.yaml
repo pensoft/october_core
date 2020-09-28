@@ -41,7 +41,7 @@ fields:
         mode: date
         format: 'Y'
         span: left
-        default: ''
+        default: 'now'
         required: 1
         type: datepicker
     status:

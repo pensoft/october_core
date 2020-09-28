@@ -59,35 +59,40 @@ class Library extends Model
     public $attachOne = [
         'file' => 'System\Models\File'
     ];
+    public $appends = [
+		'status_attr',
+		'derived_attr',
+		'year_attr',
+	];
 
     public function getDueDateAttribute($value)
     {
         return (new Carbon($value))->englishMonth;
     }
 
-    public function getYearAttribute($value)
+    public function getYearAttrAttribute($value)
     {
         return (new Carbon($value))->year;
     }
 
-//    public function getStatusAttribute($value)
-//    {
-//        switch((int) $value){
-//            case self::STATUS_PUBLISHED: return 'Published';
-//            case self::STATUS_INPRESS: return 'In Press';
-//            case self::STATUS_INPREPARATION: return 'In Preparation';
-//            case self::STATUS_OTHER: return 'Other';
-//        }
-//    }
+    public function getStatusAttrAttribute()
+    {
+        switch((int) $this->status){
+            case self::STATUS_PUBLISHED: return 'Published';
+            case self::STATUS_INPRESS: return 'In Press';
+            case self::STATUS_INPREPARATION: return 'In Preparation';
+            case self::STATUS_OTHER: return 'Other';
+        }
+    }
 
     public function getFileSizeAttribute()
     {
         return (new ByteSize())->format($this->file->file_size);
     }
 
-    public function getDerivedAttribute($value)
+    public function getDerivedAttrAttribute($value)
     {
-        switch((int) $value){
+        switch((int) $this->derived){
             case self::DERIVED_YES: return 'Yes';
             case self::DERIVED_NO: return 'No';
         }
