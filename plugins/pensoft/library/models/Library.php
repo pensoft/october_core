@@ -35,8 +35,8 @@ class Library extends Model
         'title desc' => 'Title (desc)',
         'year asc' => 'Year (asc)',
         'year desc' => 'Year (desc)',
-        'type asc' => 'Type (asc)',
-        'type desc' => 'Type (desc)',
+        // 'type asc' => 'Type (asc)',
+        // 'type desc' => 'Type (desc)',
     ];
 
     public static $allowSortTypesOptions = [
@@ -70,15 +70,15 @@ class Library extends Model
         return (new Carbon($value))->year;
     }
 
-    public function getStatusAttribute($value)
-    {
-        switch((int) $value){
-            case self::STATUS_PUBLISHED: return 'Published';
-            case self::STATUS_INPRESS: return 'In Press';
-            case self::STATUS_INPREPARATION: return 'In Preparation';
-            case self::STATUS_OTHER: return 'Other';
-        }
-    }
+//    public function getStatusAttribute($value)
+//    {
+//        switch((int) $value){
+//            case self::STATUS_PUBLISHED: return 'Published';
+//            case self::STATUS_INPRESS: return 'In Press';
+//            case self::STATUS_INPREPARATION: return 'In Preparation';
+//            case self::STATUS_OTHER: return 'Other';
+//        }
+//    }
 
     public function getFileSizeAttribute()
     {
@@ -108,6 +108,10 @@ class Library extends Model
         $query->where('is_visible', true);
     }
 
+    public function scopeOfType($query, $type){
+        return $query->where('type', $type);
+    }
+
     public function scopeListFrontEnd($query, $options = []){
         extract(
             array_merge([
@@ -118,13 +122,13 @@ class Library extends Model
 
         switch ($type){
 			case self::SORT_TYPE_DELIVERABLES:
-				$query->where('type', (int)self::TYPE_DELIVERABLE);
+				$query->ofType(self::TYPE_DELIVERABLE);
 				break;
 			case self::SORT_TYPE_RELEVANT_PUBLICATIONS:
-				$query->where('type', 1)->where('derived', self::DERIVED_NO);
+                $query->ofType(self::TYPE_JOURNAL_PAPER)->where('derived', self::DERIVED_NO);
 				break;
 			case self::SORT_TYPE_PROJECT_PUBLICATIONS:
-				$query->where('type', 1)->where('derived', self::DERIVED_YES);
+				$query->ofType(self::TYPE_JOURNAL_PAPER)->where('derived', self::DERIVED_YES);
 				break;
 		}
 
