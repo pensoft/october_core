@@ -16,6 +16,15 @@
 .card-carousel {
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: column;
+
+    .card-body {
+        background: #eff1f3;
+    }
+}
+
+.card-new-item + .card-new-item {
+    margin-top: 1rem;
 }
 
 .card-columns {
@@ -94,7 +103,6 @@
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     box-sizing: border-box;
-    .rounded();
 
     &.horizontal {
         flex-direction: row;
@@ -103,9 +111,14 @@
             max-width: 270px;
         }
     }
-
+    &.no-margin-top {
+        margin-top: 0px !important;
+    }
     &.no-background {
         background-color: @transparent;
+      .card-body {
+        background: none;
+      }
     }
     &.no-border {
         .border(0) !important;
@@ -179,6 +192,7 @@
         min-height: 1px;
         padding: 1.25rem;
     }
+
     .card-title {
         margin-bottom: @margin-base-space * .75rem;
     }
@@ -208,6 +222,10 @@
             color: #fff;
             border-bottom: 0px;
             text-align: center;
+        }
+
+        .card-body {
+            background: #ffffff;
         }
     }
 

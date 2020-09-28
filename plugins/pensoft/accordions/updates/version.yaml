@@ -9,3 +9,6 @@
 1.0.4:
     - 'Updated table pensoft_accordions_item'
     - builder_table_update_pensoft_accordions_item.php
+1.0.5:
+    - 'Updated table pensoft_accordions_item'
+    - builder_table_update_pensoft_accordions_item_2.php

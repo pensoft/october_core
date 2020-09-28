@@ -9,8 +9,18 @@ html,body {
 }
 
 a {
+    &.no-color{
+        color:@text-color-default;
+    }
     .text-link;
 }
+
+ul{
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+ol.q {list-style-type: upper-roman; padding-left: 20px;}
 
 .header-image {
     overflow: hidden;
@@ -79,7 +89,7 @@ a {
 
     .funding {
         display: flex;
-        flex: 1 1 auto;
+        flex: 1 1 30%;
     }
     .powered-by {
         display: flex;
@@ -146,8 +156,8 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: stretch;
-    min-height: 400px;
     box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .subscribe-items + .subscribe-items {

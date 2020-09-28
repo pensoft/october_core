@@ -25,5 +25,9 @@ class Partners extends Model
         'cover' => 'System\Models\File'
     ];
 
+	public $belongsTo = [
+		'country' => 'RainLab\Location\Models\Country'
+	];
+
 
 }

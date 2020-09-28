@@ -14,7 +14,7 @@
 					{% partial "components/card.htm" 
 						title=highlight.title
 						body=highlight.content
-						class="mx-1 card-link"
+						class="mx-1 card-link card-new-item"
 						href=highlight.href
 						image=highlight.cover ? highlight.cover|crop_image|resize(280, 181, {'mode': 'crop'}) : false
 					%}

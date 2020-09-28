@@ -2,8 +2,8 @@
 <div class="library-container">
     <h2>{{ record.title }}</h2>
     {% partial "components/libraries-content" label="Authors:" value=record.authors %}
-    {% partial "components/libraries-content" label="Status:" value=record.status %}
-    {% partial "components/libraries-content" label="Year:" value=record.year %}
+    {% partial "components/libraries-content" label="Status:" value=record.status_attr %}
+    {% partial "components/libraries-content" label="Year:" value=record.year_attr %}
 
     {% partial "components/libraries-content" label="Journal:" value=record.journal %}
     {% partial "components/libraries-content" label="Proceedings:" value=record.proceedings_title %}
@@ -20,13 +20,12 @@
     {% partial "components/libraries-content" label="URL/DOI:" value=record.doi is_link=true  %}
 
     {%if record.file%}
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="mt-1 d-flex justify-content-between align-items-center">
-                <a target="_blank" href="{{record.file.path()}}" class="btn btn-secondary">Download </a>
-                <span> ({{record.filesize}})</span>
-            </div>
+    <div class="row middle-xs">
+      <div class="col-xs-12">
+        <div class="d-flex flex-column justify-content-start flex-lg-row mt-1 d-flex align-items-start">
+            <a target="_blank" href="{{record.file.path()}}" class="btn btn-secondary no-margin">Download ({{record.filesize}})</a>
         </div>
+      </div>
     </div>
     {%endif%}
 

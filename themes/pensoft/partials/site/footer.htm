@@ -1,18 +1,18 @@
-<div class="container">
+<div class="container-fluid border-box">
     <div class="row nowrap text-light d-flex justify-content-between align-items-center flex-column flex-lg-row">
         {% if (footer_funds_flag != null or footer_funds_text != '') %}
-        <div class="funding flex-column my-1 my-lg-0 flex-lg-row px-1">
+        <div class="funding flex-column my-1 my-lg-0 flex-lg-row px-1 align-items-center ">
             {% if footer_funds_flag %}
                 <img class="text mr-0 mr-lg-1" style="height:50px;" src="{{ footer_funds_flag }}"/>
             {% endif %}
             {% if footer_funds_text %}
-                <span class="mt-1 mt-lg-0 text-justify">{{footer_funds_text}}</span>
+                <span class="text-justify align-items-center">{{footer_funds_text}}</span>
             {%endif %}
         </div>
         {% endif %}
         {% if (enable_social_media) %}
         <div class="social-networks px-1">
-            <div class="icons">
+            <div class="icons justify-content-center">
                 {% if enable_facebook %}
                     <a href="{{facebook_url}}" class="text-white pr p-facebook " target="_blank" ></a>
                 {% endif %}
@@ -25,7 +25,7 @@
             </div>
         </div>
         {% endif %}
-        
-        <div class="powered-by my-1 my-lg-0 px-1"><span class="mr-1">Designed and powered by</span><img class="text" src="{{ 'assets/images/pensoft-logo.svg'|theme }}"/></div>
+        <a style="flex:0 0 auto;" href="/privacy-policy">Read our Privacy Policy</a>
+        <div class="powered-by my-1 my-lg-0 px-1 align-items-center justify-content-end"><span class="mr-1">Designed and powered by</span><a href="{{config('link.pensoft')}}" target="_blank"><img class="text" src="{{ 'assets/images/pensoft-logo.svg'|theme }}"/></a></div>
     </div>
 </div>

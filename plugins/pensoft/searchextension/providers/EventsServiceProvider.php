@@ -24,7 +24,7 @@ class EventsServiceProvider extends ResultsProvider
             $result->title     = $match->title;
             $result->text      = $match->description;
             $result->url       = $controller->pageUrl('events', ['slug' => $match->slug]);
-            $result->thumb     = $match->cover_image;
+            // $result->thumb     = $match->cover_image;
             $result->model     = $match;
             $result->meta      = [
             ];

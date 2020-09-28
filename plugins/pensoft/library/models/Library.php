@@ -26,26 +26,23 @@ class Library extends Model
     const TYPE_DELIVERABLE = 5;
     const TYPE_REPORT = 6;
 
+	const SORT_TYPE_DELIVERABLES = 1;
+	const SORT_TYPE_RELEVANT_PUBLICATIONS = 2;
+	const SORT_TYPE_PROJECT_PUBLICATIONS = 3;
+
     public static $allowSortingOptions = [
         'title asc' => 'Title (asc)',
         'title desc' => 'Title (desc)',
-        'authors asc' => 'Author(s) (asc)',
-        'authors desc' => 'Author(s) (desc)',
         'year asc' => 'Year (asc)',
         'year desc' => 'Year (desc)',
-        'doi asc' => 'URL/DOI (asc)',
-        'doi desc' => 'URL/DOI (desc)',
-        'type asc' => 'Type (asc)',
-        'type desc' => 'Type (desc)',
+        // 'type asc' => 'Type (asc)',
+        // 'type desc' => 'Type (desc)',
     ];
 
     public static $allowSortTypesOptions = [
-        self::TYPE_JOURNAL_PAPER => 'Journal Paper',
-        self::TYPE_PROCEEDINGS_PAPER => 'Proceedings Paper',
-        self::TYPE_BOOK_CHAPTER => 'Book Chapter',
-        self::TYPE_BOOK => 'Book',
-        self::TYPE_DELIVERABLE => 'Deliverable',
-        self::TYPE_REPORT => 'Report',
+		self::SORT_TYPE_DELIVERABLES => 'Deliverables',
+		self::SORT_TYPE_RELEVANT_PUBLICATIONS => 'Relevant Publications',
+		self::SORT_TYPE_PROJECT_PUBLICATIONS => 'MAIA Publications',
     ];
 
     /**
@@ -62,20 +59,25 @@ class Library extends Model
     public $attachOne = [
         'file' => 'System\Models\File'
     ];
+    public $appends = [
+		'status_attr',
+		'derived_attr',
+		'year_attr',
+	];
 
     public function getDueDateAttribute($value)
     {
         return (new Carbon($value))->englishMonth;
     }
 
-    public function getYearAttribute($value)
+    public function getYearAttrAttribute($value)
     {
         return (new Carbon($value))->year;
     }
 
-    public function getStatusAttribute($value)
+    public function getStatusAttrAttribute()
     {
-        switch((int) $value){
+        switch((int) $this->status){
             case self::STATUS_PUBLISHED: return 'Published';
             case self::STATUS_INPRESS: return 'In Press';
             case self::STATUS_INPREPARATION: return 'In Preparation';
@@ -88,9 +90,9 @@ class Library extends Model
         return (new ByteSize())->format($this->file->file_size);
     }
 
-    public function getDerivedAttribute($value)
+    public function getDerivedAttrAttribute($value)
     {
-        switch((int) $value){
+        switch((int) $this->derived){
             case self::DERIVED_YES: return 'Yes';
             case self::DERIVED_NO: return 'No';
         }
@@ -111,6 +113,10 @@ class Library extends Model
         $query->where('is_visible', true);
     }
 
+    public function scopeOfType($query, $type){
+        return $query->where('type', $type);
+    }
+
     public function scopeListFrontEnd($query, $options = []){
         extract(
             array_merge([
@@ -118,10 +124,18 @@ class Library extends Model
                 'type' => 0,
             ], $options)
         );
-        
-        if(in_array($type, array_keys(self::$allowSortTypesOptions))){
-            $query->where('type', (int)$type);
-        }
+
+        switch ($type){
+			case self::SORT_TYPE_DELIVERABLES:
+				$query->ofType(self::TYPE_DELIVERABLE);
+				break;
+			case self::SORT_TYPE_RELEVANT_PUBLICATIONS:
+                $query->ofType(self::TYPE_JOURNAL_PAPER)->where('derived', self::DERIVED_NO);
+				break;
+			case self::SORT_TYPE_PROJECT_PUBLICATIONS:
+				$query->ofType(self::TYPE_JOURNAL_PAPER)->where('derived', self::DERIVED_YES);
+				break;
+		}
 
         if(in_array($sort, array_keys(self::$allowSortingOptions))){
             $parts = explode(' ', $sort);

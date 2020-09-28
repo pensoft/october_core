@@ -23,7 +23,7 @@ class LinksServiceProvider extends ResultsProvider
             $result->title     = $match->title;
             $result->text      = $match->content;
             $result->url       = $match->url;
-            $result->thumb     = $match->cover;
+            // $result->thumb     = $match->cover;
             $result->model     = $match;
             $result->meta      = [
                 'target' => '_blank',

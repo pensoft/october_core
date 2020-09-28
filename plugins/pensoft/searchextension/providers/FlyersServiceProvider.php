@@ -21,7 +21,7 @@ class FlyersServiceProvider extends ResultsProvider
             $result->title     = $match->name;
             $result->text      = $match->content ?: '';
             $result->url       = $controller->pageUrl('flyer');
-            $result->thumb     = $match->flyer_image;
+            // $result->thumb     = $match->flyer_image;
             $result->model     = $match;
             $result->meta      = [];
 

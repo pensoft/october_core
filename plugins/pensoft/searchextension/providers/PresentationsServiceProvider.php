@@ -21,7 +21,7 @@ class PresentationsServiceProvider extends ResultsProvider
             $result->title     = $match->name;
             $result->text      = $match->content ?: '';
             $result->url       = $controller->pageUrl('presentation');
-            $result->thumb     = $match->presentation_image;
+            // $result->thumb     = $match->presentation_image;
             $result->model     = $match;
             $result->meta      = [];
 
