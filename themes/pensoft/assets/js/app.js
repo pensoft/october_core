@@ -128,9 +128,11 @@ async function onLoadedDomContent(){
 
 function handleSVGMapMouseMove(event) {
 	var countryId = $(event.target).attr('class');
-	var countryId = $(event.target).attr('class');
+	var countryName = $(event.target).attr('title');
 	var tooltip = document.getElementById("tooltip");
-	
+	if(!countryId){
+		countryId = $(event.target).parent().attr('class');
+	}
 	switch (countryId) {
 		case "BG":
 		case "GR":
