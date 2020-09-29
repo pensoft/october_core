@@ -239,7 +239,7 @@ Docs & License: https://fullcalendar.io/
                 '<span class="fc-title">' +
                     (core.htmlEscape(eventDef.title || '') || '&nbsp;') + // we always want one line of height
                     '</span>';
-            return '<a class="' + classes.join(' ') + '"' +
+            return '<a href="javascript:;" data-toggle="tooltip" data-placement="top" data-delay="500" class="' + classes.join(' ') + '"' +
                 (eventDef.url ?
                     ' href="' + core.htmlEscape(eventDef.url) + '"' :
                     '') +

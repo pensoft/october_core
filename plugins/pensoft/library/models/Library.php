@@ -31,8 +31,8 @@ class Library extends Model
 	const SORT_TYPE_PROJECT_PUBLICATIONS = 3;
 
     public static $allowSortingOptions = [
-        'title asc' => 'Title (asc)',
-        'title desc' => 'Title (desc)',
+//        'title asc' => 'Title (asc)',
+//        'title desc' => 'Title (desc)',
         'year asc' => 'Year (asc)',
         'year desc' => 'Year (desc)',
         // 'type asc' => 'Type (asc)',

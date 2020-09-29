@@ -8,7 +8,7 @@ is_link=false
     {% if is_link %}
         <span class="text-ligth"><a target="_blank" href="{{value}}" class="break-word">{{value}}</a></span>
     {% else %}
-        <span class="text-ligth">{{value}}</span>
+        <span class="text-ligth">{{value|replace({",": ", "})}}</span>
     {% endif %}
 </div>
 {% endif %}

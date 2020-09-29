@@ -13,6 +13,7 @@ use Pensoft\Searchextension\providers\PartnersServiceProvider;
 use Pensoft\Searchextension\providers\PresentationsServiceProvider;
 use Pensoft\Searchextension\providers\PressreleasesServiceProvider;
 use Pensoft\Searchextension\providers\VideosServiceProvider;
+use Pensoft\Searchextension\providers\LibraryServiceProvider;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
@@ -38,6 +39,7 @@ class Plugin extends PluginBase
                 new PresentationsServiceProvider(),
                 new PressreleasesServiceProvider(),
                 new VideosServiceProvider(),
+                new LibraryServiceProvider(),
             ];
         });
     }
