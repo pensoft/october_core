@@ -4,11 +4,12 @@ layout = "default"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
+header_image = "Maya_Library2.jpg"
 
 [library]
 ==
 <?php
-    use Pensoft\Library\Models\Library;
+use Pensoft\Library\Models\Library;
     use Rych\ByteSize\ByteSize;
     use Pensoft\Library\Classes\ZipFiles;
 
@@ -46,8 +47,6 @@ robot_follow = "follow"
     }
 ?>
 ==
-
-
 <div class="container">
     {%if total_file_size_bites%}
         <div class="row center-xs mb-1">
