@@ -1,5 +1,5 @@
 <h2 class="underline">{{accordion.getAccordion().name}}</h2>
-<div id="{{__SELF__.property('elementId')}}" class="text-left">
+<div id="{{__SELF__.property('elementId')}}" class="text-left relative">
     {% for item in accordion.getAccordion().items.take(__SELF__.property('maxItems')) %}
         {% partial "components/accordion-item" title=item.title content=item.body prefix=item.prefix %}
     {% endfor %}
@@ -24,6 +24,7 @@
                 },
                 heightStyle: "{{__SELF__.property('heightStyle')}}"
             });
+            $(".accordion-title-predix").removeClass('hide').removeClass('relative').addClass('absolute');
         });
     })
 </script>
