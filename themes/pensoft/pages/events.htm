@@ -57,6 +57,12 @@ function onStart(){
         <h1>{{ entry.title }}</h1>
         <div class="text-published mt-2">
             {{entry.event_date}}
+			{% if entry.start %}
+			  &nbsp; ({{ 'Time'|_ }}: {{ entry.start|date('H:i') }}
+			{% endif %}
+			{% if entry.start %}
+				 - {{ entry.end|date('H:i') }})
+			{% endif %}
         </div>
         <div class="text bold mt-2">{{ entry.place }}</div>
         <div class="event-container d-flex">
