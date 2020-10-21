@@ -21,6 +21,11 @@
                             alert('there was an error while fetching events!');
                         }
                     },
+					eventTimeFormat: {
+						hour: '2-digit',
+						minute: '2-digit',
+						meridiem: false
+					},
                     eventClick: function(info) {
                         info.jsEvent.preventDefault();
 
@@ -36,6 +41,7 @@
                     eventRender: function(info) {
                         info.el.setAttribute('title', info.event.extendedProps.description.replace(/<[^>]*>?/gm, ''));
                     },
+					displayEventEnd: true,
                 });
 
                 calendar.render();
