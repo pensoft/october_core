@@ -24,7 +24,7 @@ class Entry extends Model
 
 	public $translatable = ['title', 'description', 'place'];
 
-    public $appends = ['event_date'];
+    public $appends = ['event_date', 'event_time'];
 
     public $attachOne = [
         'cover_image' => 'System\Models\File',
@@ -98,6 +98,16 @@ class Entry extends Model
             return $start->day .' '. $start->englishMonth . ' - ' . $end->day . ' ' . $end->englishMonth . ' ' . $end->year;
         }else{
             return $start->day . ' ' . $start->englishMonth .' ' . $start->year . ' - ' . $end->day . ' ' . $end->englishMonth . ' ' . $end->year;
+        }
+    }
+
+    public function getEventTimeAttribute(){
+        $start = new Carbon($this->start);
+        $end = new Carbon($this->end);
+        if ($start->hour === $end->hour && $start->minute === $end->minute) {
+            return ' at ' . $start->hour . ':' . str_pad($start->minute, 2,  0, STR_PAD_RIGHT);
+        }else{
+            return ' at ' .$start->hour . ':' . str_pad($start->minute, 2,  0, STR_PAD_RIGHT).'-' . $end->hour . ':' . str_pad($end->minute, 2,  0, STR_PAD_RIGHT);
         }
     }
 

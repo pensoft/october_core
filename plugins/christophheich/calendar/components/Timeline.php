@@ -38,7 +38,7 @@ class Timeline extends ComponentBase
 
     public function getLatestEntries()
     {
-        $entries = Entry::orderBy('created_at', 'desc');
-        return $entries->take($this->property('limit'))->get();
+        $entries = Entry::orderBy('start', 'desc');
+        return $entries->take($this->property('limit'))->get()->reverse();
     }
 }
