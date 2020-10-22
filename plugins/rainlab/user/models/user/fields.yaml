@@ -77,14 +77,6 @@ tabs:
             tab: 'rainlab.user::lang.user.account'
             context: preview
             type: text
-        partner:
-            label: Partner
-            nameFrom: title
-            descriptionFrom: description
-            emptyOption: '-- choose --'
-            span: auto
-            type: relation
-            tab: 'rainlab.user::lang.user.account'
 secondaryTabs:
     fields:
         avatar:

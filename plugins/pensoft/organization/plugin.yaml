@@ -1,0 +1,6 @@
+plugin:
+    name: 'pensoft.organization::lang.plugin.name'
+    description: 'pensoft.organization::lang.plugin.description'
+    author: 'Kremena Kaleva'
+    icon: oc-icon-group
+    homepage: ''

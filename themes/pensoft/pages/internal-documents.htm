@@ -79,19 +79,18 @@ allowedUserGroups[] = "internal-users"
 				{% for subfolder in folder.getChildren %}
 				<div id="delete_result_{{subfolder.id}}">
 					<div style="padding-bottom: 20px">
-							<h3 class="accordion-toggle folder row" style="margin-bottom: 0;">
-								<div class="col-xs-11">{{subfolder.name}}</div>
+						<h3 class="accordion-toggle folder row" style="margin-bottom: 0;">
+							<div class="col-xs-11">{{subfolder.name}}</div>
 
-								<div class="col-xs-1 end-xs plusminus">+</div>
-								{% if userCanEdit %}
-								<a class="delete-icon" style="right: 80px;" href="javascript:;" title="Delete" data-request="onDeleteFolder" data-request-data="id:  {{subfolder.id}}"  data-request-confirm="Are you sure you want to delete this folder and all the files and fileders in it?">Delete</a><br>
-								{% endif %}
-							</h3>
+							<div class="col-xs-1 end-xs plusminus">+</div>
+							{% if userCanEdit %}
+							<a class="delete-icon" style="right: 80px;" href="javascript:;" title="Delete" data-request="onDeleteFolder" data-request-data="id:  {{subfolder.id}}"  data-request-confirm="Are you sure you want to delete this folder and all the files and fileders in it?">Delete</a><br>
+							{% endif %}
+						</h3>
 						<div class="accordion-content folders" style="display: none;">
 							<div id="partialInternalDocuments">
 								{% partial 'components/internal_documents' subfolder=subfolder userCanEdit=userCanEdit %}
 							</div>
-
 						</div>
 					</div>
 				</div>

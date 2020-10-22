@@ -11,8 +11,4 @@ class Plugin extends PluginBase
 			FilesForm::class => 'filesform',
 		];
     }
-
-    public function registerSettings()
-    {
-    }
 }
