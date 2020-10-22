@@ -73,3 +73,9 @@
     - users_add_ip_address.php
 1.5.2: Whitespace from usernames is now trimmed, allowed for username to be added to Reset Password mail templates.
 1.5.3: Fixes a bug in the user update functionality if password is not changed. Added highlighting for banned users in user list.
+1.5.4:
+- Adds partner column to users table (partner).
+- users_add_partner.php
+1.5.5:
+- Changed partner column to users table (partner_id).
+- users_change_partner_column.php

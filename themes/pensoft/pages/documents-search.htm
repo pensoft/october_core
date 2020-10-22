@@ -1,0 +1,74 @@
+title = "Documents search"
+url = "/documents-search"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+
+[searchResults]
+resultsPerPage = 10
+showProviderBadge = 1
+noResultsMessage = {{'No records found'|_}}
+visitPageMessage = "Visit page"
+[alternateHrefLangElements]
+
+==
+<?php
+
+use Pensoft\Internaldocuments\Models\Subfolders;
+use System\Models\File;
+
+function onStart(){
+	$term = Request::get('q');
+	if($term){
+		$foldersData = Subfolders::where('name','iLIKE','%'.$term.'%')->get();
+		$this['foldersData'] = $foldersData;
+
+		$filesData = File::get();
+
+		$files = $filesData->filter(function ($file) use ($term) {
+			if(Str::is(strtolower('*' . $term . '*'), strtolower($file->file_name))){
+				return $file;
+			}
+		});
+
+		$this['filesData'] = $files;
+	}
+}
+
+public function onDownloadHandler(){
+	$files = post('files');
+	return Redirect::to('trigger-download')->with('files', $files); // pass attributes in the session
+}
+
+?>
+==
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<a href="{{url('internal-documents')}}">< Back to documents</a>
+		</div>
+		{% partial 'components/search-documents-search-form' %}
+		<div class="col-xs-12">
+			<h2>Search results for {{ searchResults.query }}</h2>
+				{% if user %}
+					{% if foldersData or foldersData %}
+						{% for resultFolder in foldersData %}
+							{% partial 'components/internal_documents_search' folder=resultFolder  %}
+						{% endfor %}
+
+						{% for resultFile in filesData %}
+							{% partial 'components/internal_documents_search' file=resultFile %}
+						{% endfor %}
+
+					{% else %}
+
+						{{'No records found'|_}}
+
+					{% endif %}
+				{% endif %}
+		</div>
+	</div>
+</div>

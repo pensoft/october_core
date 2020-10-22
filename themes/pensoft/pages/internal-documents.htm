@@ -1,0 +1,126 @@
+title = "Library"
+url = "/internal-documents/:slug?|[a-zA-Z\-0-9]"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[session]
+security = "all"
+allowedUserGroups[] = "internal-users"
+
+[filesform]
+
+==
+<?php
+	use Pensoft\Internaldocuments\Models\Subfolders;
+	use System\Models\File;
+	use RainLab\User\Models\UserGroup;
+
+
+	public function onStart(){
+		if($this->user->inGroup( UserGroup::getInternalUsersGroup() )){
+			$this['userCanEdit'] = $this->user->inGroup( UserGroup::getCanEditUsersGroup() ); // true
+		}else{
+			return Redirect::to('/');
+		}
+		if($this->param('slug')){
+			$this['folder'] = Subfolders::select('pensoft_internaldocuments_subfolders.*')
+										->where('slug', ''.$this->param('slug').'')
+										->first();
+		}else{
+			$this['folders'] = Subfolders::where('pensoft_internaldocuments_subfolders.parent_id', null)->get();
+		}
+
+	}
+
+
+	public function onDownloadHandler(){
+		$files = post('files');
+		return Redirect::to('trigger-download')->with('files', $files); // pass attributes in the session
+	}
+
+	public function onDeleteFile(){
+		$fileId = post('id');
+		$file = File::find($fileId);
+		if($file)
+			$file->delete();
+		return ['#delete_result_'.$fileId => ''];
+	}
+
+	public function onDeleteFolder(){
+		$folderId = post('id');
+		$folder = Subfolders::find($folderId);
+		if($folder)
+			$folder->delete();
+		return ['#delete_result_'.$folderId => ''];
+	}
+?>
+==
+{% component 'session' %}
+<div class="container">
+	{% if user %}
+	<div class="row">
+		{% if folder.nest_depth == 0 and folders.count == 0 %}
+		<div class="col-xs-12">
+			<a href="{{url('internal-documents')}}">< Back to documents</a>
+		</div>
+		{% endif %}
+		{% partial 'components/search-documents-search-form' %}
+		<div class="col-xs-12">
+			<h3>{{ folder.name }}</h3>
+			{% if folder.getParentsAndSelf.count %}
+				<a data-toggle="modal" href="#contentBasic{{ folder.id }}" class="upload-icon">Upload</a>
+				{% partial 'components/popup-files-form' subfolder=folder is_group=0 %}
+			{% endif %}
+
+			{% if folder.getChildren.count %}
+			<div id="accordion-documents" class="text-left relative ui-accordion ui-widget ui-helper-reset" role="tablist">
+				{% for subfolder in folder.getChildren %}
+				<div id="delete_result_{{subfolder.id}}">
+					<div style="padding-bottom: 20px">
+							<h3 class="accordion-toggle folder row" style="margin-bottom: 0;">
+								<div class="col-xs-11">{{subfolder.name}}</div>
+
+								<div class="col-xs-1 end-xs plusminus">+</div>
+								{% if userCanEdit %}
+								<a class="delete-icon" style="right: 80px;" href="javascript:;" title="Delete" data-request="onDeleteFolder" data-request-data="id:  {{subfolder.id}}"  data-request-confirm="Are you sure you want to delete this folder and all the files and fileders in it?">Delete</a><br>
+								{% endif %}
+							</h3>
+						<div class="accordion-content folders" style="display: none;">
+							<div id="partialInternalDocuments">
+								{% partial 'components/internal_documents' subfolder=subfolder userCanEdit=userCanEdit %}
+							</div>
+
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<script>
+					$(document).ready(function () {
+						initAccordeon('accordion-documents');
+					});
+				</script>
+
+			</div>
+			{% endif %}
+		</div>
+
+
+		{% if folders.count %}
+		<div class="card-container">
+			<div class="cards">
+				{% for record in folders %}
+					<div class="card profile no-border" style="margin-bottom: 15px">
+						<a style="display:flex; background: #1a272d url({{ record.cover.thumb(100,200,{'mode':'crop'}) }}) center center no-repeat; background-size: 100px; height: 200px" href="internal-documents/{{ record.slug }}" title="{{ record.name }}"></a>
+						<h3 class="card-header" style="font-size: 1em;"><a href="{{url('internal-documents')}}/{{ record.slug }}" title="{{ record.name }}" style="color: #fff;">{{ record.name }}</a></h3>
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+		{% endif %}
+
+	</div>
+	{% endif %}
+</div>

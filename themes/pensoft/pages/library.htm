@@ -36,6 +36,7 @@ use Pensoft\Library\Models\Library;
     public function onFilterRecords(){
         $this->prepareVars();
     }
+
     public function onKor(){
         $zip = (new ZipFiles(new Library))->downloadFiles();
         header("Content-type: application/zip");

@@ -1,0 +1,28 @@
+
+	<div class="ss-result">
+		<div class="ss-result__content">
+			<h4 class="ss-result__title">
+				{%  if folder.id %}
+					Folder
+				{% if folder.getParent.count %}
+					{% for parent in folder.getParents %}
+						{{parent.name}} /
+					{% endfor %}
+				{% endif %}
+				<a href="{{url('internal-documents')}}/{{folder.getRoot.slug}}">{{folder.name}}</a>
+				{%  else %}
+					{% if file.getExtension() == 'docx' or file.getExtension() == 'doc' %}
+					<img src="{{'files_doc.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+					{% elseif file.getExtension() == 'pdf' %}
+					<img src="{{'files_pdf.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+					{% else %}
+					<img src="{{'files_file.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+					{% endif %}
+					<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files: [{{file}}]">Download</a>
+				{% endif %}
+			</h4>
+		</div>
+		<hr>
+	</div>
+
+

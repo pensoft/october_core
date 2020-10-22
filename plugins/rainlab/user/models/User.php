@@ -1,5 +1,6 @@
 <?php namespace RainLab\User\Models;
 
+use Pensoft\Partners\Models\Partners;
 use Str;
 use Auth;
 use Mail;
@@ -36,6 +37,10 @@ class User extends UserBase
     public $belongsToMany = [
         'groups' => [UserGroup::class, 'table' => 'users_groups']
     ];
+
+	public $belongsTo = [
+		'partner' => [Partners::class, 'table' => 'pensoft_partners_partners']
+	];
 
     public $attachOne = [
         'avatar' => \System\Models\File::class

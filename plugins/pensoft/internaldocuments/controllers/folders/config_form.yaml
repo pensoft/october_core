@@ -1,0 +1,10 @@
+name: Folders
+form: $/pensoft/internaldocuments/models/folders/fields.yaml
+modelClass: Pensoft\InternalDocuments\Models\Folders
+defaultRedirect: pensoft/internaldocuments/folders
+create:
+    redirect: 'pensoft/internaldocuments/folders/update/:id'
+    redirectClose: pensoft/internaldocuments/folders
+update:
+    redirect: pensoft/internaldocuments/folders
+    redirectClose: pensoft/internaldocuments/folders

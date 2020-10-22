@@ -20,3 +20,8 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
+    title:
+        label: Title
+        span: auto
+        type: text
+        comment: 'will be displayed in users info list'

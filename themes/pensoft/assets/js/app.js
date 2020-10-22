@@ -174,5 +174,21 @@ function filterSVGMap(pCountryElem) {
 	tooltip.classList.remove("active");
 }
 
+function initAccordeon(pElem) {
+	$('#' + pElem).find('.accordion-toggle').click(function () {
+		if($('.accordion-content').is(':visible')) {
+//			$(".accordion-content").slideUp(300);
+//			$(".plusminus").text('+');
+		}
+		if($(this).next(".accordion-content").is(':visible')) {
+			$(this).next(".accordion-content").slideUp(300);
+			$(this).children(".plusminus").text('+');
+		} else {
+			$(this).next(".accordion-content").slideDown(300);
+			$(this).children(".plusminus").text('-');
+		}
+	});
+}
+
 
 init()
