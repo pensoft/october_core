@@ -25,14 +25,15 @@ function onStart(){
 		$foldersData = Subfolders::where('name','iLIKE','%'.$term.'%')->get();
 		$this['foldersData'] = $foldersData;
 
-		$filesData = File::get();
+		$filesData = File::where('attachment_type', 'Pensoft\InternalDocuments\Models\Subfolders')->get();
 
 		$files = $filesData->filter(function ($file) use ($term) {
 			if(Str::is(strtolower('*' . $term . '*'), strtolower($file->file_name))){
+				$folder = Subfolders::where('id', $file->attachment_id)->first();
+				$file->folderData = $folder;
 				return $file;
 			}
 		});
-
 		$this['filesData'] = $files;
 	}
 }

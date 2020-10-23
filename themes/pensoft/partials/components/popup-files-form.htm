@@ -19,7 +19,7 @@
 							<input name="name" type="text" id="name" placeholder="Enter folder name">
 						</div>
 					{%  endif %}
-
+					{% if not root %}
 					<div class="field">
 						<label for="images">Images</label>
 						<input name="images[]" type="file" id="images" placeholder="Upload images" multiple="multiple" accept="image/*">
@@ -28,10 +28,10 @@
 
 					<div class="field">
 						<label for="files">Files</label>
-						<input name="files[]" type="file" id="files" placeholder="Upload files" multiple="multiple" accept=".pdf, .doc, .docx, .ppt, .xls, xlsx">
+						<input name="files[]" type="file" id="files" placeholder="Upload files" multiple="multiple" accept=".pdf, .doc, .docx, .ppt, .xls, xlsx, .txt">
 						<div id="file_result"></div>
 					</div>
-
+					{% endif %}
 					<div class="mt-1 text-center">
 						<button type="submit" class="btn btn-warning">Save</button>
 						<p>&nbsp;</p>

@@ -19,7 +19,7 @@ allowedUserGroups[] = "internal-users"
 
 
 	public function onStart(){
-		if($this->user->inGroup( UserGroup::getInternalUsersGroup() )){
+		if($this->user && $this->user->inGroup( UserGroup::getInternalUsersGroup() )){
 			$this['userCanEdit'] = $this->user->inGroup( UserGroup::getCanEditUsersGroup() ); // true
 		}else{
 			return Redirect::to('/');
@@ -51,8 +51,9 @@ allowedUserGroups[] = "internal-users"
 	public function onDeleteFolder(){
 		$folderId = post('id');
 		$folder = Subfolders::find($folderId);
-		if($folder)
+		if($folder){
 			$folder->delete();
+		}
 		return ['#delete_result_'.$folderId => ''];
 	}
 ?>
@@ -71,7 +72,7 @@ allowedUserGroups[] = "internal-users"
 			<h3>{{ folder.name }}</h3>
 			{% if folder.getParentsAndSelf.count %}
 				<a data-toggle="modal" href="#contentBasic{{ folder.id }}" class="upload-icon">Upload</a>
-				{% partial 'components/popup-files-form' subfolder=folder is_group=0 %}
+				{% partial 'components/popup-files-form' subfolder=folder is_group=0 root=1 %}
 			{% endif %}
 
 			{% if folder.getChildren.count %}

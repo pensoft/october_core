@@ -11,6 +11,11 @@
 				{% endif %}
 				<a href="{{url('internal-documents')}}/{{folder.getRoot.slug}}">{{folder.name}}</a>
 				{%  else %}
+				{% if file.folderData.getParentsAndSelf.count %}
+				{% for parentFolder in file.folderData.getParentsAndSelf %}
+				{{parentFolder.name}} /
+				{% endfor %}
+				{% endif %}
 					{% if file.getExtension() == 'docx' or file.getExtension() == 'doc' %}
 					<img src="{{'files_doc.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
 					{% elseif file.getExtension() == 'pdf' %}
@@ -18,8 +23,11 @@
 					{% else %}
 					<img src="{{'files_file.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
 					{% endif %}
-					<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files: [{{file}}]">Download</a>
+
+
+					<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
 				{% endif %}
+
 			</h4>
 		</div>
 		<hr>
