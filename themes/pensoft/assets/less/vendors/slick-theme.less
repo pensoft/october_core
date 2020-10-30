@@ -53,6 +53,13 @@
     }
 }
 
+.slick-prev{
+//   background: url("../images/back.svg") top left no-repeat;
+}
+.slick-next{
+//   background: url("../images/forward-01.svg") top left no-repeat;
+}
+
 .slick-prev:before, .slick-next:before {
     font-family: @slick-font-family;
     font-size: 20px;
@@ -61,7 +68,7 @@
     opacity: @slick-opacity-default;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+
     & when ( @slick-font-family = 'slick' ) {
         /* Icons */
         @font-face {
@@ -81,7 +88,7 @@
         right: -25px;
     }
     &:before {
-        content: @slick-prev-character;
+        // content: @slick-prev-character;
         color: @dark-color;
         [dir="rtl"] & {
             content: @slick-next-character;
@@ -96,7 +103,7 @@
         right: auto;
     }
     &:before {
-        content: @slick-next-character;
+        // content: @slick-next-character;
         color: @dark-color;
         [dir="rtl"] & {
             content: @slick-prev-character;

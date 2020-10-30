@@ -29,8 +29,20 @@
                 </div>
             {% endif %}
             
-            <div class="text-center mt-1">
-                <button type="submit" class="btn btn-primary">Save</button>
+            <div class="mt-1">
+				<div class="row middle-xs">
+					<div class="col-xs-1">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+					<div class="col-xs-12 col-md-10 mt-1 mt-lg-0">
+						{% if user %}
+
+							{% partial 'components/account/deactivate_link' %}
+
+						{% endif %}
+
+					</div>
+				</div>
             </div>
         </div>
     </div>

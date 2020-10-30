@@ -1,4 +1,4 @@
-title = "profile"
+title = "Profile"
 url = "/profile"
 layout = "default"
 is_hidden = 0
@@ -7,22 +7,27 @@ robot_follow = "follow"
 ==
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-4">
-            <div class="list border">
+        <div class="col-xs-12 col-md-2">
+            <div class="list">
                 <a href="#" class="list-item">Change password</a>
                 <a href="/profile/page-2" class="list-item">Page 2</a>
             </div>
         </div>
-        <div class="col-xs-12 col-md-8 mt-1 mt-lg-0">
+        <div class="col-xs-12 col-md-10 mt-1 mt-lg-0">
             {% if user %}
-                
+
                 {% partial 'components/account/activation_check' %}
-                
+
                 {% partial 'components/account/update' %}
-                
-                {% partial 'components/account/deactivate_link' %}
-                
+
             {% endif %}
+			{% if  not user %}
+
+				<a class="btn btn-link" href="/register">Create account</a>
+
+			{% endif %}
+
+
         </div>
     </div>
 </div>

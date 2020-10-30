@@ -1,0 +1,26 @@
+{% for file in files %}
+	<div id="delete_result_{{file.id}}">
+		<div class="file_container row middle-xs between-xs">
+			<div class="col-xs-10" id="tipContainer{{file.id}}" style="padding-left: 0; margin-left: 0;">
+				<span class="drag-handle">&nbsp;</span>
+				{% if file.getExtension() == 'docx' %}
+				<img src="{{'files_doc.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+				{% elseif file.getExtension() == 'pdf' %}
+				<img src="{{'files_pdf.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+				{% else %}
+				<img src="{{'files_file.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+				{% endif %}
+			</div>
+			<div class="col-xs-2 end-xs">
+				<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
+			</div>
+
+
+			{% if userCanEdit %}
+			<script>
+				initRightclickDeleteTippy('{{file.id}}');
+			</script>
+			{% endif %}
+		</div>
+	</div>
+{% endfor %}

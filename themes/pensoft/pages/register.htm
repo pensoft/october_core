@@ -14,9 +14,9 @@ requirePassword = 0
 <div class="container">
     {% if not user %}
     
-        <div class="row center-xs">
+        <div class="row">
     
-            <div class="col-md-6">
+            <div class="col-md-12">
                 {% partial 'components/account/register' %}
             </div>
     
@@ -28,7 +28,7 @@ requirePassword = 0
     
         {% partial 'components/account/update' %}
     
-        {% partial 'components/account/deactivate_link' %}
+        <!--{% partial 'components/account/deactivate_link' %}-->
     
     {% endif %}
 </div>

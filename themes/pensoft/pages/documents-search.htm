@@ -47,11 +47,9 @@ public function onDownloadHandler(){
 ==
 
 <div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<a href="{{url('internal-documents')}}">< Back to documents</a>
-		</div>
-		{% partial 'components/search-documents-search-form' %}
+	<div class="row middle-xs between-xs">
+			{% partial 'components/search-documents-search-form' %}
+
 		<div class="col-xs-12">
 			<h2>Search results for {{ searchResults.query }}</h2>
 				{% if user %}

@@ -99,7 +99,7 @@
 
     .timeline-item:nth-child(even){
         left: 50%;
-        text-align: left;
+        //text-align: left;
 
         &::after {
             left: -(@cycle-width / 2) - @timeline-cycle-border-width;
@@ -149,7 +149,7 @@
             border-width: @timeline-cycle-border-width;
             border-style: solid;
             box-shadow: 0 0 0 @timeline-border-weight * 1 @timeline-border-color;
-            z-index: @zindex-fixed;
+            z-index: 998;
             right: -(@cycle-width / 2) - @timeline-cycle-border-width;
         }
     }

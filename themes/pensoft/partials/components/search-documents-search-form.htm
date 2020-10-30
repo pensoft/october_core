@@ -7,3 +7,10 @@
 		</form>
 	</div>
 </div>
+
+<div class="col-xs-12 col-md-2 end-xs">
+	{% if folder.nest_depth == 0 and folders.count == 0 %}
+	<a href="{{url('internal-repository')}}" class="back"> <div class="arrow-left end-xs"></div> &nbsp;Back to documents</a>
+	{% endif %}
+</div>
+

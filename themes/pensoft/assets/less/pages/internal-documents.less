@@ -3,8 +3,7 @@
   background: url('../../assets/images/library_icons_delete.svg') left no-repeat;
   background-size: 8px;
   padding-left: 14px;
-  position: absolute;
-  margin-left: 20px;
+
 }
 
 .upload-icon{
@@ -14,10 +13,9 @@
 }
 
 .download-icon{
-  background: url('../../assets/images/library_icons_download.svg') left no-repeat;
-  background-size: 8px;
-  padding-left: 14px;
-  margin-left: 10px;
+  background: url(../../assets/images/download.svg) bottom left no-repeat;
+  background-size: 15px;
+  padding-left: 20px;
 }
 
 
@@ -342,3 +340,77 @@
   font-size: 1.3em;
 }
 
+.arrow-left {
+  background: url('../../assets/images/back.svg') top left  no-repeat;
+  width: 18px;
+  height: 18px;
+  /* background-color: red; */
+  position: relative;
+  display: inline-block;
+  top: 4px;
+  left: 3px;
+}
+
+.back{
+  color: #495a63;
+}
+
+.circled_plus{
+  background: url('../../assets/images/upload.svg') top left  no-repeat;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  display: inline-block;
+  top: 3px;
+  margin-right: 3px;
+}
+
+
+.all_images_container{
+  height: 140px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.all_images_container.changeHeight {height: auto;}
+
+.all_images_container .documents_images_list{
+  float: left;
+  margin: 5px;
+  width: 150px;
+  height: 120px;
+}
+
+.all_images_container .documents_images_list:hover{
+  cursor: move;
+}
+
+
+.ui-state-highlight {
+  height: 3em;
+  line-height: 2em;
+  background: #f5f5f5;
+}
+
+.drag-handle{
+  width: 11px;
+  height: 100%;
+  float: left;
+  margin-right: 10px;
+  background: url('../../assets/images/drag.svg') no-repeat;
+  background-size: cover;
+  background-position-x: -6px;
+}
+
+.drag-handle:hover {
+  cursor: move;
+}
+
+.folder_icon{
+  background: none;
+  border: none;
+  padding: 0;
+  background: url('@{slick-loader-path}folder.svg') left no-repeat;
+  background-size: 33px;
+  padding-left: 42px;
+}

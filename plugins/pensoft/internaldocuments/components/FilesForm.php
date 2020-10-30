@@ -41,7 +41,6 @@ class FilesForm extends ComponentBase
 			return Redirect::back()->withErrors($validator);
 		}
 
-
 		if(Input::get('name')){
 			$subfolder = new Subfolders();
 			$subfolder->name = Input::get('name');
@@ -54,11 +53,17 @@ class FilesForm extends ComponentBase
 		$subfolder->images = Input::file('images');
 		$subfolder->files = Input::file('files');
 		$subfolder->save();
+	}
 
-		Flash::success('Added');
+	public function onFolderRename(){
+		$folderId = Input::get('id');
+		$folderName = Input::get('name');
 
-		return Redirect::back();
-
+		$folder = Subfolders::find($folderId);
+		if($folder){
+			Subfolders::where('id', $folderId)->update(['name' => $folderName]);
+		}
+//		return ['name' => $folderName];
 	}
 
 	public function onImageUpload(){
@@ -96,5 +101,53 @@ class FilesForm extends ComponentBase
 		return  [
 			'#file_result' => $output
 		];
+	}
+
+	public function onSortFiles(){
+		parse_str(post('sortOrder'), $output);
+		$reorderIds = $output['sortItem'];
+		$subfolderId = post('subfolderId');
+		$moved = [];
+		$position = 0;
+
+		if (is_array($reorderIds) && count($reorderIds)) {
+			foreach ($reorderIds as $id) {
+				if (in_array($id, $moved) || !$record = File::find($id))
+					continue;
+				$record->sort_order = $position;
+				$record->save();
+				$moved[] = $id;
+				$position++;
+			}
+		}
+
+		$subfolderData = Subfolders::where('parent_id', $subfolderId)->get();
+
+		return [
+			'#sortable' => $this->renderPartial('components/documents-files', ['files' => $subfolderData, 'group_id' => $subfolderId, 'userCanEdit' => true])
+		];
+	}
+
+	public function onSortFolders(){
+		parse_str(post('sortOrder'), $output);
+
+		$sourceNode = Subfolders::find(post('sourceNode'));
+		$targetNode = post('targetNode') ? Subfolders::find(post('targetNode')) : null;
+
+		if ($sourceNode == $targetNode) {
+			return;
+		}
+
+		switch (post('position')) {
+			case 'left':
+			default:
+				$sourceNode->moveBefore($targetNode);
+				break;
+
+			case 'right':
+				$sourceNode->moveAfter($targetNode);
+				break;
+		}
+
 	}
 }

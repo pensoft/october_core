@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div class="control-popup modal fade" id="contentBasic{{ subfolder.id }}" tabindex="-1" role="dialog">
+<div class="control-popup modal fade" id="contentBasicFiles{{ subfolder.id }}" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Add files and/or folder</h4>
+				<h4 class="modal-title">Add files</h4>
 			</div>
 			<div class="modal-body">
 				<form class="ui form" method="post" action="{{__SELF__}}::onSumbit" enctype="multipart/form-data" accept-charset="utf8">
@@ -13,13 +13,7 @@
 					<input type="hidden" name="parent" value="{{subfolder.id}}">
 					{{form_token()}}
 					{{form_sessionKey()}}
-					{% if is_group == 0 %}
-						<div class="field">
-							<label for="name">Name</label>
-							<input name="name" type="text" id="name" placeholder="Enter folder name">
-						</div>
-					{%  endif %}
-					{% if not root %}
+
 					<div class="field">
 						<label for="images">Images</label>
 						<input name="images[]" type="file" id="images" placeholder="Upload images" multiple="multiple" accept="image/*">
@@ -31,7 +25,6 @@
 						<input name="files[]" type="file" id="files" placeholder="Upload files" multiple="multiple" accept=".pdf, .doc, .docx, .ppt, .xls, xlsx, .txt">
 						<div id="file_result"></div>
 					</div>
-					{% endif %}
 					<div class="mt-1 text-center">
 						<button type="submit" class="btn btn-warning">Save</button>
 						<p>&nbsp;</p>

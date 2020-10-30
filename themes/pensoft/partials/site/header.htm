@@ -5,8 +5,23 @@ listItemClasses = "nav-item"
 primaryClasses = "navbar-nav"
 secondaryClasses = "dropdown-menu"
 numberOfLevels = 2
+
+[menu login]
+start = "id-16"
+activeNode = "id-17"
+listItemClasses = "item"
+primaryClasses = "nav nav-pills"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 2
 ==
-<nav class="pr-1 pl-1 navbar fixed " id="headernavbar">
+{% if user %}
+<nav class="fixed navbar-loggedin-user " id="headernavbar">
+	<div class="navbar-collapse collapse ">
+		{% component 'login' %}
+	</div>
+</nav>
+{% endif %}
+<nav class="pr-1 pl-1 navbar fixed " id="headernavbar" {% if user %} style="margin-top:50px;"{% endif %}>
     <a href="{{'home'|page}}" class="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}');">
         
     </a>

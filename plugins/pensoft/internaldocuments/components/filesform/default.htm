@@ -3,31 +3,5 @@
 		Upload files/folders to this one
 	</p>
 
-	<form class="ui form" data-request="onSubmit" data-request-flash data-request-files>
-		<input type="hidden" name="_handler" value="onSave">
-		<input type="hidden" name="parent_id" value="12">
-		{{form_token()}}
-		{{form_sessionKey()}}
-		<div class="field">
-			<label for="name">Name</label>
-			<input name="name" type="text" id="name" placeholder="Enter folder name">
-		</div>
 
-		<div class="field">
-			<label for="images">Images</label>
-			<input name="images[]" type="file" id="images" placeholder="Upload images" multiple="multiple" accept="image/*" data-request="onImageUpload" data-request-flash data-request-files>
-			<div id="image_result"></div>
-		</div>
-
-		<div class="field">
-			<label for="files">Files</label>
-			<input name="files[]" type="file" id="files" placeholder="Upload files" multiple="multiple" accept="application/*" data-request="onFileUpload" data-request-flash data-request-files>
-			<div id="file_result"></div>
-		</div>
-
-		<div class="mt-1 text-center">
-			<button type="submit" class="btn btn-warning">Save</button>
-		</div>
-
-	</form>
 </div>

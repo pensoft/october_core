@@ -1,101 +1,76 @@
 {% if userCanEdit %}
 
-	<br><a data-toggle="modal" href="#contentBasic{{ subfolder.id }}" class="upload-icon" style="margin-left: 0;">Upload</a>
+<br xmlns="http://www.w3.org/1999/html">
+<a data-toggle="modal" href="#contentBasicFolder{{ subfolder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Create subfolder</a>
+&nbsp;&nbsp;&nbsp;
+<a data-toggle="modal" href="#contentBasicFiles{{ subfolder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Upload files</a>
 
-	{% partial 'components/popup-files-form' subfolder=subfolder is_group=0 %}
+
+
+	{% partial 'components/popup-files-form' subfolder=subfolder %}
+	{% partial 'components/popup-folders-form' subfolder=subfolder %}
 
 
 {% endif %}
 <p>
 	{% if subfolder.images.count %}
-		{% for image in subfolder.images %}
-			<div id="delete_result_{{image.id}}" style="float: left;">
-				<img  src="{{image.thumb(170,120,{'mode':'crop'})}}" width="170" height="120" alt="{{image.file_name}}" style="margin: 5px;" />
-				{% if userCanEdit %}
-					<a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  {{image.id}}" target="_blank" style="margin-left: -10px"  data-request-confirm="Are you sure you want to delete this file?">Delete</a>
-				{% endif %}
-			</div>
-		{% endfor %}
-		<div style="clear: both;"></div>
-		<p><a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  {{group.images}}" target="_blank" class="download-icon">Download all</a></p>
+		{% partial 'components/documents-images' images=subfolder.images  userCanEdit=userCanEdit group_id=subfolder.id %}
 	{% endif %}
 </p>
+
 <p>
-	{% if subfolder.files.count %}
-		{% for file in subfolder.files %}
-			<div class="file_container" id="delete_result_{{file.id}}">
-				{% if file.getExtension() == 'docx' or file.getExtension() == 'doc' %}
-				<img src="{{'files_doc.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
-				{% elseif file.getExtension() == 'pdf' %}
-				<img src="{{'files_pdf.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> <span style="cursor: pointer;" onclick="window.open('{{file.path}}', '_blank');">{{ file.file_name }}</span>
-				{% else %}
 
-				<img src="{{'files_file.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;">
-					{% if file.isImage %}
-						<span style="cursor: pointer;" onclick="window.open('{{file.path}}', '_blank');">{{ file.file_name }}</span>
-					{% else %}
-						{{ file.file_name }}
-					{% endif %}
-				{% endif %}
-				<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files: [{{file}}]" class="download-icon">Download</a>
-				{% if userCanEdit %}
-					<a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  {{file.id}}"  data-request-confirm="Are you sure you want to delete this file?">Delete</a><br>
-				{% endif %}
-			</div>
-		{% endfor %}
+	{% if subfolder.files.count %}
+	<div id="sortableFiles{{subfolder.id}}">
+		{% partial 'components/documents-files' files=subfolder.files userCanEdit=userCanEdit group_id=subfolder.id %}
+	</div>
+	<script>
+		initSort('sortableFiles{{subfolder.id}}', '{{subfolder.id}}', 'files');
+	</script>
 	{% endif %}
 </p>
-{% for group in subfolder.getChildren %}
-<div id="accordion-documents delete_result_{{group.id}}" class="text-left relative ui-accordion ui-widget ui-helper-reset" role="tablist">
+<div id="sortableFolders{{subfolder.id}}">
+	{% for group in subfolder.getChildren %}
+	<div id="delete_result_{{group.id}}">
+		<div id="accordion-documents" class="text-left relative ui-accordion ui-widget ui-helper-reset">
 
-	<h3 class="accordion-toggle subfolder_files">
-		<span class="">{{group.name}}</span>
-		<span class="plusminus">+</span>
-		{% if userCanEdit %}
-			<a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFolder" data-request-data="id:  {{group.id}}" target="_blank" data-request-confirm="Are you sure you want to delete this folder and all files in it?">Delete</a>
-		{% endif %}
-	</h3>
+			<h3 class="accordion-toggle subfolder_files">
+				<span id="tipContainer{{group.id}}">{{group.name}}</span>
+				<div class="plusminus"><span class="plus"></span></div>
+				{% if userCanEdit %}
 
-	<div class="accordion-content subfolders mb-1" style="display: none;">
-		{% if userCanEdit %}
-		<p><span>
-				<a data-toggle="modal" href="#contentBasic{{ group.id }}" class="upload-icon">Upload</a>
-				{% partial 'components/popup-files-form' subfolder=group is_group=1 %}
-		</span></p>
-		{% endif %}
+					<script>
+						initRightclickRenameFolderTippy('{{group.id}}');
+					</script>
+					{% partial 'components/popup-edit-folder_name-form' subfolder=group %}
+				{% endif %}
+			</h3>
 
+			<div class="accordion-content subfolders mb-1" style="display: none;">
+				{% if userCanEdit %}
+				<p><span>
+						<a data-toggle="modal" href="#contentBasicFiles{{ group.id }}"><span class="circled_plus"></span> Upload files</a>
+						{% partial 'components/popup-files-form' subfolder=group %}
+				</span></p>
+				{% endif %}
 
-		{% for file in group.files %}
-			<dv id="delete_result_{{file.id}}">
-				<div class="file_container">
-					{% if file.getExtension() == 'docx' %}
-					<img src="{{'files_doc.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
-					{% elseif file.getExtension() == 'pdf' %}
-					<img src="{{'files_pdf.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
-					{% else %}
-					<img src="{{'files_file.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
-					{% endif %}
-					<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
-					{% if userCanEdit %}
-						<a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  {{file.id}}" data-request-confirm="Are you sure you want to delete this file?">Delete</a><br>
-					{% endif %}
-				</div>
-			</dv>
-		{% endfor %}
+				{% if group.files.count %}
+					<div id="sortableFiles{{group.id}}">
+						{% partial 'components/documents-files' files=group.files userCanEdit=userCanEdit group_id=group.id %}
+					</div>
+					<script>
+						initSort('sortableFiles{{group.id}}', '{{group.id}}', 'files');
+					</script>
+				{% endif %}
 
-		{% if group.images.count %}
-
-			{% for image in group.images %}
-				<div id="delete_result_{{image.id}}" style="float: left;">
-					<img  src="{{image.thumb(170,120,{'mode':'crop'})}}" width="170" height="120" alt="{{image.file_name}}" style="margin: 5px; width: 170px;" />
-					{% if userCanEdit %}
-						<a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  {{image.id}}" target="_blank" style="margin-left: -75px" data-request-confirm="Are you sure you want to delete this file?">Delete</a>
-					{% endif %}
-				</div>
-			{% endfor %}
-			<div style="clear: both;"></div>
-			<p><a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  {{group.images}}" target="_blank" class="download-icon">Download all</a></p>
-		{% endif %}
+				{% if group.images.count %}
+					{% partial 'components/documents-images' images=group.images  userCanEdit=userCanEdit group_id=group.id %}
+				{% endif %}
+			</div>
+		</div>
 	</div>
+	{% endfor %}
 </div>
-{% endfor %}
+<script>
+	initSort('sortableFolders{{subfolder.id}}', '{{subfolder.id}}', 'folders');
+</script>

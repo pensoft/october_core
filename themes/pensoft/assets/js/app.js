@@ -10,6 +10,79 @@ var keepFooter = function(documentHasScroll){
     }
 }
 
+function initSort(containerId, folderId, type){
+	var link = document.querySelector('.accordion-toggle');
+	link.addEventListener('click', function(event) {
+		if($(this).next(".accordion-content").is(':visible')) {
+			$(this).next(".accordion-content").slideUp(300);
+			$(this).children(".plusminus").html('<span class="plus"></span>');
+		}
+	});
+
+	if(type == 'folders'){
+		$( "#"+containerId ).sortable({
+			revert: true,
+			opacity: 0.8,
+			handle: (type == 'images') ? false : ".drag-handle",
+			placeholder: (type == 'images') ? false : "ui-state-highlight",
+			start: function(e, ui) {
+				// creates a temporary attribute on the element with the old index
+				$(this).attr('data-previndex', ui.item.index());
+			},
+			update: function( event, ui ) {
+
+				var id = ui.item.attr("id").replace('delete_result_','');
+				var prevSiblingId = ui.item.prev();
+				if(prevSiblingId.length > 0){
+					prevSiblingId = ui.item.prev().attr('id').replace('delete_result_','');
+					var targetNode = prevSiblingId;
+					var position = 'right';
+				}
+				var nextSiblingId = ui.item.next();
+				if(nextSiblingId.length > 0){
+					nextSiblingId = ui.item.next().attr('id').replace('delete_result_','');
+					var targetNode = nextSiblingId;
+					var position = 'left';
+				}
+				$(this).removeAttr('data-previndex');
+
+				var data = $( "#"+containerId ).sortable( "serialize", { key: "sortItem[]" } );
+				$.request('onSortFolders',
+					{
+						data: {
+							'sortOrder': data,
+							'subfolderId': folderId,
+							'sourceNode': id,
+							'targetNode': targetNode,
+							'position': position
+						},
+					});
+			}
+		});
+	}else{
+		$( "#"+containerId ).sortable({
+			revert: true,
+			opacity: 0.8,
+			handle: (type == 'images') ? false : ".drag-handle",
+			placeholder: (type == 'images') ? false : "ui-state-highlight",
+			update: function( event, ui ) {
+				var data = $( "#"+containerId ).sortable( "serialize", { key: "sortItem[]" } );
+				$.request('onSortFiles',
+					{
+						data: {
+							'sortOrder': data,
+							'subfolderId': folderId,
+						},
+					});
+			}
+		});
+	}
+
+
+
+	$( "#"+containerId ).disableSelection();
+}
+
 function isBreakpointLarge(){
     return window.innerWidth <= 991;
 }
@@ -53,6 +126,89 @@ function createTippy(element, options){
     });
 }
 
+
+function initRightclickDeleteTippy(id, type='file', file = ''){
+	if(type == 'image'){
+		var html = '<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [\' + file + \']" target="_blank" class="download-icon">Download</a><br><a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
+	}else{
+		var html = '<a class="delete-icon" href="javascript:;" title="Download" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
+	}
+	var rightClickableArea = document.querySelector('#tipContainer'+id);
+	if(rightClickableArea){
+		var instance = tippy(rightClickableArea, {
+			placement: 'right-start',
+			trigger: 'manual',
+			interactive: true,
+			arrow: false,
+			content: html,
+			allowHTML: true,
+			animation: 'scale',
+			theme: 'light',
+		});
+
+		rightClickableArea.addEventListener('contextmenu', (event) => {
+			event.preventDefault();
+
+			instance.setProps({
+				getReferenceClientRect: () => ({
+					width: 0,
+					height: 0,
+					top: event.clientY,
+					bottom: event.clientY,
+					left: event.clientX,
+					right: event.clientX,
+				}),
+			});
+
+			instance.show();
+		});
+	}
+}
+
+function initRightclickRenameFolderTippy(id){
+	var rightClickableArea = document.querySelector('#tipContainer'+id);
+	if(rightClickableArea){
+		var instance = tippy(rightClickableArea, {
+			placement: 'right-start',
+			trigger: 'manual',
+			interactive: true,
+			arrow: false,
+			content: '<a data-toggle="modal" href="#contentBasicEditFolder' + id + '" style="margin-left: 0;">Rename</a><br><a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFolder" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>',
+			allowHTML: true,
+			animation: 'scale',
+			theme: 'light',
+		});
+
+		rightClickableArea.addEventListener('contextmenu', (event) => {
+			event.preventDefault();
+
+			instance.setProps({
+				getReferenceClientRect: () => ({
+					width: 0,
+					height: 0,
+					top: event.clientY,
+					bottom: event.clientY,
+					left: event.clientX,
+					right: event.clientX,
+				}),
+			});
+
+			instance.show();
+		});
+	}
+}
+
+
+function toggleImages(id){
+	$('.all_images_container').toggleClass('changeHeight', 500);
+	if($('.show_all_btn'+id).text() == "Show all"){
+		$('.show_all_btn'+id).text('Show less');
+	} else if($('.show_all_btn'+id).text() == 'Show less'){
+		$('.show_all_btn'+id).text('Show all');
+	}
+}
+
+
 function cardCarousel(object){
     return new Promise(resolve => {
         $('#card-carousel').slick(object);
@@ -70,7 +226,7 @@ function appendProfile() {
 function appendSignIn(){
     $(document).on('signin', function (e) {
         var headerNavbarNav = $('#headerNavbarNav');
-        var li = '<li class="nav-item"><a href="http://maia.pensoft.com/login" target = "_self">Sign in</a></li >';
+        var li = '<li class="nav-item sign-in"><a href="http://maia.pensoft.com/login" target = "_self">Login</a></li >';
         headerNavbarNav.find('>ul').append(li);
     });
 }
@@ -78,7 +234,7 @@ function appendSignIn(){
 function appendSignOut() {
     $(document).on('signout', function (e) {
         var headerNavbarNav = $('#headerNavbarNav');
-        var li = '<li class="nav-item"><a data-request="onLogout" data-request-data="redirect: \'/\'">Sign out</a></li >';
+        var li = '<li class="nav-item  sign-in"><a data-request="onLogout" data-request-data="redirect: \'/\'">Logout</a></li >';
         headerNavbarNav.find('>ul').append(li);
     });
 }
@@ -100,7 +256,9 @@ function init() {
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 autoplay: true,
-                autoplaySpeed: 6000,
+				autoplaySpeed: 6000,
+				prevArrow: '<i class="slick-prev p p-back"/>',
+				nextArrow: '<i class="slick-next p p-forward"/>',
             });
         }
     });
@@ -109,7 +267,7 @@ function init() {
         autoRequestFormLibrary();
     });
     // appendProfile()
-    // appendSignIn()
+    appendSignIn()
     appendSignOut()
 }
 
@@ -119,7 +277,9 @@ async function onLoadedDomContent(){
             slidesToShow: 3,
             slidesToScroll: 3,
             autoplay: true,
-            autoplaySpeed: 6000,
+			autoplaySpeed: 6000,
+			prevArrow: '<i class="slick-prev pr p-back"/>',
+			nextArrow: '<i class="slick-next pr p-forward"/>',
         });
     }
     keepFooter(documentHasScroll());
@@ -178,13 +338,12 @@ function initAccordeon(pElem) {
 	$('#' + pElem).find('.accordion-toggle').click(function () {
 		if($(this).next(".accordion-content").is(':visible')) {
 			$(this).next(".accordion-content").slideUp(300);
-			$(this).children(".plusminus").text('+');
+			$(this).children(".plusminus").html('<span class="plus"></span>');
 		} else {
 			$(this).next(".accordion-content").slideDown(300);
-			$(this).children(".plusminus").text('-');
+			$(this).children(".plusminus").html('<span class="minus"></span>');
 		}
 	});
 }
-
 
 init()
