@@ -24,3 +24,5 @@ columns:
     pretty_allow_share:
         label: 'Allow share'
         type: text
+
+        

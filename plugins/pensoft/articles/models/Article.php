@@ -30,6 +30,7 @@ class Article extends Model
     public function getPrettyAllowShareAttribute(){
         return filter_var($this->allow_share, FILTER_VALIDATE_BOOLEAN) ? "yes" : "no";
     }
+    
 
     public function getReadmoreAttribute($value){
         return '<a href="'. $this->slug .'" >...read more</a>'. $value;
