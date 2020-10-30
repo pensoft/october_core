@@ -31,7 +31,7 @@ fields:
     allow_share:
         label: 'Allow share buttons'
         span: right
-        default: 1
+        default: true
         type: switch
     cover:
         label: Cover

@@ -27,8 +27,8 @@ class Article extends Model
         'cover' => 'System\Models\File'
     ];
 
-    public function getAllowshareAttribute($value){
-        return filter_var($value, FILTER_VALIDATE_BOOLEAN) ? "yes" : "no";
+    public function getPrettyAllowShareAttribute(){
+        return filter_var($this->allow_share, FILTER_VALIDATE_BOOLEAN) ? "yes" : "no";
     }
 
     public function getReadmoreAttribute($value){

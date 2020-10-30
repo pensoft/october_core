@@ -21,6 +21,6 @@ columns:
     updated_at:
         label: 'Updated at'
         type: timesince
-    allow_share:
+    pretty_allow_share:
         label: 'Allow share'
         type: text
