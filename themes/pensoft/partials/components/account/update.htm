@@ -7,7 +7,7 @@
             </div>
             <div class="field">
                 <label for="accountLastName">Last Name</label>
-                <input name="name" type="text" class="" id="accountLastName" value="{{ user.surname }}">
+                <input name="surname" type="text" class="" id="accountLastName" value="{{ user.surname }}">
             </div>
         
             <div class="field">
@@ -17,8 +17,10 @@
 
             <div class="field">
 				{% if user.avatar %}
-				<div>
+
+				<div id="userAvatar">
 					<img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" style="border-radius: 50%;" width="70" height="70">
+					<a href="javascript:;" class="upload-remove-button" data-request="onRemoveAvatar" data-request-confirm="Are you sure?" data-request-data="file_id: {{user.avatar.id}}" style="color: #9D6A6A;" alt="Delete avatar">X</a>
 				</div>
 				{% endif %}
                 <label for="accountAvatar">Avatar</label>

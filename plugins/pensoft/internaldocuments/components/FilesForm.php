@@ -2,6 +2,7 @@
 
 namespace Pensoft\Internaldocuments\Components;
 
+use Backend\Models\User;
 use \Cms\Classes\ComponentBase;
 use Input;
 use Pensoft\InternalDocuments\Models\Subfolders;

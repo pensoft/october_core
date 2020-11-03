@@ -17,6 +17,7 @@ use Cms\Classes\ComponentBase;
 use RainLab\User\Models\User as UserModel;
 use RainLab\User\Models\Settings as UserSettings;
 use Exception;
+use System\Models\File;
 
 /**
  * Account component
@@ -435,7 +436,52 @@ class Account extends ComponentBase
         $this->prepareVars();
     }
 
-    /**
+
+	/**
+	 * Update the user
+	 */
+	public function onDeleteAvatar()
+	{
+		if (!$user = $this->user()) {
+			return;
+		}
+
+		$data = post();
+
+		if ($this->updateRequiresPassword()) {
+			if (!$user->checkHashValue('password', $data['password_current'])) {
+				throw new ValidationException(['password_current' => Lang::get('rainlab.user::lang.account.invalid_current_pass')]);
+			}
+		}
+
+		if (Input::hasFile('avatar')) {
+			$user->avatar = Input::file('avatar');
+		}
+
+		$user->fill($data);
+		$user->save();
+
+		/*
+		 * Password has changed, reauthenticate the user
+		 */
+		if (array_key_exists('password', $data) && strlen($data['password'])) {
+			Auth::login($user->reload(), true);
+		}
+
+		Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
+
+		/*
+		 * Redirect
+		 */
+		if ($redirect = $this->makeRedirection()) {
+			return $redirect;
+		}
+
+		$this->prepareVars();
+	}
+
+
+	/**
      * Deactivate user
      */
     public function onDeactivate()
@@ -600,4 +646,15 @@ class Account extends ComponentBase
 
         return UserModel::isRegisterThrottled(Request::ip());
     }
+
+	public function onRemoveAvatar()
+	{
+
+		$fileId = post('file_id');
+		$file = File::find($fileId);
+		if($file)
+			$file->delete();
+		return ['#userAvatar' => ''];
+
+	}
 }

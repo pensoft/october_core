@@ -11,7 +11,7 @@
 				<form class="ui form" method="post" data-request="{{__SELF__}}::onSubmit" data-request-validate data-request-files data-request-flash data-request-update="'@_files_list' : '#files_list_{{ subfolder.id }}'" data-request-success="$('.modal').modal('hide'); $(this).trigger('close.oc.popup');" >
 					<input type="hidden" name="_handler" value="onSubmit">
 					<input type="hidden" name="parent" value="{{subfolder.id}}">
-					<input type="hidden" name="user_id" value="{{user.id}}">
+					<input type="hidden" name="user_id" value="{{subfolder.user_id}}">
 					{{form_token()}}
 					{{form_sessionKey()}}
 

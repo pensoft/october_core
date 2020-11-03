@@ -3,9 +3,9 @@
 		<div class="file_container row middle-xs between-xs">
 			<div class="col-xs-10" id="tipContainer{{file.id}}" style="padding-left: 0; margin-left: 0;">
 				<span class="drag-handle">&nbsp;</span>
-				{% if file.getExtension() == 'docx' %}
+				{% if file.getExtension()| lowercase == 'docx' %}
 				<img src="{{'files_doc.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
-				{% elseif file.getExtension() == 'pdf' %}
+				{% elseif file.getExtension()| lowercase == 'pdf' %}
 				<img src="{{'files_pdf.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
 				{% else %}
 				<img src="{{'files_file.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}

@@ -18,7 +18,6 @@ function onStart()
 			$fileId = $files[0]['id'];
 			$file = File::find($fileId);
 			$file->output('attachment');
-			return Redirect::back();
 			exit();
 		}else{ // download zip
 			$zip_file = tempnam(sys_get_temp_dir(), "MAIA-documents");
@@ -30,9 +29,20 @@ function onStart()
 				$fileId = $item['id'];
 				$file = File::find($fileId);
 				$filePath = $file->getLocalPath();
+				$filename = $item['file_name'];
+				$i = 1;
+				if ( $filename == basename($filePath) ){
+					// If this file already exists add "-1, -2"
+					$filename = $i . '-' . basename($filePath);
+					$i++;
+				} else {
+					$filename = basename($filePath);
+					$i = 1;
+				}
+
 				$zip->addFile(
 					$filePath,
-					$item['file_name']
+					$filename
 				);
 			}
 			$zip->close();
@@ -41,7 +51,6 @@ function onStart()
 			header("Pragma: no-cache");
 			header("Expires: 0");
 			readfile($zip_file);
-			return Redirect::back();
 			exit();
 		}
 	}

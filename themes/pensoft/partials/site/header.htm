@@ -22,7 +22,8 @@ numberOfLevels = 2
 			{% if user.avatar %}
 				<a href="/profile" style="color:#ffffff;">{{ user.name }} {{ user.surname }} &nbsp; &nbsp; <img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(30,30, { mode : 'crop' } )}}" style="border-radius: 50%; margin-right:20px;" align="right"> </a>
 			{% else %}
-			<a href="/profile" style="color:#ffffff;">{{ user.name }} {{ user.surname }} &nbsp; &nbsp;</a>
+
+			<a href="/profile" style="color:#ffffff;">{{ user.name }} {{ user.surname }} &nbsp; &nbsp; <img alt="{{ user.name }} {{ user.surname }}" src="{{ 'CMS_icons_avatar_white.svg'|media }}" width="30" height="30" style="margin-right:20px;" align="right"></a>
 			{% endif %}
 	</div>
 </nav>
