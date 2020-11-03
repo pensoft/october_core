@@ -127,12 +127,17 @@ function createTippy(element, options){
 }
 
 
-function initRightclickDeleteTippy(id, type='file', file = ''){
+function initRightclickDeleteTippy(id, type='file', file = '', pUserCanDelete){
+	var html = '';
 	if(type == 'image'){
-		var html = '<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [\' + file + \']" target="_blank" class="download-icon">Download</a><br><a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
-	}else{
-		var html = '<a class="delete-icon" href="javascript:;" title="Download" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
+		html = html+'<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [' + file + ']" target="_blank" class="download-icon">Download</a>';
 	}
+
+	if(pUserCanDelete){
+		html = html+'<br><a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
+	}
+
+
 	var rightClickableArea = document.querySelector('#tipContainer'+id);
 	if(rightClickableArea){
 		var instance = tippy(rightClickableArea, {
@@ -165,15 +170,20 @@ function initRightclickDeleteTippy(id, type='file', file = ''){
 	}
 }
 
-function initRightclickRenameFolderTippy(id){
+function initRightclickRenameFolderTippy(id, pUserCanDelete){
 	var rightClickableArea = document.querySelector('#tipContainer'+id);
+	var html = '<a data-toggle="modal" href="#contentBasicEditFolder' + id + '" style="margin-left: 0;">Rename</a>';
+	if(pUserCanDelete){
+		var html = html+'<br><a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFolder" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
+	}
+
 	if(rightClickableArea){
 		var instance = tippy(rightClickableArea, {
 			placement: 'right-start',
 			trigger: 'manual',
 			interactive: true,
 			arrow: false,
-			content: '<a data-toggle="modal" href="#contentBasicEditFolder' + id + '" style="margin-left: 0;">Rename</a><br><a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFolder" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>',
+			content: html,
 			allowHTML: true,
 			animation: 'scale',
 			theme: 'light',
@@ -334,8 +344,11 @@ function filterSVGMap(pCountryElem) {
 	tooltip.classList.remove("active");
 }
 
-function initAccordeon(pElem) {
-	$('#' + pElem).find('.accordion-toggle').click(function () {
+function initAccordeon(pElem, pParentId) {
+	$('#tipContainer'+pParentId).parent().next().slideDown(300);
+	$('#tipContainer'+pParentId).parent().children(".plusminus").html('<span class="minus"></span>');
+
+	$('body').on('click','.accordion-toggle',function(){
 		if($(this).next(".accordion-content").is(':visible')) {
 			$(this).next(".accordion-content").slideUp(300);
 			$(this).children(".plusminus").html('<span class="plus"></span>');
@@ -344,6 +357,15 @@ function initAccordeon(pElem) {
 			$(this).children(".plusminus").html('<span class="minus"></span>');
 		}
 	});
+	// $('#' + pElem).find('.accordion-toggle').click(function () {
+	// 	if($(this).next(".accordion-content").is(':visible')) {
+	// 		$(this).next(".accordion-content").slideUp(300);
+	// 		$(this).children(".plusminus").html('<span class="plus"></span>');
+	// 	} else {
+	// 		$(this).next(".accordion-content").slideDown(300);
+	// 		$(this).children(".plusminus").html('<span class="minus"></span>');
+	// 	}
+	// });
 }
 
 init()

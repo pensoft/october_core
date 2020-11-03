@@ -1,13 +1,14 @@
 title = "Internal repository"
-url = "/internal-repository/:slug?|[a-zA-Z\-0-9]"
+url = "/internal-repository/:slug?|[a-zA-Z\-0-9]/:parent_id?|[0-9]"
 layout = "default"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
 
 [session]
-security = "all"
+security = "user"
 allowedUserGroups[] = "internal-users"
+redirect = "home"
 
 [filesform]
 ==
@@ -18,11 +19,11 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 
 
 	public function onStart(){
-		if($this->user && $this->user->inGroup( UserGroup::getInternalUsersGroup() )){
-			$this['userCanEdit'] = $this->user->inGroup( UserGroup::getCanEditUsersGroup() ); // true
-		}else{
+
+		if(!$this->user){
 			return Redirect::to('/');
 		}
+
 		if($this->param('slug')){
 			$this['folder'] = Subfolders::select('pensoft_internaldocuments_subfolders.*')
 										->where('slug', ''.$this->param('slug').'')
@@ -31,6 +32,9 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 			$this['folders'] = Subfolders::where('pensoft_internaldocuments_subfolders.parent_id', null)->get();
 		}
 
+		if($this->param('parent_id')){
+			$this['expand'] = $this->param('parent_id');
+		}
 	}
 
 
@@ -66,48 +70,23 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 			<h3 style="font-size: 27px;">{{ folder.name }}</h3>
 			{% if folder.getParentsAndSelf.count %}
 			<p><a data-toggle="modal" href="#contentBasicFolder{{ folder.id }}"><span class="circled_plus"></span> Create folder</a></p>
-				{% partial 'components/popup-folders-form' subfolder=folder %}
+				{% partial __SELF__ ~ '::_popup-folders-form' subfolder=folder partial_name='_folders_list'  %}
 			{% endif %}
 
 			{% if folder.getChildren.count %}
 			<div id="accordion-documents" class="text-left relative ui-accordion ui-widget ui-helper-reset" role="tablist">
 				<div id="sortableFolders{{folder.id}}">
-					{% for subfolder in folder.getChildren %}
-						<div id="delete_result_{{subfolder.id}}">
-							<div style="padding-bottom: 20px">
-								<h3 class="accordion-toggle folder row" style="margin-bottom: 0;">
-									<div class="col-xs-11" id="tipContainer{{subfolder.id}}"><span class="drag-handle">&nbsp;</span>
-										<div id="folderName-{{ subfolder.id }}">{% partial 'components/folder_name' folder_name=subfolder.name %}</div>
-									</div>
-
-									<div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
-									{% if userCanEdit %}
-										{% partial 'components/popup-edit-folder_name-form' subfolder=subfolder %}
-										<script>
-											initRightclickRenameFolderTippy('{{subfolder.id}}');
-										</script>
-									{% endif %}
-								</h3>
-								<div class="accordion-content folders" style="display: none;">
-									<div id="partialInternalDocuments">
-										{% partial 'components/internal_documents' subfolder=subfolder userCanEdit=userCanEdit %}
-									</div>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-
+					{% partial __SELF__ ~ '::_folders_list' folder=folder %}
 				</div>
 				<script>
 					initSort('sortableFolders{{folder.id}}', '{{folder.id}}', 'folders');
 				</script>
-				<script>
-					$(document).ready(function () {
-						initAccordeon('accordion-documents');
-					});
-				</script>
-
 			</div>
+			<script>
+				$(document).ready(function () {
+					initAccordeon('accordion-documents', '{{expand}}');
+				});
+			</script>
 			{% endif %}
 		</div>
 

@@ -15,9 +15,15 @@ secondaryClasses = "dropdown-menu"
 numberOfLevels = 2
 ==
 {% if user %}
-<nav class="fixed navbar-loggedin-user " id="headernavbar">
-	<div class="navbar-collapse collapse ">
-		{% component 'login' %}
+<nav class="fixed navbar-loggedin-user ">
+	<div class="navbar-collapse collapse row middle-xs">
+		<div class="col-xs-10">{% component 'login' %}</div>
+		<div class="col-xs-2 end-xs">
+			{% if user.avatar %}
+				<a href="/profile" style="color:#ffffff;">{{ user.name }} {{ user.surname }} &nbsp; &nbsp; <img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(30,30, { mode : 'crop' } )}}" style="border-radius: 50%; margin-right:20px;" align="right"> </a>
+			{% else %}
+			<a href="/profile" style="color:#ffffff;">{{ user.name }} {{ user.surname }} &nbsp; &nbsp;</a>
+			{% endif %}
 	</div>
 </nav>
 {% endif %}
@@ -33,7 +39,7 @@ numberOfLevels = 2
             <div id="search" class="search" >
                 <form class="input-group align-items-start" action="{{ 'search' | page }}" method="get">
                     <input class="form-control search" name="q" type="text" autocomplete="on">
-                    <button class="btn search btn-link pr p-search1 big text-white" style="margin-top:0; width:auto; padding-left:1rem; padding-right:1rem;" type="submit"></button>
+                    <button class="btn search btn-link pr p-search big text-white" style="margin-top:0; width:auto; padding-left:1rem; padding-right:1rem;" type="submit"></button>
                 </form>
             </div>
         </div>

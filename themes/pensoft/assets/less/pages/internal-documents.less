@@ -333,7 +333,7 @@
 .userBox{
   border-bottom: 1px solid #b4b4b4;
   color: #4e5e67;
-  padding: 15px;
+  padding: 2rem 15px;
 }
 
 .username{
@@ -341,18 +341,24 @@
 }
 
 .arrow-left {
-  background: url('../../assets/images/back.svg') top left  no-repeat;
-  width: 18px;
-  height: 18px;
-  /* background-color: red; */
-  position: relative;
-  display: inline-block;
-  top: 4px;
-  left: 3px;
+  background: url('../../assets/images/back.svg') left  no-repeat;
+  background-size: 18px;
+  background-position: 10px 11px;
+  width: 10px;
+  display: inline;
+  padding: 10px 20px;
+  content: unset;
 }
 
 .back{
   color: #495a63;
+}
+
+a:hover .arrow-left{
+  background: #ededed  url('../../assets/images/back.svg') left  no-repeat;
+  background-size: 18px;
+  background-position: 10px 11px;
+  border-radius: 20px;
 }
 
 .circled_plus{

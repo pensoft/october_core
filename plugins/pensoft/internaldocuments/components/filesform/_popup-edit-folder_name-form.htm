@@ -8,7 +8,7 @@
 				<h4 class="modal-title">Edit folder name</h4>
 			</div>
 			<div class="modal-body">
-				<form class="ui form" method="post" data-request="{{__SELF__}}::onFolderRename" data-request-update="'@_folder_name' : '#folderName-{{ subfolder.id }}'" data-request-success="$(this).trigger('close.oc.popup');">
+				<form class="ui form" method="post" data-request="{{__SELF__}}::onFolderRename" data-request-update="'@_folder_name' : '#folderName-{{ subfolder.id }}'" data-request-success="$('.modal').modal('hide'); $(this).trigger('close.oc.popup');" >
 					<input type="hidden" name="_handler" value="onFolderRename">
 					<input type="hidden" name="id" value="{{subfolder.id}}">
 					{{form_token()}}

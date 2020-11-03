@@ -9,7 +9,7 @@
 						{{parent.name}} /
 					{% endfor %}
 				{% endif %}
-				<a href="{{url('internal-repository')}}/{{folder.getRoot.slug}}">{{folder.name}}</a>
+				<a href="{{url('internal-repository')}}/{{folder.getRoot.slug}}/{% if folder.getParent[0].nest_depth > 0 %}{{folder.getParent[0].id}}{% endif %}">{{folder.name}}</a>
 				{%  else %}
 				{% if file.folderData.getParentsAndSelf.count %}
 					{% for parentFolder in file.folderData.getParentsAndSelf %}

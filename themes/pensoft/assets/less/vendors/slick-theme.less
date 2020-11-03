@@ -40,10 +40,13 @@
     padding: 0;
     border: none;
     outline: none;
+
     &:hover, &:focus {
         outline: none;
         background: transparent;
         color: transparent;
+      background: #ededed;
+      border-radius: 50px;
         &:before {
             opacity: @slick-opacity-on-hover;
         }
@@ -54,10 +57,10 @@
 }
 
 .slick-prev{
-//   background: url("../images/back.svg") top left no-repeat;
+  padding: 10px 13px 10px 7px;
 }
 .slick-next{
-//   background: url("../images/forward-01.svg") top left no-repeat;
+  padding: 10px 7px 10px 13px;
 }
 
 .slick-prev:before, .slick-next:before {
@@ -69,6 +72,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+
     & when ( @slick-font-family = 'slick' ) {
         /* Icons */
         @font-face {
@@ -79,6 +83,7 @@
             src: url('@{slick-font-path}slick.eot?#iefix') format('embedded-opentype'), url('@{slick-font-path}slick.woff') format('woff'), url('@{slick-font-path}slick.ttf') format('truetype'), url('@{slick-font-path}slick.svg#slick') format('svg');
         }
     }
+
 }
 
 .slick-prev {

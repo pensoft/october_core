@@ -1,4 +1,4 @@
-{% if userCanEdit %}
+
 
 <br xmlns="http://www.w3.org/1999/html">
 <a data-toggle="modal" href="#contentBasicFolder{{ subfolder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Create subfolder</a>
@@ -6,70 +6,16 @@
 <a data-toggle="modal" href="#contentBasicFiles{{ subfolder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Upload files</a>
 
 
+	{% partial __SELF__ ~ '::_popup-files-form' subfolder=subfolder %}
+	{% partial __SELF__ ~ '::_popup-folders-form' subfolder=subfolder partial_name='_subfolders_list' %}
 
-	{% partial 'components/popup-files-form' subfolder=subfolder %}
-	{% partial 'components/popup-folders-form' subfolder=subfolder %}
 
 
-{% endif %}
-<p>
-	{% if subfolder.images.count %}
-		{% partial 'components/documents-images' images=subfolder.images  userCanEdit=userCanEdit group_id=subfolder.id %}
-	{% endif %}
-</p>
-
-<p>
-
-	{% if subfolder.files.count %}
-	<div id="sortableFiles{{subfolder.id}}">
-		{% partial 'components/documents-files' files=subfolder.files userCanEdit=userCanEdit group_id=subfolder.id %}
-	</div>
-	<script>
-		initSort('sortableFiles{{subfolder.id}}', '{{subfolder.id}}', 'files');
-	</script>
-	{% endif %}
-</p>
+<div id="files_list_{{subfolder.id}}">
+	{% partial __SELF__ ~ '::_files_list' folder=subfolder userCanEdit=userCanEdit group_id=subfolder.id %}
+</div>
 <div id="sortableFolders{{subfolder.id}}">
-	{% for group in subfolder.getChildren %}
-	<div id="delete_result_{{group.id}}">
-		<div id="accordion-documents" class="text-left relative ui-accordion ui-widget ui-helper-reset">
-
-			<h3 class="accordion-toggle subfolder_files">
-				<span id="tipContainer{{group.id}}">{{group.name}}</span>
-				<div class="plusminus"><span class="plus"></span></div>
-				{% if userCanEdit %}
-
-					<script>
-						initRightclickRenameFolderTippy('{{group.id}}');
-					</script>
-					{% partial 'components/popup-edit-folder_name-form' subfolder=group %}
-				{% endif %}
-			</h3>
-
-			<div class="accordion-content subfolders mb-1" style="display: none;">
-				{% if userCanEdit %}
-				<p><span>
-						<a data-toggle="modal" href="#contentBasicFiles{{ group.id }}"><span class="circled_plus"></span> Upload files</a>
-						{% partial 'components/popup-files-form' subfolder=group %}
-				</span></p>
-				{% endif %}
-
-				{% if group.files.count %}
-					<div id="sortableFiles{{group.id}}">
-						{% partial 'components/documents-files' files=group.files userCanEdit=userCanEdit group_id=group.id %}
-					</div>
-					<script>
-						initSort('sortableFiles{{group.id}}', '{{group.id}}', 'files');
-					</script>
-				{% endif %}
-
-				{% if group.images.count %}
-					{% partial 'components/documents-images' images=group.images  userCanEdit=userCanEdit group_id=group.id %}
-				{% endif %}
-			</div>
-		</div>
-	</div>
-	{% endfor %}
+	{% partial __SELF__ ~ '::_subfolders_list' folder=subfolder userCanEdit=userCanEdit %}
 </div>
 <script>
 	initSort('sortableFolders{{subfolder.id}}', '{{subfolder.id}}', 'folders');

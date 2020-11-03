@@ -15,12 +15,9 @@
 				<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
 			</div>
 
-
-			{% if userCanEdit %}
 			<script>
-				initRightclickDeleteTippy('{{file.id}}');
+				initRightclickDeleteTippy('{{file.id}}', 'file', '{{file}}', '{{folder.user_id == user.id}}');
 			</script>
-			{% endif %}
 		</div>
 	</div>
 {% endfor %}

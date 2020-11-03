@@ -3,11 +3,10 @@
 
 	<div id="delete_result_{{image.id}}" class="documents_images_list">
 		<img  src="{{image.thumb(150,120,{'mode':'crop'})}}" alt="{{image.file_name}}" style="margin: 5px;" id="tipContainer{{image.id}}" />
-		{% if userCanEdit %}
+
 		<script>
-			initRightclickDeleteTippy('{{image.id}}', 'image', '{{image}}');
+			initRightclickDeleteTippy('{{image.id}}', 'image', '{{image}}', '{{folder.user_id == user.id}}');
 		</script>
-		{% endif %}
 	</div>
 	{% endfor %}
 </div>

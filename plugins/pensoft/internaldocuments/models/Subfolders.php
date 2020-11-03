@@ -1,6 +1,7 @@
 <?php namespace Pensoft\InternalDocuments\Models;
 
 use Model;
+use RainLab\Translate\Traits\MLControl;
 
 /**
  * Model
@@ -28,7 +29,8 @@ class Subfolders extends Model
 	protected $nullable = ['parent_id'];
 
     public $belongsTo = [
-		'parent' => 'Pensoft\Internaldocuments\Models\Subfolders'
+		'parent' => 'Pensoft\Internaldocuments\Models\Subfolders',
+		'user' => 'Rainlab\User\Models\User'
 	];
 
 	public $attachMany = [

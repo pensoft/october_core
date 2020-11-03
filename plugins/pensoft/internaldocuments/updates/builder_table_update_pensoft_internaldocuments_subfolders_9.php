@@ -3,13 +3,13 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableUpdatePensoftInternaldocumentsSubfolders4 extends Migration
+class BuilderTableUpdatePensoftInternaldocumentsSubfolders9 extends Migration
 {
     public function up()
     {
         Schema::table('pensoft_internaldocuments_subfolders', function($table)
         {
-            $table->dropColumn('files_groups');
+            $table->integer('user_id')->nullable();
         });
     }
     
@@ -17,7 +17,7 @@ class BuilderTableUpdatePensoftInternaldocumentsSubfolders4 extends Migration
     {
         Schema::table('pensoft_internaldocuments_subfolders', function($table)
         {
-            $table->text('files_groups')->nullable();
+            $table->dropColumn('user_id');
         });
     }
 }

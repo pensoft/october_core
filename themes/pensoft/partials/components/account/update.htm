@@ -1,14 +1,28 @@
-{{ form_ajax('onUpdate') }}
+<form method="post" data-request="onUpdate" data-request-files data-request-flash>
     <div class="ui form">
         <div class="fields">
             <div class="field">
-                <label for="accountName">Full Name</label>
+                <label for="accountName">First Name</label>
                 <input name="name" type="text" class="" id="accountName" value="{{ user.name }}">
+            </div>
+            <div class="field">
+                <label for="accountLastName">Last Name</label>
+                <input name="name" type="text" class="" id="accountLastName" value="{{ user.surname }}">
             </div>
         
             <div class="field">
                 <label for="accountEmail">Email</label>
                 <input name="email" type="email" class="" id="accountEmail" value="{{ user.email }}">
+            </div>
+
+            <div class="field">
+				{% if user.avatar %}
+				<div>
+					<img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" style="border-radius: 50%;" width="70" height="70">
+				</div>
+				{% endif %}
+                <label for="accountAvatar">Avatar</label>
+                <input name="avatar" type="file" class="" id="accountAvatar" value="{{ user.avatar.file_name }}" accept="image/*">
             </div>
         
             <div class="field">
@@ -46,5 +60,4 @@
             </div>
         </div>
     </div>
-
-{{ form_close() }}
+</form>

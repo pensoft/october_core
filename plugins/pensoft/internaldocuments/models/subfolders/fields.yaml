@@ -46,3 +46,10 @@ fields:
         span: full
         type: fileupload
         comment: 'for root folders only'
+    user:
+        label: User
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        readOnly: 1
+        type: relation

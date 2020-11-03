@@ -45,3 +45,6 @@
 1.0.16:
     - 'Updated table pensoft_internaldocuments_subfolders'
     - builder_table_update_pensoft_internaldocuments_subfolders_8.php
+1.0.17:
+    - 'Updated table pensoft_internaldocuments_subfolders'
+    - builder_table_update_pensoft_internaldocuments_subfolders_9.php

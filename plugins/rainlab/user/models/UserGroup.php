@@ -11,7 +11,6 @@ class UserGroup extends GroupBase
     const GROUP_GUEST = 'guest';
     const GROUP_REGISTERED = 'registered';
 	const CODE_INTERNAL_USERS = 'internal-users';
-	const CODE_INTERNAL_USERS_CAN_EDIT = 'can-edit';
 
     /**
      * @var string The database table used by the model.
@@ -72,17 +71,5 @@ class UserGroup extends GroupBase
 		$group = self::where('code', self::CODE_INTERNAL_USERS)->first() ?: false;
 
 		return self::$internalUsersGroup = $group;
-	}
-
-
-	public static function getCanEditUsersGroup()
-	{
-		if (self::$canEditUsersGroup !== null) {
-			return self::$canEditUsersGroup;
-		}
-
-		$group = self::where('code', self::CODE_INTERNAL_USERS_CAN_EDIT)->first() ?: false;
-
-		return self::$canEditUsersGroup = $group;
 	}
 }

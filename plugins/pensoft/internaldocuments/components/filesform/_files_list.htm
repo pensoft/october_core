@@ -1,0 +1,17 @@
+<p>
+	{% if folder.images.count %}
+		{% partial 'components/documents-images' images=folder.images group_id=folder.id %}
+	{% endif %}
+</p>
+
+<p>
+
+	{% if folder.files.count %}
+		<div id="sortableFiles{{folder.id}}">
+			{% partial 'components/documents-files' files=folder.files group_id=folder.id %}
+		</div>
+		<script>
+			initSort('sortableFiles{{folder.id}}', '{{folder.id}}', 'files');
+		</script>
+	{% endif %}
+</p>

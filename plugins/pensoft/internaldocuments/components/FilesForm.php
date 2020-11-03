@@ -3,7 +3,6 @@
 namespace Pensoft\Internaldocuments\Components;
 
 use \Cms\Classes\ComponentBase;
-use October\Rain\Support\Facades\Flash;
 use Input;
 use Pensoft\InternalDocuments\Models\Subfolders;
 use Validator;
@@ -52,7 +51,14 @@ class FilesForm extends ComponentBase
 
 		$subfolder->images = Input::file('images');
 		$subfolder->files = Input::file('files');
+		$subfolder->user_id = Input::get('user_id');
 		$subfolder->save();
+
+		$folderData = Subfolders::where('id', Input::get('parent'))->first();
+
+		$this->page['folder'] = $folderData;
+		$this->page['group_id'] = Input::get('parent');
+
 	}
 
 	public function onFolderRename(){
@@ -63,7 +69,8 @@ class FilesForm extends ComponentBase
 		if($folder){
 			Subfolders::where('id', $folderId)->update(['name' => $folderName]);
 		}
-//		return ['name' => $folderName];
+
+		$this->page['name'] = $folderName;
 	}
 
 	public function onImageUpload(){
@@ -124,7 +131,7 @@ class FilesForm extends ComponentBase
 		$subfolderData = Subfolders::where('parent_id', $subfolderId)->get();
 
 		return [
-			'#sortable' => $this->renderPartial('components/documents-files', ['files' => $subfolderData, 'group_id' => $subfolderId, 'userCanEdit' => true])
+			'#sortable' => $this->renderPartial('components/documents-files', ['files' => $subfolderData, 'group_id' => $subfolderId])
 		];
 	}
 
