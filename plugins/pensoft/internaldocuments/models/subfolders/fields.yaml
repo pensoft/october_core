@@ -51,5 +51,8 @@ fields:
         nameFrom: name
         descriptionFrom: description
         span: auto
-        readOnly: 1
+        readOnly: 0
+        required: 1
+        containerAttributes:
+            1: Admin
         type: relation
