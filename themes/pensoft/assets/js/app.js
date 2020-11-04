@@ -229,14 +229,14 @@ function cardCarousel(object){
 function appendProfile() {
     $(document).on('profile', function (e) {
         var headerNavbarNav = $('#headerNavbarNav');
-        var li = '<li class="nav-item"><a href="http://maia.pensoft.com/profile" target = "_self">Profile</a></li >';
+        var li = '<li class="nav-item"><a href="/profile" target = "_self">Profile</a></li >';
         headerNavbarNav.find('>ul').append(li);
     });
 }
 function appendSignIn(){
     $(document).on('signin', function (e) {
         var headerNavbarNav = $('#headerNavbarNav');
-        var li = '<li class="nav-item sign-in"><a href="http://maia.pensoft.com/login" target = "_self">Login</a></li >';
+        var li = '<li class="nav-item sign-in"><a href="/login" target = "_self">Login</a></li >';
         headerNavbarNav.find('>ul').append(li);
     });
 }
