@@ -73,7 +73,6 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 				{% partial __SELF__ ~ '::_popup-folders-form' subfolder=folder partial_name='_folders_list'  %}
 			{% endif %}
 
-			{% if folder.getChildren.count %}
 			<div id="accordion-documents" class="text-left relative ui-accordion ui-widget ui-helper-reset" role="tablist">
 				<div id="sortableFolders{{folder.id}}">
 					{% partial __SELF__ ~ '::_folders_list' folder=folder %}
@@ -87,7 +86,6 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 					initAccordeon('accordion-documents', '{{expand}}');
 				});
 			</script>
-			{% endif %}
 		</div>
 
 
