@@ -12,10 +12,10 @@
 
 
 <div id="files_list_{{subfolder.id}}">
-	{% partial __SELF__ ~ '::_files_list' folder=subfolder userCanEdit=userCanEdit group_id=subfolder.id %}
+	{% partial __SELF__ ~ '::_files_list' folder=subfolder group_id=subfolder.id %}
 </div>
 <div id="sortableFolders{{subfolder.id}}">
-	{% partial __SELF__ ~ '::_subfolders_list' folder=subfolder userCanEdit=userCanEdit %}
+	{% partial __SELF__ ~ '::_subfolders_list' folder=subfolder %}
 </div>
 <script>
 	initSort('sortableFolders{{subfolder.id}}', '{{subfolder.id}}', 'folders');

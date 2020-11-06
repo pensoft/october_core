@@ -69,8 +69,19 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 		<div class="col-xs-12">
 			<h3 style="font-size: 27px;">{{ folder.name }}</h3>
 			{% if folder.getParentsAndSelf.count %}
-			<p><a data-toggle="modal" href="#contentBasicFolder{{ folder.id }}"><span class="circled_plus"></span> Create folder</a></p>
+			<p>
+				<a data-toggle="modal" href="#contentBasicFolder{{ folder.id }}"><span class="circled_plus"></span> Create folder</a> &nbsp; &nbsp;
+				<a data-toggle="modal" href="#contentBasicFiles{{ folder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Upload files</a>
+
+
+			</p>
+				{% partial __SELF__ ~ '::_popup-files-form' subfolder=folder %}
 				{% partial __SELF__ ~ '::_popup-folders-form' subfolder=folder partial_name='_folders_list'  %}
+
+			<div id="files_list_{{folder.id}}">
+				{% partial __SELF__ ~ '::_files_list' folder=folder group_id=folder.id %}
+			</div>
+
 			{% endif %}
 
 			<div id="accordion-documents" class="text-left relative ui-accordion ui-widget ui-helper-reset" role="tablist">

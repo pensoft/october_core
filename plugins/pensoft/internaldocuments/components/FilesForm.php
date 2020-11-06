@@ -11,6 +11,7 @@ use Redirect;
 use ValidationException;
 use System\Models\File;
 use System\Classes\MediaLibrary;
+use Auth;
 
 class FilesForm extends ComponentBase
 {
@@ -59,6 +60,7 @@ class FilesForm extends ComponentBase
 
 		$this->page['folder'] = $folderData;
 		$this->page['group_id'] = Input::get('parent');
+		$this->page['user'] = Auth::getUser();
 
 	}
 

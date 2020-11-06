@@ -12,12 +12,15 @@ var keepFooter = function(documentHasScroll){
 
 function initSort(containerId, folderId, type){
 	var link = document.querySelector('.accordion-toggle');
-	link.addEventListener('click', function(event) {
-		if($(this).next(".accordion-content").is(':visible')) {
-			$(this).next(".accordion-content").slideUp(300);
-			$(this).children(".plusminus").html('<span class="plus"></span>');
-		}
-	});
+	if(link){
+		link.addEventListener('click', function(event) {
+			if($(this).next(".accordion-content").is(':visible')) {
+				$(this).next(".accordion-content").slideUp(300);
+				$(this).children(".plusminus").html('<span class="plus"></span>');
+			}
+		});
+	}
+
 
 	if(type == 'folders'){
 		$( "#"+containerId ).sortable({
@@ -130,11 +133,11 @@ function createTippy(element, options){
 function initRightclickDeleteTippy(id, type='file', file = '', pUserCanDelete){
 	var html = '';
 	if(type == 'image'){
-		html = html+'<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [' + file + ']" target="_blank" class="download-icon">Download</a>';
+		html = html+'<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [' + file + ']" target="_blank" class="download-icon">Download</a><br>';
 	}
 
 	if(pUserCanDelete){
-		html = html+'<br><a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
+		html = html+'<a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
 	}
 
 
