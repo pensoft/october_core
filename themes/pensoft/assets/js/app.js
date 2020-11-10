@@ -140,9 +140,8 @@ function initRightclickDeleteTippy(id, type='file', file = '', pUserCanDelete){
 		html = html+'<a class="delete-icon" href="javascript:;" title="Delete" data-request="onDeleteFile" data-request-data="id:  ' + id + '"  data-request-confirm="Are you sure you want to delete?">Delete</a>';
 	}
 
-
 	var rightClickableArea = document.querySelector('#tipContainer'+id);
-	if(rightClickableArea){
+	if(rightClickableArea && html != ''){
 		var instance = tippy(rightClickableArea, {
 			placement: 'right-start',
 			trigger: 'manual',

@@ -5,7 +5,7 @@
 		<img  src="{{image.thumb(150,120,{'mode':'crop'})}}" alt="{{image.file_name}}" style="margin: 5px;" id="tipContainer{{image.id}}" />
 
 		<script>
-			initRightclickDeleteTippy('{{image.id}}', 'image', '{{image}}', '{{folder.user_id == user.id}}');
+			initRightclickDeleteTippy('{{image.id}}', 'image', '{{image}}', '{{folder.user_id == user.id or folder.nest_depth == 0}}');
 		</script>
 	</div>
 	{% endfor %}

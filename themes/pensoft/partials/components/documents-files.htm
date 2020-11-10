@@ -16,7 +16,7 @@
 			</div>
 
 			<script>
-				initRightclickDeleteTippy('{{file.id}}', 'file', '{{file}}', '{{folder.user_id == user.id}}');
+				initRightclickDeleteTippy('{{file.id}}', 'file', '{{file}}', '{{(folder.user_id == user.id or folder.nest_depth == 0)}}');
 			</script>
 		</div>
 	</div>

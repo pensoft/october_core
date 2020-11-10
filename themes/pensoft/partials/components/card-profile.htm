@@ -1,8 +1,6 @@
 
 <div class="card profile no-border no-background">
-    <a style="display:flex" href="profile/{{url}}" title="{{fullname}}">
-        <img class="card-img-top" src="{% if avatar %}{{avatar}}{% else %}{{'assets/images/profile.png'|theme}}{% endif %}" alt="{{fullname}}" />
-    </a>
+	<img class="card-img-top" src="{% if avatar %}{{avatar}}{% else %}{{'assets/images/profile.png'|theme}}{% endif %}" alt="{{fullname}}" />
     <h3 class="card-header">{{fullname}}</h3>
     <div class="card-body text-center">
         
