@@ -398,9 +398,20 @@ class Account extends ComponentBase
      */
     public function onUpdate()
     {
-        if (!$user = $this->user()) {
+
+    	if (!$user = $this->user()) {
             return;
         }
+
+		$rules = [
+			'password' => 'required|between:' . UserModel::getMinPasswordLength() . ',255',
+			'password_confirmation' => 'required_with:password|between:' . UserModel::getMinPasswordLength() . ',255'
+		];
+
+		$validation = Validator::make(post(), $rules);
+		if ($validation->fails()) {
+			throw new ValidationException($validation);
+		}
 
         $data = post();
 
@@ -417,14 +428,24 @@ class Account extends ComponentBase
         $user->fill($data);
         $user->save();
 
+		$vars = [
+			'name' => $user->name,
+			'surname' => $user->surname
+		];
+
+		Mail::send('rainlab.user::mail.welcome', $vars, function($message) use ($user) {
+			$message->to($user->email, $user->full_name);
+		});
+
+		Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
+
+
         /*
          * Password has changed, reauthenticate the user
          */
         if (array_key_exists('password', $data) && strlen($data['password'])) {
             Auth::login($user->reload(), true);
         }
-
-        Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
 
         /*
          * Redirect

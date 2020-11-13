@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use October\Rain\Auth\Models\User as UserBase;
 use RainLab\User\Models\Settings as UserSettings;
 use October\Rain\Auth\AuthException;
+use Cms\Classes\Page;
 
 class User extends UserBase
 {
@@ -480,12 +481,20 @@ class User extends UserBase
      */
     public function getNotificationVars()
     {
-        $vars = [
+		$code = implode('!', [$this->id, $this->getActivationCode()]);
+
+		$siteUrl = Page::url('home');
+
+		$vars = [
             'name'     => $this->name,
+            'surname'  => $this->surname,
             'email'    => $this->email,
             'username' => $this->username,
             'login'    => $this->getLogin(),
-            'password' => $this->getOriginalHashValue('password')
+            'password' => $this->getOriginalHashValue('password'),
+			'code' 	   => $code,
+			'link' 	   => $siteUrl . '/register/' . $code,
+			'site_url' => $siteUrl
         ];
 
         /*
