@@ -438,14 +438,18 @@ class Account extends ComponentBase
             Auth::login($user->reload(), true);
         }
 
-		$vars = [
-			'name' => $user->name,
-			'surname' => $user->surname
-		];
+		if(!post('profile')) {
 
-		Mail::send('rainlab.user::mail.welcome', $vars, function($message) use ($user) {
-			$message->to($user->email, $user->full_name);
-		});
+			$vars = [
+				'name' => $user->name,
+				'surname' => $user->surname
+			];
+
+			Mail::send('rainlab.user::mail.welcome', $vars, function ($message) use ($user) {
+				$message->to($user->email, $user->full_name);
+			});
+
+		}
 
 		Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
 
