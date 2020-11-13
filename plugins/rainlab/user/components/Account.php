@@ -403,15 +403,18 @@ class Account extends ComponentBase
             return;
         }
 
-		$rules = [
-			'password' => 'required|between:' . UserModel::getMinPasswordLength() . ',255',
-			'password_confirmation' => 'required_with:password|between:' . UserModel::getMinPasswordLength() . ',255'
-		];
+        if(!post('profile')){
+			$rules = [
+				'password' => 'required|between:' . UserModel::getMinPasswordLength() . ',255',
+				'password_confirmation' => 'required_with:password|between:' . UserModel::getMinPasswordLength() . ',255'
+			];
 
-		$validation = Validator::make(post(), $rules);
-		if ($validation->fails()) {
-			throw new ValidationException($validation);
+			$validation = Validator::make(post(), $rules);
+			if ($validation->fails()) {
+				throw new ValidationException($validation);
+			}
 		}
+
 
         $data = post();
 
@@ -428,6 +431,13 @@ class Account extends ComponentBase
         $user->fill($data);
         $user->save();
 
+        /*
+         * Password has changed, reauthenticate the user
+         */
+        if (array_key_exists('password', $data) && strlen($data['password'])) {
+            Auth::login($user->reload(), true);
+        }
+
 		$vars = [
 			'name' => $user->name,
 			'surname' => $user->surname
@@ -438,14 +448,6 @@ class Account extends ComponentBase
 		});
 
 		Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
-
-
-        /*
-         * Password has changed, reauthenticate the user
-         */
-        if (array_key_exists('password', $data) && strlen($data['password'])) {
-            Auth::login($user->reload(), true);
-        }
 
         /*
          * Redirect
