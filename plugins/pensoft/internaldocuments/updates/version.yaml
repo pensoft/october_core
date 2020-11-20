@@ -48,3 +48,6 @@
 1.0.17:
     - 'Updated table pensoft_internaldocuments_subfolders'
     - builder_table_update_pensoft_internaldocuments_subfolders_9.php
+1.0.18:
+    - 'Updated table system_files'
+    - add_user_id_to_system_files.php

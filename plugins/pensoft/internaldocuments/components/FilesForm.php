@@ -24,6 +24,27 @@ class FilesForm extends ComponentBase
 		];
 	}
 
+	private function updateFileUserId($recordFiles, $model, $type){
+		$user = Auth::getUser();
+		foreach ($recordFiles as $fileData) {
+			$file = new File();
+			$file->data = $fileData;
+			$file->is_public = true;
+			$file->user_id = $user->id;
+			$file->save();
+
+			switch ($type){
+				case 'files':
+					$model->files()->add($file);
+				default:
+					break;
+				case 'images':
+					$model->images()->add($file);
+					break;
+			}
+		}
+	}
+
 	public function onSubmit(){
 		$validator = Validator::make(
 			[
@@ -51,8 +72,14 @@ class FilesForm extends ComponentBase
 
 		}
 
-		$subfolder->images = Input::file('images');
-		$subfolder->files = Input::file('files');
+		//update user_id in system_files
+		if(Input::file('files'))
+			$this->updateFileUserId(Input::file('files'), $subfolder, 'files');
+		if(Input::file('images'))
+			$this->updateFileUserId(Input::file('images'), $subfolder, 'images');
+
+//		$subfolder->images = Input::file('images');
+//		$subfolder->files = Input::file('files');
 		$subfolder->user_id = Input::get('user_id');
 		$subfolder->save();
 
