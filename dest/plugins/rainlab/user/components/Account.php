@@ -17,7 +17,6 @@ use Cms\Classes\ComponentBase;
 use RainLab\User\Models\User as UserModel;
 use RainLab\User\Models\Settings as UserSettings;
 use Exception;
-use System\Models\File;
 
 /**
  * Account component
@@ -313,6 +312,7 @@ class Account extends ComponentBase
             $requireActivation = UserSettings::get('require_activation', true);
             $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
             $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
+            $adminActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_ADMIN;
             $user = Auth::register($data, $automaticActivation);
 
             Event::fire('rainlab.user.register', [$user, $data]);
@@ -324,6 +324,14 @@ class Account extends ComponentBase
                 $this->sendActivationEmail($user);
 
                 Flash::success(Lang::get(/*An activation email has been sent to your email address.*/'rainlab.user::lang.account.activation_email_sent'));
+            }
+
+            /*
+             * Activation is by the admin, show message
+             * For automatic email on account activation RainLab.Notify plugin is needed
+             */
+            if ($adminActivation) {
+                Flash::success(Lang::get(/*You have successfully registered. Your account is not yet active and must be approved by an administrator.*/'rainlab.user::lang.account.activation_by_admin'));
             }
 
             /*
@@ -398,23 +406,9 @@ class Account extends ComponentBase
      */
     public function onUpdate()
     {
-
-    	if (!$user = $this->user()) {
+        if (!$user = $this->user()) {
             return;
         }
-
-        if(!post('profile')){
-			$rules = [
-				'password' => 'required|between:' . UserModel::getMinPasswordLength() . ',255',
-				'password_confirmation' => 'required_with:password|between:' . UserModel::getMinPasswordLength() . ',255'
-			];
-
-			$validation = Validator::make(post(), $rules);
-			if ($validation->fails()) {
-				throw new ValidationException($validation);
-			}
-		}
-
 
         $data = post();
 
@@ -438,20 +432,7 @@ class Account extends ComponentBase
             Auth::login($user->reload(), true);
         }
 
-		if(!post('profile')) {
-
-			$vars = [
-				'name' => $user->name,
-				'surname' => $user->surname
-			];
-
-			Mail::send('rainlab.user::mail.welcome', $vars, function ($message) use ($user) {
-				$message->to($user->email, $user->full_name);
-			});
-
-		}
-
-		Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
+        Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
 
         /*
          * Redirect
@@ -463,52 +444,7 @@ class Account extends ComponentBase
         $this->prepareVars();
     }
 
-
-	/**
-	 * Update the user
-	 */
-	public function onDeleteAvatar()
-	{
-		if (!$user = $this->user()) {
-			return;
-		}
-
-		$data = post();
-
-		if ($this->updateRequiresPassword()) {
-			if (!$user->checkHashValue('password', $data['password_current'])) {
-				throw new ValidationException(['password_current' => Lang::get('rainlab.user::lang.account.invalid_current_pass')]);
-			}
-		}
-
-		if (Input::hasFile('avatar')) {
-			$user->avatar = Input::file('avatar');
-		}
-
-		$user->fill($data);
-		$user->save();
-
-		/*
-		 * Password has changed, reauthenticate the user
-		 */
-		if (array_key_exists('password', $data) && strlen($data['password'])) {
-			Auth::login($user->reload(), true);
-		}
-
-		Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
-
-		/*
-		 * Redirect
-		 */
-		if ($redirect = $this->makeRedirection()) {
-			return $redirect;
-		}
-
-		$this->prepareVars();
-	}
-
-
-	/**
+    /**
      * Deactivate user
      */
     public function onDeactivate()
@@ -673,15 +609,4 @@ class Account extends ComponentBase
 
         return UserModel::isRegisterThrottled(Request::ip());
     }
-
-	public function onRemoveAvatar()
-	{
-
-		$fileId = post('file_id');
-		$file = File::find($fileId);
-		if($file)
-			$file->delete();
-		return ['#userAvatar' => ''];
-
-	}
 }

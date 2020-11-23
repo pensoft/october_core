@@ -56,10 +56,10 @@ class FormBuilder extends FormWidgetBase
      */
     public function loadAssets()
     {
-        $this->addJs('/plugins/rainlab/builder/formwidgets/formbuilder/assets/js/formbuilder.js', 'builder');
-        $this->addJs('/plugins/rainlab/builder/formwidgets/formbuilder/assets/js/formbuilder.domtopropertyjson.js', 'builder');
-        $this->addJs('/plugins/rainlab/builder/formwidgets/formbuilder/assets/js/formbuilder.tabs.js', 'builder');
-        $this->addJs('/plugins/rainlab/builder/formwidgets/formbuilder/assets/js/formbuilder.controlpalette.js', 'builder');
+        $this->addJs('js/formbuilder.js', 'builder');
+        $this->addJs('js/formbuilder.domtopropertyjson.js', 'builder');
+        $this->addJs('js/formbuilder.tabs.js', 'builder');
+        $this->addJs('js/formbuilder.controlpalette.js', 'builder');
     }
 
     public function renderControlList($controls, $listName = '')

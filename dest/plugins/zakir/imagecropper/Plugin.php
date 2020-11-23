@@ -2,7 +2,6 @@
 
 use Event;
 use Backend;
-use Exception;
 use System\Classes\PluginBase;
 use Zakir\ImageCropper\Widgets\ImageCropper as ImageCropperManager;
 use Zakir\ImageCropper\Models\Settings as Settings;

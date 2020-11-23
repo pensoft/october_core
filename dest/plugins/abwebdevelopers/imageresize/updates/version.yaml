@@ -41,3 +41,14 @@
   - Fix - Update plugin's boot method to not directly reference Settings until DB connection is established
 2.1.8:
   - Added twig filter to parse and resize/modify images (via regex) using twig filter(s)
+2.1.9:
+  - Improvement to the detection of the original image's mime type (uses less system resources)
+2.2.0:
+  - Added optional permalinks for images to ensure image URLs always yield the same image after cache flushes
+  - create_permalinks_table.php
+2.2.1:
+  - Fix issue where REMOTE_ADDR server variable is not set when running through CLI
+2.2.2:
+  - Fix MySQL issue where text fields had default values
+2.2.3:
+  - Improvements to Permalinks

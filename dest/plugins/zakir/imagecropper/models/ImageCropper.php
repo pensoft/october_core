@@ -1,6 +1,5 @@
 <?php namespace Zakir\ImageCropper\Models;
 
-use ABWebDevelopers\ImageResize\Classes\Resizer;
 use Model;
 use System\Classes\MediaLibrary;
 use System\Models\File;
@@ -48,9 +47,5 @@ class ImageCropper extends Model
         }else{
             return MediaLibrary::url($this->path);
         }
-    }
-    public function beforeSave()
-    {
-        Resizer::clearFiles();
     }
 }

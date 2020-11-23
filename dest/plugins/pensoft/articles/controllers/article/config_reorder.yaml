@@ -1,4 +1,0 @@
-title: Article
-modelClass: Pensoft\Articles\Models\Article
-toolbar:
-    buttons: reorder_toolbar

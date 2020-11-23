@@ -9,7 +9,7 @@ return [
     | Should the default locale be prefixed by the plugin?
     |
     */
-    'prefixDefaultLocale' => false,
+    'prefixDefaultLocale' => true,
 
     /*
     |--------------------------------------------------------------------------

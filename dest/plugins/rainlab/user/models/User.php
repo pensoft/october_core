@@ -1,6 +1,5 @@
 <?php namespace RainLab\User\Models;
 
-use Pensoft\Partners\Models\Partners;
 use Str;
 use Auth;
 use Mail;
@@ -10,7 +9,6 @@ use Carbon\Carbon;
 use October\Rain\Auth\Models\User as UserBase;
 use RainLab\User\Models\Settings as UserSettings;
 use October\Rain\Auth\AuthException;
-use Cms\Classes\Page;
 
 class User extends UserBase
 {
@@ -39,10 +37,6 @@ class User extends UserBase
         'groups' => [UserGroup::class, 'table' => 'users_groups']
     ];
 
-	public $belongsTo = [
-		'partner' => [Partners::class, 'table' => 'pensoft_partners_partners']
-	];
-
     public $attachOne = [
         'avatar' => \System\Models\File::class
     ];
@@ -61,6 +55,13 @@ class User extends UserBase
         'created_ip_address',
         'last_ip_address'
     ];
+    
+    /**
+     * Reset guarded fields, because we use $fillable instead.
+     * @var array The attributes that aren't mass assignable.
+     */
+    protected $guarded = ['*'];
+
 
     /**
      * Purge attributes from data set.
@@ -481,20 +482,12 @@ class User extends UserBase
      */
     public function getNotificationVars()
     {
-		$code = implode('!', [$this->id, $this->getActivationCode()]);
-
-		$siteUrl = Page::url('home');
-
-		$vars = [
+        $vars = [
             'name'     => $this->name,
-            'surname'  => $this->surname,
             'email'    => $this->email,
             'username' => $this->username,
             'login'    => $this->getLogin(),
-            'password' => $this->getOriginalHashValue('password'),
-			'code' 	   => $code,
-			'link' 	   => $siteUrl . '/register/' . $code,
-			'site_url' => $siteUrl
+            'password' => $this->getOriginalHashValue('password')
         ];
 
         /*

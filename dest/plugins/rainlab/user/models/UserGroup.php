@@ -10,7 +10,6 @@ class UserGroup extends GroupBase
 {
     const GROUP_GUEST = 'guest';
     const GROUP_REGISTERED = 'registered';
-	const CODE_INTERNAL_USERS = 'internal-users';
 
     /**
      * @var string The database table used by the model.
@@ -43,8 +42,6 @@ class UserGroup extends GroupBase
     ];
 
     protected static $guestGroup = null;
-    protected static $internalUsersGroup = null;
-    protected static $canEditUsersGroup = null;
 
     /**
      * Returns the guest user group.
@@ -60,16 +57,4 @@ class UserGroup extends GroupBase
 
         return self::$guestGroup = $group;
     }
-
-
-	public static function getInternalUsersGroup()
-	{
-		if (self::$internalUsersGroup !== null) {
-			return self::$internalUsersGroup;
-		}
-
-		$group = self::where('code', self::CODE_INTERNAL_USERS)->first() ?: false;
-
-		return self::$internalUsersGroup = $group;
-	}
 }

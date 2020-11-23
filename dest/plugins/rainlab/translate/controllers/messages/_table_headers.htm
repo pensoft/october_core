@@ -2,7 +2,7 @@
 <script type="text/template" id="<?= $this->getId('fromTitle') ?>">
     <div class="header-language" onclick="$.translateMessages.toggleDropdown('#fromTitleButton')">
         <?php if ($selectedFrom === null): ?>
-            Key
+            <?= $defaultLocale->name ?> <span class="is-default">- <?= e(trans('rainlab.translate::lang.locale.default_suffix')) ?></span>
         <?php else: ?>
             <?= $selectedFrom->name ?>
         <?php endif ?>
@@ -51,7 +51,7 @@
 <script type="text/template" id="<?= $this->getId('toTitle') ?>">
     <div class="header-language" onclick="$.translateMessages.toggleDropdown('#toTitleButton')">
         <?php if ($selectedTo === null): ?>
-			Key
+            <?= $defaultLocale->name ?> <span class="is-default">- <?= e(trans('rainlab.translate::lang.locale.default_suffix')) ?></span>
         <?php else: ?>
             <?= $selectedTo->name ?>
         <?php endif ?>
@@ -76,7 +76,7 @@
                     tabindex="-1"
                     href="#"
                     onclick="return $.translateMessages.setLanguage('to', null)">
-                    Key
+                    <?= $defaultLocale->name ?> - <?= e(trans('rainlab.translate::lang.locale.default_suffix')) ?>
                 </a>
             </li>
         <?php endif ?>
@@ -98,3 +98,8 @@
         <?php endif ?>
     </ul>
 </div>
+
+<!-- Found Header -->
+<script type="text/template" id="<?= $this->getId('foundTitle') ?>">
+    <?= e(trans('rainlab.translate::lang.messages.found_title')) ?> <i class="icon-info-circle" style="cursor: help" title="<?= e(trans('rainlab.translate::lang.messages.found_help')) ?>"></i>
+</script>

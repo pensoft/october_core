@@ -17,7 +17,7 @@
 
     // MULTILINGUAL CLASS DEFINITION
     // ============================
-    var onceTime = true;
+
     var MultiLingual = function(element, options) {
         var self          = this
         this.options      = options
@@ -28,60 +28,34 @@
         this.$dropdown     = $('ul.ml-dropdown-menu', this.$el)
         this.$placeholder  = $(this.options.placeholderField)
 
-		this.$activeButton.on('click', function(event){
-			var selectedLocale = 'en'
-			if(self.activeLocale == 'en'){
-				var selectedLocale = 'bg'
-			}
-			self.setLocale(selectedLocale)
-
-			/*
-			 * If Ctrl/Cmd key is pressed, find other instances and switch
-			 */
-			if (onceTime){
-				event.ctrlKey = true
-			}
-			onceTime = false;
-
-
-			if (event.ctrlKey || event.metaKey) {
-				event.preventDefault();
-				$('[data-switch-locale="'+selectedLocale+'"]').click()
-				onceTime = true;
-			}
-		})
-
-        this.$dropdown.on('click', '[data-switch-locale]', function(event){
-            var selectedLocale = $(this).data('switch-locale')
-            self.setLocale(selectedLocale)
-
-            /*
-             * If Ctrl/Cmd key is pressed, find other instances and switch
-             */
-            if (onceTime){
-                event.ctrlKey = true
-            }
-            onceTime = false;
-
-
-            if (event.ctrlKey || event.metaKey) {
-                event.preventDefault();
-                $('[data-switch-locale="'+selectedLocale+'"]').click()
-                onceTime = true;
-            }
-
-        })
-
-        this.$placeholder.on('input', function(){
-            self.$activeField.val(this.value)
-        })
-
         /*
          * Init locale
          */
         this.activeLocale = this.options.defaultLocale
         this.$activeField = this.getLocaleElement(this.activeLocale)
         this.$activeButton.text(this.activeLocale)
+
+        this.$dropdown.on('click', '[data-switch-locale]', this.$activeButton, function(event){
+            var currentLocale = event.data.text();
+            var selectedLocale = $(this).data('switch-locale')
+
+            // only call setLocale() if locale has changed
+            if (selectedLocale != currentLocale) {
+                self.setLocale(selectedLocale)
+            }
+
+            /*
+             * If Ctrl/Cmd key is pressed, find other instances and switch
+             */
+            if (event.ctrlKey || event.metaKey) {
+                event.preventDefault();
+                $('[data-switch-locale="'+selectedLocale+'"]').click()
+            }
+        })
+
+        this.$placeholder.on('input', function(){
+            self.$activeField.val(this.value)
+        })
 
         /*
          * Handle oc.inputPreset.beforeUpdate event

@@ -1,7 +1,6 @@
 <?php namespace Zakir\ImageCropper\Widgets;
 
 use Backend\Classes\WidgetBase;
-use Exception;
 use Zakir\ImageCropper\Models\ImageCropper as ImageCropperModel;
 
 class ImageCropper extends WidgetBase
@@ -32,13 +31,12 @@ class ImageCropper extends WidgetBase
 
     protected function loadAssets()
     {
-        $this->addCss('/plugins/zakir/imagecropper/widgets/imagecropper/assets/css/imagecropper.css', 'Zakir.ImageCropper');
+        $this->addCss('css/imagecropper.css', 'Zakir.ImageCropper');
         $this->addCss('https://unpkg.com/cropperjs/dist/cropper.css', 'Zakir.ImageCropper');
         
         $this->addJs('https://unpkg.com/cropperjs/dist/cropper.js', 'Zakir.ImageCropper');
-        $this->addJs('/plugins/zakir/imagecropper/widgets/imagecropper/assets/javascript/jquery-cropper.js', 'Zakir.ImageCropper');
-        $this->addJs('/plugins/zakir/imagecropper/widgets/imagecropper/assets/javascript/imagecropper.js', 'Zakir.ImageCropper');
-        
+        $this->addJs('javascript/jquery-cropper.js', 'Zakir.ImageCropper');
+        $this->addJs('javascript/imagecropper.js', 'Zakir.ImageCropper');
     }
 
 

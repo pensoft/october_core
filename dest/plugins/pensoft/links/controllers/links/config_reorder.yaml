@@ -1,4 +1,0 @@
-title: Links
-modelClass: Pensoft\Links\Models\Link
-toolbar:
-    buttons: reorder_toolbar

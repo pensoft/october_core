@@ -64,7 +64,7 @@ class MenuEditor extends FormWidgetBase
      */
     public function loadAssets()
     {
-        $this->addJs('/plugins/rainlab/builder/formwidgets/menueditor/assets/js/menubuilder.js', 'builder');
+        $this->addJs('js/menubuilder.js', 'builder');
     }
 
     public function getPluginCode()

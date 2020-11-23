@@ -1,6 +1,5 @@
 <?php namespace Zakir\ImageCropper\Models;
 
-use ABWebDevelopers\ImageResize\Classes\Resizer;
 use Model;
 
 class Settings extends Model
@@ -12,9 +11,4 @@ class Settings extends Model
 
     // Reference to field configuration
     public $settingsFields = 'fields.yaml';
-
-    public function beforeSave()
-    {
-        Resizer::clearFiles();
-    }
 }

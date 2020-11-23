@@ -5,6 +5,8 @@ namespace ABWebDevelopers\ImageResize;
 use ABWebDevelopers\ImageResize\Classes\Resizer;
 use ABWebDevelopers\ImageResize\Commands\ImageResizeClear;
 use ABWebDevelopers\ImageResize\Commands\ImageResizeGc;
+use ABWebDevelopers\ImageResize\Commands\ImageResizeResetPermalinks;
+use ABWebDevelopers\ImageResize\Models\ImagePermalink;
 use ABWebDevelopers\ImageResize\Models\Settings;
 use ABWebDevelopers\ImageResize\ReportWidgets\ImageResizeClearWidget;
 use App;
@@ -40,20 +42,40 @@ class Plugin extends PluginBase
         return [
             'filters' => [
                 'resize' => function ($image, $width, $height = null, $options = []) {
-                    $resizer = new Resizer((string) $image);
+                    $resizer = new Resizer();
 
                     $width = ($width !== null) ? (int) $width : null;
                     $height = ($height !== null) ? (int) $height : null;
                     $options = ($options instanceof Arrayable) ? $options->toArray() : (array) $options;
 
+                    // If the given configuration has a permalink identifier then resize using it
+                    if (isset($options['permalink']) && strlen($options['permalink'])) {
+                        $resizer->preventDefaultImage();
+                        $resizer->setImage((string) $image);
+
+                        return $resizer->resizePermalink($options['permalink'], $width, $height, $options)->permalink_url;
+                    }
+
+                    $resizer->setImage((string) $image);
+
                     return $resizer->resize($width, $height, $options);
                 },
                 'modify' => function ($image, $options = []) {
-                    $resizer = new Resizer((string) $image);
+                    $resizer = new Resizer();
 
                     $width = null;
                     $height = null;
                     $options = ($options instanceof Arrayable) ? $options->toArray() : (array) $options;
+
+                    // If the given configuration has a permalink identifier then resize using it
+                    if (isset($options['permalink']) && strlen($options['permalink'])) {
+                        $resizer->preventDefaultImage();
+                        $resizer->setImage((string) $image);
+
+                        return $resizer->resizePermalink($options['permalink'], $width, $height, $options)->permalink_url;
+                    }
+
+                    $resizer->setImage((string) $image);
 
                     return $resizer->resize($width, $height, $options);
                 },
@@ -146,6 +168,7 @@ class Plugin extends PluginBase
     {
         $this->registerConsoleCommand('imageresize:gc', ImageResizeGc::class);
         $this->registerConsoleCommand('imageresize:clear', ImageResizeClear::class);
+        $this->registerConsoleCommand('imageresize:reset-permalink', ImageResizeResetPermalinks::class);
     }
 
     /**
@@ -172,7 +195,7 @@ class Plugin extends PluginBase
 
     /**
      * Run the callback only if/when the database exists (and system_settings table exists).
-     * 
+     *
      * @param \Closure $callback
      * @return mixed
      */
