@@ -1,8 +1,0 @@
-columns:
-    name:
-        label: name
-        type: text
-        searchable: true
-    body:
-        label: body
-        type: text

@@ -1,4 +1,0 @@
-title: Subfolders
-modelClass: Pensoft\InternalDocuments\Models\Subfolders
-toolbar:
-    buttons: reorder_toolbar

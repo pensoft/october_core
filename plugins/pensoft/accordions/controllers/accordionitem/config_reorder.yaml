@@ -1,5 +1,0 @@
-title: Accordion
-nameFrom: title
-modelClass: Pensoft\Accordions\Models\Item
-toolbar:
-    buttons: reorder_toolbar
