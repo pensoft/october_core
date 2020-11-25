@@ -23,6 +23,7 @@ rm -rf "./plugins/" "./themes/"
 ln -s ../../dest/plugins ./
 ln -s ../../dest/themes ./
 yes | cp -f ../../dest/README.md ./
+yes | cp -f ../../dest/.copy_gitignore ./.gitignore
 chmod -R 755 ./
 chown -R www-data:www-data ./
 php artisan october:env
