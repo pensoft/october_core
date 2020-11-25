@@ -1,0 +1,10 @@
+<div class="container-fluid banner bg-secondary">
+	<div class="container">
+
+				{% for item in __SELF__.getHomepageIntro() %}
+					{{item.description|raw}}
+						<img src="{{item.image.path}}" data-aos="fade-up" />
+				{% endfor %}
+		
+	</div>
+</div>

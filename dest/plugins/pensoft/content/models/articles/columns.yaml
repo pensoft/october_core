@@ -1,0 +1,22 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        type: text
+        searchable: true
+    slug:
+        label: 'pensoft.content::lang.plugin.slug'
+        type: text
+        searchable: true
+    publication_date:
+        label: 'pensoft.content::lang.plugin.publication_date'
+        type: text
+        searchable: true
+    cover_image:
+        label: 'pensoft.content::lang.plugin.cover'
+        type: partial
+        sortable: true
+        path: ~/plugins/pensoft/content/models/articles/_icon.htm

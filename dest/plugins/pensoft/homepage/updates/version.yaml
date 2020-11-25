@@ -1,0 +1,4 @@
+1.0.1: 'First version of Homepage'
+1.0.2:
+    - 'Created table pensoft_homepage_intro'
+    - builder_table_create_pensoft_homepage_intro.php

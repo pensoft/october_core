@@ -1,0 +1,58 @@
+title = "Newsletters"
+url = "/media-center/newsletters"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList mediaNewsletterList]
+modelClass = "pensoft\Media\Models\Newsletters"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\Newsletters;
+
+function onStart(){
+	$this['mediaNewslettersList'] =  Newsletters::get();
+}
+?>
+==
+<div class="container">
+	<div class="row">
+		{% set records = mediaNewslettersList %}
+		{% set displayColumn = mediaNewslettersList.displayColumn %}
+		{% set noRecordsMessage = mediaNewslettersList.noRecordsMessage %}
+		{% set detailsPage = mediaNewslettersList.detailsPage %}
+		{% set detailsKeyColumn = mediaNewslettersList.detailsKeyColumn %}
+		{% set detailsUrlParameter = mediaNewslettersList.detailsUrlParameter %}
+
+		{% for record in records %}
+		{# Use spaceless tag to remove spaces inside the A tag. #}
+		{% spaceless %}
+		{% if record.newsletter_image %}
+		<div class="col-xs-12 col-lg-4">
+			<div class="story broshure_and_poster">
+				<p align="center"><a href="{{record.file.path}}" target="_blank"><img src="{{record.newsletter_image.thumb(305,200,{'mode':'crop'})}}" title="{{record.name}}> </a></p>
+			</div>
+			<div class="media-size">{{record.date |date('F Y')}}</div>
+			{% if record.file %}
+			<div class="media-btn_broshure_and_poster"><a class="download btn btn-secondary fluid" href="{{record.file.path}}" target="_blank">Download newsletter</a></div>
+
+
+			<div class="media-size">{{record.file.extension | uppercase}} {{record.file.size }}</div>
+			{% endif %}
+		</div>
+		{% endif %}
+
+		{% endspaceless %}
+		{% else %}
+		{{ noRecordsMessage }}
+		{% endfor %}
+	</div>
+</div>

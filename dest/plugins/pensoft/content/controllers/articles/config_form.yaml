@@ -1,0 +1,10 @@
+name: Articles
+form: $/pensoft/content/models/articles/fields.yaml
+modelClass: Pensoft\Content\Models\Articles
+defaultRedirect: pensoft/content/articles
+create:
+    redirect: 'pensoft/content/articles/update/:id'
+    redirectClose: pensoft/content/articles
+update:
+    redirect: pensoft/content/articles
+    redirectClose: pensoft/content/articles

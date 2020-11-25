@@ -1,0 +1,25 @@
+columns:
+    names:
+        label: names
+        type: text
+        searchable: true
+    avatar:
+        label: Cover
+        relation: avatar
+        type: partial
+        path: ~/plugins/pensoft/cardprofiles/partials/_avatar_column.htm
+    category:
+        label: Category
+        relation: category
+        select: name
+    country:
+        label: country
+        type: text
+    position:
+        label: position
+        type: text
+    content:
+        label: Content
+        type: partial
+        path: ~/plugins/pensoft/cardprofiles/partials/_content_column.htm
+    

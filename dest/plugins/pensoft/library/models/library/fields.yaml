@@ -1,0 +1,171 @@
+fields:
+    title:
+        label: Title
+        span: left
+        required: 1
+        type: text
+    type:
+        label: Type
+        options:
+            1: 'Journal Paper'
+            2: 'Proceedings Paper'
+            3: 'Book Chapter'
+            4: Book
+            5: Deliverable
+            6: Report
+        showSearch: true
+        span: auto
+        default: '1'
+        required: 1
+        type: dropdown
+    authors:
+        label: Authors
+        mode: string
+        separator: comma
+        customTags: true
+        useKey: false
+        span: left
+        required: 1
+        type: taglist
+    file:
+        label: 'File upload'
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    year:
+        label: Year
+        mode: date
+        format: 'Y'
+        span: left
+        default: now
+        required: 1
+        type: datepicker
+    status:
+        label: Status
+        options:
+            1: Published
+            2: 'In Press'
+            3: 'In Preparation'
+            4: Other
+        showSearch: true
+        span: auto
+        trigger:
+            action: hide
+            field: type
+            condition: 'value[6]'
+        type: dropdown
+    journal_title:
+        label: 'Journal Title'
+        span: left
+        trigger:
+            action: show
+            field: type
+            condition: 'value[1]'
+        type: text
+    derived:
+        label: Derived
+        options:
+            1: 'yes'
+            2: 'no'
+        showSearch: true
+        span: right
+        trigger:
+            action: hide
+            field: type
+            condition: 'value[5]'
+        type: dropdown
+    proceedings_title:
+        label: 'Proceedings Title'
+        span: left
+        trigger:
+            action: show
+            field: type
+            condition: 'value[2]'
+        type: text
+    is_visible:
+        label: Visible
+        span: right
+        default: 1
+        disabled: 0
+        type: switch
+    monograph_title:
+        label: 'Monograph Title'
+        span: left
+        trigger:
+            action: show
+            field: type
+            condition: 'value[3]'
+        type: text
+    deliverable_title:
+        label: 'Deliverable Number'
+        span: left
+        trigger:
+            action: show
+            field: type
+            condition: 'value[5]'
+        type: text
+    project_title:
+        label: 'Project Title'
+        span: left
+        trigger:
+            action: show
+            field: type
+            condition: 'value[6]'
+        type: text
+    volume_issue:
+        label: Volume/Issue
+        span: left
+        trigger:
+            action: hide
+            field: type
+            condition: 'value[3],value[5]'
+        type: text
+    publisher:
+        label: Publisher
+        span: left
+        type: text
+    place:
+        label: Place
+        span: left
+        type: text
+    due_date:
+        label: 'Due Date (month)'
+        mode: date
+        format: m
+        span: left
+        default: ''
+        trigger:
+            action: show
+            field: type
+            condition: 'value[5]'
+        type: datepicker
+    city:
+        label: City
+        span: left
+        trigger:
+            action: show
+            field: type
+            condition: 'value[6]'
+        type: text
+    pages:
+        label: Pages
+        span: left
+        default: '0'
+        type: text
+    doi:
+        label: 'Web link/DOI'
+        span: left
+        type: text
+    preview:
+        label: 'File preview'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload

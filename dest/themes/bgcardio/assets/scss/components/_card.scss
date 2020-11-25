@@ -1,0 +1,261 @@
+.cards {
+    // margin-left: -$padding-horizontal-base;
+    // margin-right: -$padding-horizontal-base;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-left: -$margin-horizontal-base;
+    margin-right: -$margin-horizontal-base;
+
+    &.cards-row {
+        flex-direction: row;
+    }
+    &.no-margin-x {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+}
+
+.card-rotated {
+    position: relative;
+    align-self: flex-end;
+    width: 100%;
+    height: 100%;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    transition: transform 0.3s linear;
+    cursor: pointer;
+    overflow: hidden;
+
+    &.profile {
+        width: 100%;
+        height: 230px;
+    }
+
+    .card-front,
+    .card-back {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .card-front {
+        transition: opacity 0.2s linear;
+        img {
+            width: 100%;
+        }
+    }
+    .card-back {
+        font-size: 85%;
+        line-height: 1.4em;
+        z-index: 0;
+        background-color: $silver;
+        transform: scale(1) rotateY(180deg);
+    }
+}
+
+.card-rotated:hover {
+    transform: scale(1) rotateY(180deg);
+    z-index: 2;
+    .card-front {
+        opacity: 0;
+        display: none;
+    }
+    .card-back {
+        transform: scale(1) rotateY(180deg);
+    }
+}
+
+
+.card {
+    @include border-radius($radius);
+    @include border;
+    position: relative;
+    background-color: data-get($colors, "silver");
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: $margin-vertical-base;
+    margin-bottom: $margin-vertical-base;
+    margin-left: $margin-horizontal-base;
+    margin-right: $margin-horizontal-base;
+    width: 100%;
+
+    .card-image-text {
+        text-transform: uppercase;
+        margin-bottom: $margin-horizontal-base;
+        font-size: 2em;
+        color: $white;
+        min-width: 125px;
+        background-color: $grey;
+        @include padding(3, "y");
+    }
+
+    &.animated {
+        top: 0px;
+        transition: box-shadow 0.3s, top 0.3s;
+    }
+    &.animated:hover {
+        top: -5px;
+        @include box-shadow(0px 10px 15px 0px $box-shadow-color);
+    }
+
+    &.card-no-margin-side {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    &.card-columns {
+        flex-direction: column;
+    }
+
+    &.card-icon::after {
+        @include border-radius($radius, "top-right");
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: $primary-color;
+        right: 0;
+        content: "";
+        background-image: url("../images/icons/other_open_news.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &.secondary::after {
+        background-color: $secondary-color !important;
+    }
+
+    .card-body {
+        position: relative;
+        padding: $padding-vertical-base * 2 + 10 $padding-horizontal-base * 2 $padding-vertical-base * 2
+            $padding-horizontal-base * 2;
+        .card-links {
+            @include margin(1, "t");
+        }
+        .card-icon-link {
+            z-index: 10;
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: block;
+            width: 30px;
+            height: 30px;
+        }
+        &.news,
+        &.events {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        &.files {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            box-sizing: border-box;
+        }
+
+        &.flex {
+            float: left;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+    .card-text {
+        color: $default-color;
+        @include text-size($font-size-base);
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .card-title {
+        color: $default-color;
+        @include text-size($font-size-h1);
+        // margin-bottom: $margin-vertical-base;
+    }
+    .card-image {
+        display: block;
+        float: left;
+        width: auto;
+        img {
+            width: 100%;
+        }
+    }
+    .card-profile {
+        display: block;
+        float: left;
+        width: auto;
+    }
+    .card-image-icon {
+        width: auto;
+    }
+}
+
+.card-text-center {
+    display: block;
+    width: 140px;
+    text-align: center;
+    margin-left: $margin-horizontal-base;
+    margin-right: $margin-horizontal-base;
+}
+
+@include respond-to("large") {
+
+    .card-rotated {
+        overflow: hidden;
+
+        &.profile {
+            width: 275px;
+            height: 230px;
+        }
+    }
+    .card {
+        &.card-files {
+            height: 125px;
+        }
+        &.card-news {
+            height: 200px;
+        }
+        &.card-magazine {
+            width: 100%;
+            height: 125px;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        &.card-events {
+            height: 200px;
+        }
+        flex-direction: row;
+        width: 100%;
+        .card-image {
+            width: 275px + $margin-horizontal-base * 2;
+            &.icon {
+                width: 100px;
+            }
+        }
+        .card-image-text {
+            text-transform: uppercase;
+            margin-bottom: 0px;
+            font-size: 2em;
+            color: $white;
+            width: 125px;
+            background-color: $grey;
+            @include padding(3, "y");
+        }
+
+        .card-profile {
+            width: 275px;
+            height: 230px;
+        }
+        .card-image-icon {
+            width: auto;
+        }
+        &.card-min-height {
+            min-height: 200px;
+        }
+    }
+}

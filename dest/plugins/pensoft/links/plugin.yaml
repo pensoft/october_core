@@ -1,0 +1,16 @@
+plugin:
+    name: 'pensoft.links::lang.plugin.name'
+    description: 'pensoft.links::lang.plugin.description'
+    author: Pensoft
+    icon: oc-icon-link
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Links
+        url: pensoft/links/category
+        icon: icon-link
+        sideMenu:
+            side-menu-item:
+                label: Items
+                url: pensoft/links/links
+                icon: icon-sitemap

@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table pensoft_articles_article'
+    - builder_table_create_pensoft_articles_article.php
+1.0.3:
+    - 'Updated table pensoft_articles_article'
+    - builder_table_update_pensoft_articles_article.php

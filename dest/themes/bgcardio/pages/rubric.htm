@@ -1,0 +1,203 @@
+title = "Rubric"
+url = "/rubric/:slug"
+layout = "default"
+meta_title = "Рубрика"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[builderList boardList]
+modelClass = "Pensoft\Content\Models\Board"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "full_name"
+noRecordsMessage = "{{ 'No records found'|_}}"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+
+[viewBag]
+localeMeta_title[en] = "Rubric"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use Pensoft\Content\Models\Rubrics;
+use Pensoft\Content\Models\Board;
+use Pensoft\Content\Models\News;
+use Pensoft\Content\Models\Files;
+use Pensoft\Content\Models\Media;
+
+
+function onStart(){
+    $slug = $this->param('slug');
+    if($slug){
+		$rubric = Rubrics::where('slug', $slug)->first();
+		$this['rubricData'] = $rubric;
+		if($rubric['template_id'] == 1 || $rubric['template_id'] == ''){
+			$newsData = News::where('rubric_id', $rubric['id'])->where('state', 1)->orderBy('publication_date', 'desc')->get();
+			$filesData = Files::where('rubric_id', $rubric['id'])->orderBy('sort_order', 'asc')->get();
+			$mediaData = Media::where('rubric_id', $rubric['id'])->orderBy('sort_order', 'asc')->get();
+			$this['newsData'] = isset($newsData) ? $newsData : null;
+			$this['filesData'] = isset($filesData) ? $filesData : null;
+			$this['mediaData'] = isset($mediaData) ? $mediaData : null;
+		}else{
+			$this['boardDataDirectors'] = Board::where('positoin_type', 1)->orderBy('sort_order', 'asc')->get();
+			$this['boardDataOthers'] = Board::where('positoin_type', 2)->orderBy('sort_order', 'asc')->get();
+		}
+
+    }
+
+	$this['SelectedLanguage'] = App::getLocale();
+    
+}
+
+function onEnd()
+{   
+    if($this->param('slug') && isset($this['rubricData'])){
+        $this->page->title = $this['rubricData']->name;
+    }
+}
+
+?>
+==
+{% if rubricData %}
+        
+
+        {% if rubricData.template_id == '' or rubricData.template_id == 1 %} {# portal #}
+			<div class="flex flex-row align-items-start">
+				<!--<div class="card mr-3" style="margin-top:0px; margin-left:0px">-->
+					<!--<i class="card-image-icon rounded mxy-2 icon huge {{rubricData.icon_class }} bkg"></i>-->
+				<!--</div>-->
+				<div class="fluid">
+					<h1>{{rubricData.name }}</h1>
+					<div>{{rubricData.description|raw}}</div>
+				</div>
+			</div>
+
+            {% if newsData.count() %}
+                <div class="cards card-news mt-2 justify-content-start">
+                    {% for news in newsData %}
+                    <div itemscope itemtype="https://schema.org/NewsArticle" class="card card-news card-icon card-min-height">
+                        {% if news.cover_image %}
+						<a itemprop="url" title="{{news.title}}" href="/{{ SelectedLanguage }}/news/{{news.slug}}"><img itemprop="thumbnailUrl" class="card-image rounded-l" src="{{news.cover_image|crop_image|resize(305,200, { mode: 'crop' })}}" alt="{{news.title}}" /></a>
+                        {% endif %}
+                        <div class="card-body news">
+                            <a title="{{news.title}}" class="card-icon-link" href="/{{ SelectedLanguage }}/news/{{news.slug}}"></a>
+                            <a itemprop="name" title="{{news.title}}" href="/{{ SelectedLanguage }}/news/{{news.slug}}" class="card-title text grey-white ">{{  news.title|truncate(70, true) }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+
+            {% if filesData.count() %}
+                    <div class="cards">
+                        {% for file in filesData %}
+                            <div class="colxs-12 collg-6 mt-2">
+                                <a class="card card-files card-no-margin-side fluid" href="{{ file.file.path }}" target="_blanl" title="{{file.title}}" >
+                                    <div class="card-image-text flex align-items-center justify-content-center rounded-l">
+                                        <span>{{file.file.extension}}</span>
+                                    </div>
+                                    <div class="card-body files fluid">
+                                        <div class="card-text">
+                                            {{ file.title|truncate(110, true) }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+               
+            {% endif %}
+            
+            
+            {% if mediaData.count() %}
+                <div class="flex flex-wrap rows mt-2">
+                {% for media in mediaData %}
+                    <div class="collg-6 colxs-12">
+                        <div>{{ media.title }}</div>
+                        <div class="mt-1" style="height: 340px;">
+                            {% if media.file %}
+                                <video class="iframe-video" controls=""><source src="{{ media.file.path }}" type="video/mp4"></video>
+                            {% else %}
+                                <iframe class="iframe-video" src="{{ media.url }}"></iframe>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    
+                
+                {% endfor %}
+                </div>
+            {% endif %}
+
+        {% else %} {# board #}
+
+            {% set records = boardList.records %}
+				{# DIRECTORS #}
+                
+                <h1 class="my-2">{{ 'Board of directors'|_}}</h1>
+                
+                <div class="cards">
+                    {% for person in boardDataDirectors %}
+                            <div itemscope itemtype="https://schema.org/Person" class="card card-columns no-background no-border">
+
+                                <div class="card-rotated profile">
+                                    <div class="card-front">
+                                        {% if person.picture %}
+                                            <img itemprop="image" class="card-profile rounded" src="{{person.picture|crop_image|resize(275,230, { mode: 'crop' })}}"  alt="{{person.full_name}}" />
+                                        {% else %}
+                                            <img class="card-profile rounded" src="{{ 'assets/images/profile.png'|theme }}" alt="{{person.full_name}}" />
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-back flex justify-content-center align-items-center pxy-1">
+                                        <p>{{person.short_description|raw}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="card-body fluid no-padding">
+                                    <div class="card-text">
+                                        <div itemprop="givenName" class="bold mt-1">{{ person.full_name }}</div>
+                                        <div class="">{{ person.position }}</div>
+                                        <a itemprop="email" href="mailto:{{ person.email }}" class="">{{ person.email }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+
+                {# OTHERS #}
+                <h1 class="my-2">{{ 'Other officials'|_}}</h1>
+                
+                <div class="cards">
+                    {% for person in boardDataOthers %}
+                            <div itemscope itemtype="https://schema.org/Person" class="card card-columns no-background no-border ">
+                                
+                                
+                                <div class="card-rotated profile">
+                                    <div class="card-front">
+                                        {% if person.picture %}
+                                            <img itemprop="image" class="card-profile rounded" src="{{person.picture|crop_image|resize(275,230, { mode: 'crop' })}}" alt="{{person.full_name}}" />
+                                        {% else %}
+                                            <img class="card-profile rounded" src="{{ 'assets/images/profile.png'|theme }}" alt="{{person.full_name}}" />
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-back flex justify-content-center align-items-center pxy-1">
+                                        <p>{{person.short_description|raw}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="card-body fluid no-padding" style="max-width: 275px;">
+                                    <div class="card-text">
+                                        <div itemprop="givenName" class="bold mt-1">{{ person.full_name }}</div>
+                                        <div class="">{{ person.position }}</div>
+                                        <a itemprop="email" href="mailto:{{ person.email }}">{{ person.email }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+        {% endif %}
+{% else %}
+	{{ 'No records found'|_}}
+{% endif %}

@@ -1,0 +1,50 @@
+items:
+    -
+        title: Новини
+        nesting: ''
+        type: url
+        url: /bg/news
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Управителен съвет'
+        nesting: ''
+        type: url
+        url: /bg/rubric/management-board
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Европейски препоръки'
+        nesting: ''
+        type: url
+        url: /bg/rubric/evropeiski-preporyki
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Полезни връзки'
+        type: url
+        url: /bg/rubric/polezni-vruzki
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: Информация

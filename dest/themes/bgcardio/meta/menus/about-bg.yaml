@@ -1,0 +1,41 @@
+items:
+    -
+        title: История
+        nesting: ''
+        type: url
+        url: /bg/rubric/history
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Устав
+        nesting: ''
+        type: url
+        url: /bg/rubric/statutes
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Работни групи'
+        nesting: ''
+        type: url
+        url: /bg/rubric/working-groups
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: 'За нас'

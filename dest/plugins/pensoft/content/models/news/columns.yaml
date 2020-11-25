@@ -1,0 +1,40 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+        sortable: true
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: 'pensoft.content::lang.plugin.slug'
+        type: text
+        searchable: true
+        sortable: true
+    publication_date:
+        label: 'pensoft.content::lang.plugin.publication_date'
+        type: text
+        searchable: true
+        sortable: true
+    rubric:
+        label: 'pensoft.content::lang.plugin.rubric'
+        type: text
+        searchable: true
+        sortable: true
+        select: name
+        relation: rubric
+    cover_image:
+        label: 'pensoft.content::lang.plugin.cover'
+        type: partial
+        searchable: false
+        sortable: true
+        path: ~/plugins/pensoft/content/models/news/_icon.htm
+    page:
+        label: 'pensoft.content::lang.plugin.page'
+        type: text
+        sortable: true
+        select: title
+        relation: page

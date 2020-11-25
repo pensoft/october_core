@@ -1,0 +1,12 @@
+list: $/pensoft/content/models/news/columns.yaml
+modelClass: Pensoft\Content\Models\News
+title: News
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'pensoft/content/news/update/:id'

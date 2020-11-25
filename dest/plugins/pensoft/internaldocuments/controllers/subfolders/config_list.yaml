@@ -1,0 +1,14 @@
+list: $/pensoft/internaldocuments/models/subfolders/columns.yaml
+modelClass: Pensoft\InternalDocuments\Models\Subfolders
+title: Subfolders
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+showTree: 1 //Display tree view
+treeExpanded: 1 // Tree expanded by default
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'pensoft/internaldocuments/subfolders/update/:id'

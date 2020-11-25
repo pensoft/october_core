@@ -1,0 +1,17 @@
+fields:
+    name:
+        label: name
+        span: auto
+        type: text
+    slug:
+        label: Slug
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text
+    body:
+        label: Body
+        size: ''
+        span: auto
+        type: richeditor

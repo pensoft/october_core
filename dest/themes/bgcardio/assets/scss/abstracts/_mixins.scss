@@ -1,0 +1,226 @@
+
+/// Responsive breakpoint manager
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+    $raw-query: map-get($breakpoints, $breakpoint);
+    
+    @if $raw-query {
+      $query: if(
+        type-of($raw-query) == 'string',
+        unquote($raw-query),
+        inspect($raw-query)
+      );
+  
+      @media #{$query} {
+        @content;
+      }
+    } @else {
+      @error 'No value found for `#{$breakpoint}`. '
+           + 'Please make sure it is defined in `$breakpoints` map.';
+    }
+  }
+
+@mixin color($color, $default-color: $default-color) {
+    color: data-get($colors, $color, $default-color);
+}
+@mixin colors($colors) {
+    @each $name, $color in $colors {
+        &.#{$name} {
+            @include color($name);
+        };
+    }
+}
+
+@mixin backgrounds() {
+    @each $name, $color in $colors {
+        &.#{$name} {
+            @include background($name);
+        };
+    }
+}
+@mixin background($color, $default-color: $default-color) {
+    background-color: data-get($colors, $color, $default-color);
+}
+
+@mixin prefix($property, $value, $prefixes: ()) {
+    @each $prefix in $prefixes {
+        #{$prefix}#{$property}: $value;
+    }
+    #{$property}: $value;
+}
+
+@mixin box-shadow($value: $box-shadow){
+    @if $value {
+        @include prefix(box-shadow, $value, $browser-prefixes);
+    }
+}
+
+@mixin border-radius($value: null, $position: null) {
+    @if $value {
+        @if $position {
+            @include prefix(border-#{$position}-radius, $value, $browser-prefixes);
+        }@else {
+            @include prefix(border-radius, $value, $browser-prefixes);
+        }
+    }
+}
+
+@mixin sizes($list: ()) {
+    @each $size, $declarations in $list {
+        &.#{$size} {
+            @each $property, $value in $declarations {
+                #{$property}: #{$value};
+            }
+        }
+    }
+}
+
+@mixin text-size($size, $line-height: null){
+    font-size: $size;
+    @if($line-height != null){
+        line-height: $line-height;
+    }@else{
+        line-height: calculate-line-height($size);
+    }
+}
+
+@mixin text-sizes($list: ()) {
+    @each $size, $value in $list {
+        &.#{$size} {
+            @include text-size($value);
+        }
+    }
+}
+
+@mixin padding($step, $position:'xy'){
+    $positions: (
+        't': (padding-top: $padding-vertical-base),
+        'b': (padding-bottom: $padding-vertical-base),
+        'l': (padding-left: $padding-horizontal-base),
+        'r': (padding-right: $padding-horizontal-base),
+        'x': (padding-left: $padding-horizontal-base, padding-right: $padding-horizontal-base),
+        'y': (padding-top: $padding-vertical-base, padding-bottom: $padding-vertical-base),
+        'xy': (padding-top: $padding-vertical-base, padding-bottom: $padding-vertical-base, padding-left: $padding-horizontal-base, padding-right: $padding-horizontal-base)
+    );
+
+    $list: data-get($positions, $position);
+    @each $property, $value in $list {
+        #{$property}: #{$value * $step} !important;
+    }
+}
+
+@mixin margin($step, $position:'xy'){
+    $positions: (
+        't': (margin-top: $margin-vertical-base),
+        'b': (margin-bottom: $margin-vertical-base),
+        'l': (margin-left: $margin-horizontal-base),
+        'r': (margin-right: $margin-horizontal-base),
+        'x': (margin-left: $margin-horizontal-base, margin-right: $margin-horizontal-base),
+        'y': (margin-top: $margin-vertical-base, margin-bottom: $margin-vertical-base),
+        'xy': (margin-top: $margin-vertical-base, margin-bottom: $margin-vertical-base, margin-left: $margin-horizontal-base, margin-right: $margin-horizontal-base)
+    );
+
+    $list: data-get($positions, $position);
+    @each $property, $value in $list {
+        #{$property}: #{$value * $step} !important;
+    }
+}
+
+@mixin margins {
+    $positions: (
+        't': (margin-top: $margin-vertical-base),
+        'b': (margin-bottom: $margin-vertical-base),
+        'l': (margin-left: $margin-horizontal-base),
+        'r': (margin-right: $margin-horizontal-base),
+        'x': (margin-left: $margin-horizontal-base, margin-right: $margin-horizontal-base),
+        'y': (margin-top: $margin-vertical-base, margin-bottom: $margin-vertical-base),
+        'xy': (margin-top: $margin-vertical-base, margin-bottom: $margin-vertical-base, margin-left: $margin-horizontal-base, margin-right: $margin-horizontal-base)
+    );
+
+    @each $position, $declarations in $positions {
+
+        @for $i from 1 through 3 {
+            .m#{$position}-#{$i} {
+                @each $property, $value in $declarations {
+                    #{$property}: #{$value * $i} !important;
+                }
+            }
+        } 
+    }
+}
+
+@mixin paddings {
+    $positions: (
+        't': (padding-top: $padding-vertical-base),
+        'b': (padding-bottom: $padding-vertical-base),
+        'l': (padding-left: $padding-horizontal-base),
+        'r': (padding-right: $padding-horizontal-base),
+        'x': (padding-left: $padding-horizontal-base, padding-right: $padding-horizontal-base),
+        'y': (padding-top: $padding-vertical-base, padding-bottom: $padding-vertical-base),
+        'xy': (padding-left: $padding-horizontal-base, padding-right: $padding-horizontal-base, padding-top: $padding-vertical-base, padding-bottom: $padding-vertical-base),
+    );
+
+    @each $position, $declarations in $positions {
+
+        @for $i from 1 through 3 {
+            .p#{$position}-#{$i} {
+                @each $property, $value in $declarations {
+                    #{$property}: #{$value * $i}  !important;
+                }
+            }
+        } 
+    }
+}
+
+@mixin rounds {
+    $positions: (
+        't': ('top-left', 'top-right'),
+        'b':('bottom-left', 'bottom-right'),
+        'l':('top-left', 'bottom-left'),
+        'r':('top-right', 'bottom-right'),
+        'tl':('top-left'),
+        'tr':('top-right'),
+        'bl':('bottom-left'),
+        'br':('bottom-right'),
+    );
+
+    @for $i from 0 through 3 {
+        @if ($i == 0){
+            .rounded {
+                @each $value in ('top-left', 'top-right', 'bottom-left', 'bottom-right') {
+                    @include border-radius($radius, $value);
+                }
+            }
+        }@else{
+            .rounded-#{$i} {
+                @each $value in ('top-left', 'top-right', 'bottom-left', 'bottom-right') {
+                    @include border-radius($radius * ($i + 1), $value);
+                }
+            }
+        }
+        @each $position, $declarations in $positions {
+            @if ($i == 0){
+                .rounded-#{$position} {
+                    @each $value in $declarations {
+                        @include border-radius($radius, $value);
+                    }
+                }
+            }@else{
+                .rounded-#{$position}-#{$i} {
+                    @each $value in $declarations {
+                        @include border-radius($radius * ($i + 1), $value);
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+@mixin border {
+    border-color: $border-color-base;
+    border-style: $border-style-base;
+    border-width: $border-width-base;
+}

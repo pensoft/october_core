@@ -1,0 +1,20 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table pensoft_cardprofiles_items'
+    - builder_table_create_pensoft_cardprofiles_items.php
+1.0.3:
+    - 'Created table pensoft_cardprofiles_category'
+    - builder_table_create_pensoft_cardprofiles_category.php
+1.0.4:
+    - 'Updated table pensoft_cardprofiles_items'
+    - builder_table_update_pensoft_cardprofiles_items.php
+1.0.5:
+    - 'Updated table pensoft_cardprofiles_items'
+    - builder_table_update_pensoft_cardprofiles_items_2.php
+1.0.6:
+    - 'Updated table pensoft_cardprofiles_items'
+    - builder_table_update_pensoft_cardprofiles_items_3.php
+1.0.7:
+    - 'Updated table pensoft_cardprofiles_items'
+    - builder_table_update_pensoft_cardprofiles_items_4.php

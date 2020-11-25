@@ -1,0 +1,26 @@
+title = "Calendar"
+url = "/calendar"
+layout = "default"
+meta_title = "Календар"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[calendar]
+default = "true"
+limit = "null"
+category = "null"
+language = "en"
+
+[alternateHrefLangElements]
+
+[viewBag]
+localeMeta_title[en] = "Calendar"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+function onStart(){
+		$this['SelectedLanguage'] = App::getLocale();
+	}
+?>
+==
+{% component 'calendar' language=SelectedLanguage %}

@@ -1,0 +1,15 @@
+{% if __SELF__.property('show-category-title') %}
+	<h3 class="text-center underline">{{__SELF__.getCategoryTitle()}}</h3>
+{% endif %}
+
+{% for link in __SELF__.getLinks() %}
+
+	{% partial 'components/card-link'
+		url=link.url
+		title=link.title
+		image=link.cover.getPath()
+		content=link.content
+	%}
+
+{% endfor %}
+

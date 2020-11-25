@@ -1,0 +1,24 @@
+fields:
+    name:
+        label: Name
+        span: left
+        type: text
+    cover:
+        label: 'Cover image'
+        mode: image
+        fileTypes: svg,png,jpg
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    sort_order:
+        label: Order
+        span: auto
+        type: text
+    slug:
+        label: SLug
+        span: auto
+        defaultFrom: name
+        type: text

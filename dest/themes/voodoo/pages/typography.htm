@@ -1,0 +1,251 @@
+title = "Homepage"
+url = "/typography"
+layout = "default"
+meta_description = "homepage desc"
+is_hidden = 0
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[siteSearchInclude]
+==
+{% component 'siteSearchInclude' %}
+<div class="container">
+
+    <h1>Typography page</h1>
+
+    {% if this.theme.site_name == 'Pensoft projects1' %}
+        <div class="bd-example">
+        <h1>This is changes only for project1</h1>
+        </div>
+        {% endif %}
+
+    <h2 class="my-3">Typography</h2>
+    {% content "typography.htm" %}
+
+    <h2 class="my-3">Form</h2>
+    {% content "form.htm" %}
+
+    <h2 class="my-3">Buttons</h2>
+    <div class="bd-example">
+        {% content "buttons.htm" %}
+    </div>
+
+    <h2 class="my-3">CARDS</h2>
+
+    <div class="bd-example">
+    {% partial "components/card.htm"
+        image=this.theme.header_image.getPath()
+        body="<p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+<a href='#' class='btn btn-primary'>Go somewhere</a>"
+        title="Card title"
+        style="width: 18rem;"
+        class=""
+    %}
+    </div>
+
+    <h3 class="my-2">groups</h3>
+
+    <div class="bd-example">
+        <div class="cards">
+            {% partial "components/card.htm"
+                image=this.theme.header_image.getPath()
+                image_position="top"
+                footer="some footer"
+            %}
+            {% partial "components/card.htm"
+                body="<h1>body here</h1>"
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+                image=this.theme.header_image.getPath()
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+                image=this.theme.header_image.getPath()
+                body="<h1>body here</h1>"
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+                image=this.theme.header_image.getPath()
+                body="<h1>body here</h1> <a href='#' class='btn btn-primary'>Go somewhere</a>"
+                footer="some footer"
+            %}
+        </div>
+    </div>
+
+    <h3 class="my-2">column</h3>
+
+    <div class="bd-example">
+        <div class="card-columns">
+            {% partial "components/card.htm"
+                body="<h1>body here</h1>"
+            %}
+
+            {% partial "components/card.htm"
+                body="<h1>body here</h1>"
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+                body="<h1>body here</h1>"
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+                image=this.theme.header_image.getPath()
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+                image=this.theme.header_image.getPath()
+                body="<h1>body here</h1>"
+            %}
+
+            {% partial "components/card.htm"
+                header="some header"
+                image=this.theme.header_image.getPath()
+                body="<h1>body here</h1> <a href='#' class='btn btn-primary'>Go somewhere</a>"
+                footer="some footer"
+            %}
+        </div>
+    </div>
+
+    <h2 class="mt-3">Icons</h2>
+
+    <div class="bd-example">
+        <div class="icons">
+            <span class="pr p-home"></span>
+            <span class="pr p-pencil"></span>
+            <span class="pr p-quill"></span>
+            <span class="pr p-diamonds"></span>
+            <span class="pr p-camera"></span>
+        </div>
+    </div>
+
+    <h3 class="mt-2">Icon sizes</h3>
+
+    <div class="bd-example">
+        <div class="icons">
+            <span class="pr p-camera small"></span>
+            <span class="pr p-camera"></span>
+            <span class="pr p-camera large"></span>
+            <span class="pr p-camera huge"></span>
+        </div>
+    </div>
+
+    <h3 class="mt-2">Icon colors</h3>
+
+    <div class="bd-example">
+        <div class="icons">
+            <span class="pr p-camera text-primary"></span>
+            <span class="pr p-camera text-secondary"></span>
+            <span class="pr p-camera text-success"></span>
+            <span class="pr p-camera text-danger"></span>
+            <span class="pr p-camera text-warning"></span>
+            <span class="pr p-camera text-info"></span>
+            <span class="pr p-camera text-light"></span>
+            <span class="pr p-camera text-dark"></span>
+            <span class="pr p-camera text-white"></span>
+        </div>
+    </div>
+
+    
+    <h3 class="mt-2">Icons group vertical</h3>
+
+    <div class="bd-example">
+        <div class="icons icons-vertical">
+            <span class="p p-home"></span>
+            <span class="p p-pencil"></span>
+            <span class="p p-quill"></span>
+            <span class="p p-diamonds"></span>
+            <span class="p p-camera"></span>
+        </div>
+    </div>
+
+
+    <h2 class="my-3">Timeline</h2>
+
+    <div class="bd-example">
+        <div class="row">
+            <div class="col-xs">
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">01.01.2020</div>
+                        <div class="timeline-body"> </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">01.01.2020</div>
+                        <div class="timeline-body"> </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">01.01.2020</div>
+                        <div class="timeline-body">some body here</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">01.01.2020</div>
+                        <div class="timeline-body">some body here</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">01.01.2020</div>
+                        <div class="timeline-body bg-primary">some body here</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">01.01.2020</div>
+                        <div class="timeline-body bg-primary">some body here</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">
+                <h2 class="my-3">Timeline vertical</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">
+                <div class="timeline vertical">
+                    <div class="timeline-item">
+                        <div class="timeline-header">01.01.2020</div>
+                        <div class="timeline-body">Lorem ipsum </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">02.01.2020</div>
+                        <div class="timeline-body">Lorem ipsum </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">03.01.2020</div>
+                        <div class="timeline-body">Lorem ipsum </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">03.01.2020</div>
+                        <div class="timeline-body">Lorem ipsum </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">03.01.2020</div>
+                        <div class="timeline-body">Lorem ipsum </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">03.01.2020</div>
+                        <div class="timeline-body">Lorem ipsum </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,87 @@
+[viewBag]
+
+[menu]
+start = "id-1"
+activeNode = 0
+listItemClasses = "nav-item"
+primaryClasses = "navbar-nav"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 2
+
+[menu login]
+start = "id-8"
+activeNode = 0
+listItemClasses = "item"
+primaryClasses = "nav nav-pills"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 2
+==
+{% if user %}
+<nav class="fixed navbar-loggedin-user ">
+	<div class="navbar-collapse collapse row middle-xs">
+		<div class="col-sm-10 col-xs-12">{% component 'login' %}</div>
+		<div class="col-sm-2 end-sm hidden-xs">
+			{% if user.avatar %}
+				<a href="/profile" style="color:#ffffff;">{{ user.name }} {{ user.surname }} &nbsp; &nbsp; <img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(30,30, { mode : 'crop' } )}}" style="border-radius: 50%; margin-right:20px;" align="right"> </a>
+			{% else %}
+
+			<a href="/profile" style="color:#ffffff;">{{ user.name }} {{ user.surname }} &nbsp; &nbsp; <img alt="{{ user.name }} {{ user.surname }}" src="{{ 'CMS_icons_avatar_white.svg'|media }}" width="30" height="30" style="margin-right:20px;" align="right"></a>
+			{% endif %}
+	</div>
+</nav>
+{% endif %}
+<nav class="pr-1 pl-1 navbar fixed " id="headernavbar" {% if user %} style="margin-top:69px;"{% endif %}>
+	<div id="menuToggle">
+		<input type="checkbox" />
+		<span></span>
+		<span></span>
+		<span></span>
+		{% component 'menu' %}
+	</div>
+	<a href="{{'home'|page}}" class="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}');">
+
+    </a>
+
+        <div class="navbar-collapse collapse " id="headerNavbarNav" style="display: none;">
+			{% component 'menu' %}
+		</div>
+            <div id="search" class="search" >
+                <form class="input-group align-items-start" action="{{ 'search' | page }}" method="get">
+                    <input class="form-control search" name="q" type="text" autocomplete="on">
+                    <button class="btn search btn-link pr p-search big text-grey-search-btn" type="submit"></button>
+                </form>
+            </div>
+			<div id="headerNavbarLogin">
+				<ul class="navbar-nav" style="padding: 0; margin: 0;">
+
+				</ul>
+			</div>
+
+
+</nav>
+
+
+
+{% if this.theme.header_image %}
+<div class="header-image {{page_id}}">
+    {%if this.page.header_image %}
+        <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: top center;"></div>
+    {%else%}
+        <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: top center;"></div>
+    {%endif%}
+    <div class="jumbotron px-1" data-aos="fade-up">
+        <h1 class="underline white  {% if page_id == 'home'%}home-page-header{% endif %}">{%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
+        {% if page_id == 'home' and tag_line %}
+            <p>{{tag_line}}</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+
+{% if user %}
+    <script>$(document).trigger('profile')</script>
+    <script>$(document).trigger('signout')</script>
+{% else %}
+    <script>$(document).trigger('signin')</script>
+{% endif %}

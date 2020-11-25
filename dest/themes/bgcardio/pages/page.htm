@@ -1,0 +1,188 @@
+title = "Page"
+url = "/:slug?"
+layout = "default"
+meta_title = "Страница"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[builderDetails pageDetails]
+modelClass = "Pensoft\Content\Models\Pages"
+identifierValue = "{{ :slug }}"
+modelKeyColumn = "slug"
+displayColumn = "description"
+notFoundMessage = "Record not found"
+
+[builderList portalList]
+modelClass = "Pensoft\Content\Models\Rubrics"
+scope = "-"
+scopeValue = "{{ :slug }}"
+displayColumn = "name"
+noRecordsMessage = "{{ 'No records found'|_}}"
+detailsPage = "pages"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
+
+[alternateHrefLangElements]
+
+[viewBag]
+localeMeta_title[en] = "Page"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use Pensoft\Content\Models\Pages;
+use Pensoft\Content\Models\Rubrics;
+use Pensoft\Content\Models\News;
+use Pensoft\Content\Models\Files;
+use Pensoft\Content\Models\Media;
+
+
+function onStart(){
+    $pageData = Pages::where('slug', $this->param('slug'))->first();
+	$this['pageData'] = $pageData;
+	$pageId = $pageData['id'];
+
+	$this['rubricsData'] = Rubrics::where('page_id', (int)$pageId)->orderBy('sort_order', 'ASC')->get();
+	$slug = $this->param('slug');
+	if($slug){
+		$newsData = News::where('page_id', (int)$pageId)->where('state', 1)->orderBy('publication_date', 'desc')->get();
+		$filesData = Files::where('page_id', (int)$pageId)->orderBy('sort_order', 'asc')->get();
+		$mediaData = Media::where('page_id', (int)$pageId)->orderBy('sort_order', 'asc')->get();
+		$this['newsData'] = isset($newsData) ? $newsData : null;
+		$this['filesData'] = isset($filesData) ? $filesData : null;
+		$this['mediaData'] = isset($mediaData) ? $mediaData : null;
+
+	}
+
+	$this['SelectedLanguage'] = App::getLocale();
+}
+
+
+function onEnd()
+{
+    if(isset($this->components['pageDetails']->record)){
+        $this->page->title = $this->components['pageDetails']->record->title;
+    }
+}
+
+?>
+==
+{% set record = pageDetails.record %}
+{% set displayColumn = pageDetails.displayColumn %}
+{% set notFoundMessage = pageDetails.notFoundMessage %}
+
+{% set displayColumn = pageDetails.displayColumn %}
+{% set notFoundMessage = pageDetails.notFoundMessage %}
+
+
+{% if record %}
+<h1>{{ record.title }}</h1>
+{{ attribute(record, displayColumn)|raw }}
+{% else %}
+{{ notFoundMessage }}
+{% endif %}
+
+
+{% set records = portalList.records %}
+{% set displayColumn = portalList.displayColumn %}
+{% set noRecordsMessage = portalList.noRecordsMessage %}
+{% set detailsPage = portalList.detailsPage %}
+{% set detailsKeyColumn = portalList.detailsKeyColumn %}
+{% set detailsUrlParameter = portalList.detailsUrlParameter %}
+
+<div class="cards cards-row">
+	{% for record in rubricsData %}
+	{# Use spaceless tag to remove spaces inside the A tag. #}
+	{% spaceless %}
+	<div class="flex flex-column asd">
+		<a class="card card-columns" href="/{{ SelectedLanguage }}/rubric/{{record.slug}}">
+			<i class="card-image-icon rounded mxy-2 icon huge {{record.icon_class}} bkg"></i>
+		</a>
+		<a href="/{{ SelectedLanguage }}/rubric/{{record.slug}}" class="text black card-text-center">{{ record.name}}</a>
+	</div>
+	{% endspaceless %}
+	{% endfor %}
+</div>
+
+
+
+{% if newsData.count() %}
+<div class="cards card-news mt-2 justify-content-start">
+	{% for news in newsData %}
+	<div itemscope itemtype="https://schema.org/NewsArticle" class="card card-news card-icon card-min-height">
+		{% if news.cover_image %}
+		<a itemprop="url" title="{{news.title}}" href="/{{ SelectedLanguage }}/news/{{news.slug}}"><img itemprop="thumbnailUrl" class="card-image rounded-l" src="{{news.cover_image.thumb(305,200,{'mode':'crop'})}}" alt="{{news.title}}" /></a>
+		{% endif %}
+		<div class="card-body news">
+			<a title="{{news.title}}" class="card-icon-link" href="/{{ SelectedLanguage }}/news/{{news.slug}}"></a>
+			<a itemprop="name" title="{{news.title}}" href="/{{ SelectedLanguage }}/news/{{news.slug}}" class="card-title text grey-white ">{{  news.title|truncate(70, true) }}</a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endif %}
+
+
+{% if filesData.count() %}
+<div class="cards">
+	{% for file in filesData %}
+	<div class="colxs-12 collg-6 mt-2">
+		<a class="card card-files card-no-margin-side fluid" href="{{ file.file.path }}" target="_blank" title="{{file.title}}">
+			<div class="card-image-text flex align-items-center justify-content-center rounded-l">
+				<span>{{file.file.extension}}</span>
+			</div>
+			<div class="card-body files fluid">
+				<div class="card-text">
+					{{ file.title|truncate(110, true) }}
+				</div>
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+</div>
+
+{% endif %}
+
+
+{% if mediaData.count() %}
+<div class="flex flex-wrap rows mt-2">
+	{% for media in mediaData %}
+	<div class="collg-6 colxs-12">
+		<div>{{ media.title }}</div>
+		<div class="mt-1" style="height: 340px;">
+			{% if media.file %}
+			<video class="iframe-video" controls=""><source src="{{ media.file.path }}" type="video/mp4"></video>
+			{% else %}
+			<iframe class="iframe-video" src="{{ media.url }}"></iframe>
+			{% endif %}
+		</div>
+
+	</div>
+
+
+	{% endfor %}
+</div>
+{% endif %}
+
+
+
+
+
+
+{% if records.lastPage > 1 %}
+<ul class="pagination">
+	{% if records.currentPage > 1 %}
+	<li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage-1) }) }}">&larr; Prev</a></li>
+	{% endif %}
+
+	{% for page in 1..records.lastPage %}
+	<li class="{{ records.currentPage == page ? 'active' : null }}">
+		<a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+	</li>
+	{% endfor %}
+
+	{% if records.lastPage > records.currentPage %}
+	<li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage+1) }) }}">Next &rarr;</a></li>
+	{% endif %}
+</ul>
+{% endif %}

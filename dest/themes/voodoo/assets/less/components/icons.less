@@ -1,0 +1,217 @@
+// https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use
+
+// .ps - Solid Rendering
+// .pr - Regular Rendering
+// .pl - Light
+// .pd - Duotone
+// .pb - Brands
+
+// <span style="font-size: 3em; color: Tomato;">
+//   <i class="ps p-camera"></i>
+// </span>
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icons/icomoon/icomoon.eot?ilrlqa');
+  src:  url('../fonts/icons/icomoon/icomoon.eot?ilrlqa#iefix') format('embedded-opentype'),
+    url('../fonts/icons/icomoon/icomoon.ttf?ilrlqa') format('truetype'),
+    url('../fonts/icons/icomoon/icomoon.woff?ilrlqa') format('woff'),
+    url('../fonts/icons/icomoon/icomoon.svg?ilrlqa#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.p, .pb, .pd, .pl, .pr, .ps {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    .font-size;
+    .line-height;
+
+    &.small, &.large, &.huge {
+      .line-height;
+      vertical-align: middle;
+    }
+    &.small {
+      .font-size(0.80);
+    }
+    &.normal {
+      font-size: 20px;
+      float: left;
+      margin-right: 5px;
+      height: 20px;
+    }
+    &.big {
+      .font-size(2);
+    }
+    &.large {
+      .font-size(3);
+    }
+    &.huge {
+      .font-size(5);
+    }
+    &.p-primary {
+      color: @white-color;
+      background: @button-background-color;
+      .rounded(50px);
+      padding: 0 13px;
+      .breakpoint-small-down({
+        max-width: 67px;
+        margin: 20px 0;
+      });
+
+    }
+    &.p-secondary {
+      color: @secondary-color;
+    }
+    &.p-success {
+      color: @success-color;
+    }
+    &.p-danger {
+      color: @danger-color;
+    }
+    &.p-warning {
+      color: @warning-color;
+    }
+    &.p-info {
+      color: @info-color;
+    }
+    &.p-light {
+      color: @light-color;
+    }
+    &.p-dark {
+      color: @dark-color;
+    }
+    &.p-link {
+    color: @primary-color;
+    }
+
+
+}
+
+.ps {
+    font-family: "icomoon";
+    font-weight: 900;
+}
+.pr {
+    font-family: "icomoon";
+    font-weight: 400;
+}
+.pl {
+    font-family: "icomoon";
+    font-weight: 300;
+}
+.pd {
+    font-family: "icomoon";
+    font-weight: 900;
+}
+.pb {
+    font-family: "icomoon";
+    font-weight: 400;
+}
+
+.icons {
+  display: flex;
+  font-family: "icomoon";
+  font-weight: 400;
+
+
+  .p + .p, .pb+.pb, .pd+.pd, .pl+.pl, .pr+.pr, .ps+.ps {
+    margin-left: 10px;
+  }
+
+  &.icons-vertical {
+    flex-direction: column;
+
+    .p + .p, .pb+.pb, .pd+.pd, .pl+.pl, .pr+.pr, .ps+.ps {
+      margin-left: 0;
+      margin-top:@margin-base-space;
+    }
+  }
+}
+
+.p-location:before {
+  content: "\e900";
+}
+.p-gearwheel:before {
+  content: "\e901";
+}
+.p-back:before {
+  content: "\eafb";
+}
+.p-colapse:before {
+  content: "\eafc";
+}
+.p-remove:before {
+  content: "\eafd";
+}
+.p-trash:before {
+  content: "\eafe";
+}
+.p-download:before {
+  content: "\eaff";
+}
+.p-drag:before {
+  content: "\eb00";
+}
+.p-expand:before {
+  content: "\eb01";
+}
+.p-forward:before {
+  content: "\eb02";
+}
+.p-add:before {
+  content: "\eb03";
+}
+.p-search:before {
+  content: "\ea82";
+}
+.p-hamburger:before {
+  content: "\eaf8";
+}
+.p-key:before {
+  content: "\eaf4";
+}
+.p-minus:before {
+  content: "\eaf5";
+}
+.p-person:before {
+  content: "\eaf6";
+}
+.p-plus:before {
+  content: "\eaf7";
+}
+.p-share1:before {
+  content: "\eaf9";
+}
+.p-facebook:before {
+  content: "\eaeb";
+}
+.p-instagram:before {
+  content: "\eaec";
+}
+.p-linkedin:before {
+  content: "\eaed";
+}
+.p-mail:before {
+  content: "\eaee";
+}
+.p-mendeley:before {
+  content: "\eaef";
+}
+.p-reddit:before {
+  content: "\eaf0";
+}
+.p-RSS:before {
+  content: "\eaf1";
+}
+.p-twitter:before {
+  content: "\eaf2";
+}
+.p-youtube:before {
+  content: "\eaf3";
+}

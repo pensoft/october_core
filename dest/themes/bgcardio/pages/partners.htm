@@ -1,0 +1,110 @@
+title = "partners"
+url = "/partners/:slug?"
+layout = "default"
+meta_title = "Партньори"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[builderDetails partnersDetails]
+modelClass = "Pensoft\Content\Models\Partners"
+identifierValue = "{{ :slug }}"
+modelKeyColumn = "slug"
+displayColumn = "description"
+notFoundMessage = "Record not found"
+
+[builderList partnersList]
+modelClass = "Pensoft\Content\Models\Partners"
+scope = "-"
+scopeValue = "scopeNotAsignedTo"
+displayColumn = "title"
+noRecordsMessage = "{{ 'No records found'|_}}"
+detailsPage = "partners"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+recordsPerPage = 100
+pageNumber = "{{ :page }}"
+sortColumn = "sort_order"
+sortDirection = "asc"
+
+[alternateHrefLangElements]
+
+[viewBag]
+localeMeta_title[en] = "Partners"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use Pensoft\Content\Models\News;
+
+function onStart(){
+$this['SelectedLanguage'] = App::getLocale();
+
+}
+?>
+==
+{% if this.param.slug %}
+	{% set record = partnersDetails.record %}
+	{% set displayColumn = partnersDetails.displayColumn %}
+	{% set notFoundMessage = partnersDetails.notFoundMessage %}
+
+    {% if record %}
+        <div itemscope itemtype="https://schema.org/Organization">
+            {% if record.logo %}
+            <img itemprop="logo" class="mr-2 mb-2 float-left" src="{{record.logo|crop_image|resize(305,200, { mode: 'crop' })}}" alt="record.logo.title">
+            {% endif %}
+            <h1 itemprop="legalName" class="mb-2">{{record.title}}</h1>
+            
+            <div itemprop="description">
+                {{ attribute(record, displayColumn)|raw }}
+            </div>
+        </div>
+	{% else %}
+	{{'No records found'|_}}
+	{% endif %}
+
+
+{% else %}
+
+
+{% set records = partnersList.records %}
+{% set displayColumn = partnersList.displayColumn %}
+{% set noRecordsMessage = partnersList.noRecordsMessage %}
+{% set detailsPage = partnersList.detailsPage %}
+{% set detailsKeyColumn = partnersList.detailsKeyColumn %}
+{% set detailsUrlParameter = partnersList.detailsUrlParameter %}
+
+<h1>{{'Partners'|_}}</h1>
+
+<div class="cards">
+    {% for record in records %}
+    <div  itemscope itemtype="https://schema.org/Organization" class="card card-news card-min-height">
+        {% if record.website %}
+            <a itemprop="url" href="{{ record.website }}" target="_blank" class="rounded-l rounded-r">
+        {% else %}
+            <a itemprop="url" href="/{{SelectedLanguage}}/partners/{{ record.slug }}" class="rounded-l rounded-r">
+        {% endif %}
+                <img itemprop="logo" src="{{ record.logo|crop_image|resize(275,200, { mode: 'crop' }) }}" alt="{{ record.title}}" />
+            </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% if records.lastPage > 1 %}
+    <ul class="pagination">
+        {% if records.currentPage > 1 %}
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage-1) }) }}">&larr; Prev</a></li>
+        {% endif %}
+
+        {% for page in 1..records.lastPage %}
+            <li class="{{ records.currentPage == page ? 'active' : null }}">
+                <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        {% if records.lastPage > records.currentPage %}
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage+1) }) }}">Next &rarr;</a></li>
+        {% endif %}
+    </ul>
+{% endif %}
+
+
+{% endif %}

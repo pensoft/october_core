@@ -1,0 +1,42 @@
+
+	<div class="ss-result">
+		<div class="ss-result__content">
+			<h4 class="ss-result__title">
+				{%  if folder.id %}
+					<span class="folder_icon"></span>
+				{% if folder.getParent.count %}
+					{% for parent in folder.getParents %}
+						{{parent.name}} /
+					{% endfor %}
+				{% endif %}
+				<a href="{{url('internal-repository')}}/{{folder.getRoot.slug}}/{% if folder.getParent[0].nest_depth > 0 %}{{folder.getParent[0].id}}{% endif %}">{{folder.name}}</a>
+				{%  else %}
+				{% if file.folderData.getParentsAndSelf.count %}
+					{% for parentFolder in file.folderData.getParentsAndSelf %}
+						{{parentFolder.name}} /
+					{% endfor %}
+				{% endif %}
+					{% if file.isImage %}
+						<img  src="{{file.thumb(30,30,{'mode':'crop'})}}" alt="{{file.file_name}}" style="float: left; margin-right: 8px;" /> {{ file.file_name }}
+					{% else %}
+
+						{% if file.getExtension() == 'docx' or file.getExtension() == 'doc' %}
+						<img src="{{'files_doc.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+						{% elseif file.getExtension() == 'pdf' %}
+						<img src="{{'files_pdf.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+						{% else %}
+						<img src="{{'files_file.svg'|media}}" style="width: 30px; float: left; margin-right: 8px;"> {{ file.file_name }}
+						{% endif %}
+
+					{% endif %}
+
+
+					<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
+				{% endif %}
+
+			</h4>
+		</div>
+		<hr>
+	</div>
+
+

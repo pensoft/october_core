@@ -1,0 +1,5 @@
+title: 'Order'
+nameFrom: name_page
+modelClass: Pensoft\Content\Models\Rubrics
+toolbar:
+  buttons: reorder_toolbar

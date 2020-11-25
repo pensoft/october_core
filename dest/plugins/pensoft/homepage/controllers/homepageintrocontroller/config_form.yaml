@@ -1,0 +1,10 @@
+name: HomepageIntroController
+form: $/pensoft/homepage/models/homepageintro/fields.yaml
+modelClass: Pensoft\Homepage\Models\HomepageIntro
+defaultRedirect: pensoft/homepage/homepageintrocontroller
+create:
+    redirect: 'pensoft/homepage/homepageintrocontroller/update/:id'
+    redirectClose: pensoft/homepage/homepageintrocontroller
+update:
+    redirect: pensoft/homepage/homepageintrocontroller
+    redirectClose: pensoft/homepage/homepageintrocontroller

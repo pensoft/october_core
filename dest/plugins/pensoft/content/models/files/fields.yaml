@@ -1,0 +1,30 @@
+fields:
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        span: left
+        required: 1
+        type: text
+    rubric:
+        label: 'pensoft.content::lang.plugin.rubric'
+        span: right
+        nameFrom: name
+        descriptionFrom: description
+        emptyOption: '-- Choose rubric --'
+        type: relation
+    file:
+        label: 'pensoft.content::lang.plugin.file_upload'
+        span: left
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        required: 1
+        type: fileupload
+    page:
+        label: 'pensoft.content::lang.plugin.page'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        emptyOption: '-- Choose page --'
+        type: relation

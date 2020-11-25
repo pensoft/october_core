@@ -1,0 +1,12 @@
+list: $/pensoft/links/models/category/columns.yaml
+modelClass: Pensoft\Links\Models\Category
+title: Category
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'pensoft/links/category/update/:id'

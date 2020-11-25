@@ -1,0 +1,56 @@
+[viewBag]
+
+[searchInput]
+useAutoComplete = 0
+autoCompleteResultCount = 5
+showProviderBadge = 1
+
+[alternateHrefLangElements]
+==
+<?php
+function onStart(){
+	$this['SelectedLanguage'] = App::getLocale();
+}
+?>
+==
+<!-- Nav -->
+<div class="container">
+    <div class="flex flex-row align-items-center justify-content-between">
+        <div class="navbar-left-side flex flex-row align-items-center justify-content-start ">
+            <a href="/" class="navbar-brand">
+                <i class="icon brand {{SelectedLanguage}} huge"></i>
+            </a>
+            <div class="menu d-lg-flex d-none" id="menu">
+                <div class="fluid d-lg-none">
+                    <i onclick="hideMenu()" class="icon large icon-close mx-1 mt-2 float-right"></i>
+                </div>
+                {% partial 'menu' %}
+            </div>
+        </div>
+        <div class="flex align-items-center navbar-center-side">
+            <div class="form-inline">
+                <form class="flex-inline" action="/search?q={{ query | url_encode(true) }}" method="get">
+                    <input name="q" type="text" placeholder="{{'Search'|_}}"
+                            class="form-control fluid rounded form-icon search ml-1"
+                            value="{{ searchInput.query }}"
+                            autocomplete="off"
+                            {% if searchInput.useAutoComplete %}
+                                data-track-input
+                                data-request="{{ searchInput }}::onType"
+                                data-request-before-update="document.getElementById('autocomplete-results').classList.add('ss-search-form__results--visible')"
+                                data-request-update="'{{ searchInput }}::autocomplete': '#autocomplete-results'"
+                            {% endif %}
+                    >
+                </form>
+                
+            </div>
+            <div class="flex flex-column">
+                {% for locale, alternateUrl in alternateHrefLangElements.locales %}
+                    <a rel="alternate" class="icon flag-{{ locale }}" hreflang="{{ locale }}" href="{{ url(alternateUrl) }}" ></a>
+                {% endfor %}
+            </div>
+            <a href="https://www.escardio.org/" target="_blank" class="icon icon-esc d-lg-block d-none"></a>
+        </div>
+            <i class="icon icon-hamburger large ml-1 mr-1 d-lg-none d-block" onclick="showMenu()" ></i>
+    </div>
+</div>

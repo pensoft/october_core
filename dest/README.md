@@ -23,19 +23,12 @@ SimpleXML PHP Extension
 ```bash deployer.sh my_project git@github.com:user/my_project.git```
 
 2. Edit .env file  
-Set:
-
 Change:
 - `DB_USERNAME=`
 - `DB_PASSWORD=`  
 - `APP_DEBUG=true` to `APP_DEBUG=false`
 - `APP_URL=http://localhost`
 
-2. Change admin password  
-```php artisan october:passwd username password```  
-3. hghj
-```
-php artisan october:up
-ln -s ../../dest/plugins ./
-ln -s ../../dest/themes ./
-```
+3. Start configurator
+```bash configurator.sh my_project```
+

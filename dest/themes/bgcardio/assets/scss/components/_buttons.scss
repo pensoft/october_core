@@ -1,0 +1,55 @@
+$button-text-color: $white !default;
+
+.button {
+    @include text-size($font-size-base);
+    @include backgrounds();
+    @include sizes($button-sizes);
+
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: $primary-color;
+    color: $button-text-color;
+    padding: $padding-vertical-base $padding-horizontal-base;
+    cursor: pointer;
+    border: 0;
+    // text-transform: uppercase;
+    padding-left: $padding-vertical-base * 2;
+    padding-right: $padding-vertical-base * 2;
+
+    @if $button-is-rounded {
+        border-radius: $radius;
+    }
+
+    &.primary {
+        color: $button-text-color;
+        background-color: $primary-color;
+
+        &.outline {
+            color: $primary-color;
+        }
+    }
+
+    &.secondary {
+        color: $button-text-color;
+        background-color: $secondary-color;
+
+        &.outline {
+            color: $secondary-color;
+        }
+    }
+
+    &.shadow {
+        @include box-shadow($box-shadow);
+    }
+    &.rounded {
+        @include border-radius($radius)
+    }
+
+    &.outline {
+        background-color: transparent;
+        border: $button-border solid;
+        color: $primary-color;
+    }
+}
+

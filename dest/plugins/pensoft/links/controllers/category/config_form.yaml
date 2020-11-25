@@ -1,0 +1,10 @@
+name: Category
+form: $/pensoft/links/models/category/fields.yaml
+modelClass: Pensoft\Links\Models\Category
+defaultRedirect: pensoft/links/category
+create:
+    redirect: 'pensoft/links/category/update/:id'
+    redirectClose: pensoft/links/category
+update:
+    redirect: pensoft/links/category
+    redirectClose: pensoft/links/category

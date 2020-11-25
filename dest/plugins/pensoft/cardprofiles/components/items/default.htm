@@ -1,0 +1,20 @@
+
+{% if __SELF__.property('show-category-title') %}
+    <div class="col-xs text-center">
+        <h3 class="underline">{{__SELF__.getCategory().name}}</h3>
+    </div>
+{% endif %}
+
+{% for item in __SELF__.getCategory().profiles.take(__SELF__.property('maxItems')) %}
+	{% partial "components/card-profile"
+		fullname=item.names
+		content=item.content
+		country=item.country
+		position=item.position
+		url=item.slug
+		department=item.department
+		email=item.email
+		avatar=item.avatar
+	%}
+{% endfor %}
+

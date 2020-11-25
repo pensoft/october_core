@@ -1,0 +1,12 @@
+title: Rubrics
+modelClass: Pensoft\Content\Models\Rubrics
+list: $/pensoft/content/models/rubrics/columns.yaml
+recordUrl: 'pensoft/content/rubrics/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

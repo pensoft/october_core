@@ -1,0 +1,10 @@
+name: Links
+form: $/pensoft/links/models/link/fields.yaml
+modelClass: Pensoft\Links\Models\Link
+defaultRedirect: pensoft/links/links
+create:
+    redirect: 'pensoft/links/links/update/:id'
+    redirectClose: pensoft/links/links
+update:
+    redirect: pensoft/links/links
+    redirectClose: pensoft/links/links

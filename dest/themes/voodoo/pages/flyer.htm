@@ -1,0 +1,56 @@
+title = "Flyer"
+url = "/media-center/flyer"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList mediaFlyersList]
+modelClass = "pensoft\Media\Models\Flyers"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\Flyers;
+
+function onStart(){
+	$this['mediaFlyersList'] =  Flyers::get();
+}
+?>
+==
+<div class="container">
+	<div class="row">
+	{% set records = mediaFlyersList %}
+	{% set displayColumn = mediaFlyersList.displayColumn %}
+	{% set noRecordsMessage = mediaFlyersList.noRecordsMessage %}
+	{% set detailsPage = mediaFlyersList.detailsPage %}
+	{% set detailsKeyColumn = mediaFlyersList.detailsKeyColumn %}
+	{% set detailsUrlParameter = mediaFlyersList.detailsUrlParameter %}
+
+	{% for record in records %}
+	{# Use spaceless tag to remove spaces inside the A tag. #}
+	{% spaceless %}
+	{% if record.flyer_image %}
+		<div class="col-xs-12 col-lg-4">
+			<div class="story broshure_and_poster">
+				<p align="center"><a href="{{record.file.path}}" target="_blank"><img src="{{record.flyer_image.thumb(305,200,{'mode':'crop'})}}" title="{{record.name}}> </a></p>
+			</div>
+			{% if record.file %}
+			<div class="media-btn_broshure_and_poster"><button class="btn btn-secondary" href="{{record.file.path}}" target="_blank"><i class="pr normal p-download"></i> Download flyer</button></div>
+
+			<div class="media-size">{{record.file.extension | uppercase}} {{record.file.size }}</div>
+			{% endif %}
+		</div>
+	{% endif %}
+
+	{% endspaceless %}
+	{% else %}
+	{{ noRecordsMessage }}
+	{% endfor %}
+	</div>
+</div>

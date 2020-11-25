@@ -1,0 +1,9 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+
+    li {
+        margin-left: $margin-horizontal-base;
+        margin-right: $margin-horizontal-base;
+    }
+}

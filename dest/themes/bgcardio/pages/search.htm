@@ -1,0 +1,155 @@
+title = "Search"
+url = "/search"
+layout = "default"
+meta_title = "Търсачка"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[searchResults]
+resultsPerPage = 10
+showProviderBadge = 1
+noResultsMessage = 0
+visitPageMessage = "Visit page"
+
+[alternateHrefLangElements]
+
+[viewBag]
+localeMeta_title[en] = "Search"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use Pensoft\Content\Models\Rubrics;
+use Pensoft\Content\Models\Pages;
+use Pensoft\Content\Models\News;
+use Pensoft\Content\Models\Files;
+use Pensoft\Content\Models\Media;
+use ChristophHeich\Calendar\Models\Entry;
+
+
+function onStart(){
+    $term = Request::get('q');
+    $lang = App::getLocale();
+    $length = 300;
+    if($term){
+        
+        #news
+		$newsTitelesData = News::transWhere('title','%'.$term.'%', $lang, 'iLIKE')->where('state', 1)->get()->toArray();
+		$newsDescriptionsData = News::transWhere('description','%'.$term.'%', $lang, 'iLIKE')->where('state', 1)->get()->toArray();
+		
+		foreach($newsTitelesData as $news){
+			$newsData[$news['id']] = $news;
+			$newsData[$news['id']]['title'] = $news['title'];
+			$newsData[$news['id']]['content'] = substr($news['description'], 0, $length).'...';
+			$newsData[$news['id']]['url'] = '/'.$lang.'/news/'.$news['slug'];
+			$newsData[$news['id']]['type'] = 'news';
+		}
+		
+		foreach($newsDescriptionsData as $news){
+			$newsData[$news['id']] = $news;
+			$newsData[$news['id']]['title'] = $news['title'];
+			$newsData[$news['id']]['content'] = substr($news['description'], 0, $length).'...';
+			$newsData[$news['id']]['url'] = '/'.$lang.'/news/'.$news['slug'];
+			$newsData[$news['id']]['type'] = 'news';
+		}
+		
+		$this['newsData'] = isset($newsData) ? $newsData : null;
+
+        #entry
+		$entryTitelesData = Entry::transWhere('title','%'.$term.'%', $lang, 'iLIKE')->get()->toArray();
+		$entryDescriptionsData = Entry::transWhere('description','%'.$term.'%', $lang, 'iLIKE')->get()->toArray();
+
+		foreach($entryTitelesData as $entry){
+			$entryData[$entry['id']] = $entry;
+			$entryData[$entry['id']]['title'] = $entry['title'];
+			$entryData[$entry['id']]['content'] = substr($entry['description'], 0, $length).'...';
+			$entryData[$entry['id']]['url'] = '/'.$lang.'/events/'.$entry['slug'];
+			$entryData[$entry['id']]['type'] = 'entry';
+		}
+
+		foreach($entryDescriptionsData as $entry){
+			$entryData[$entry['id']] = $entry;
+			$entryData[$entry['id']]['title'] = $entry['title'];
+			$entryData[$entry['id']]['content'] = substr($entry['description'], 0, $length).'...';
+			$entryData[$entry['id']]['url'] = '/'.$lang.'/events/'.$entry['slug'];
+			$entryData[$entry['id']]['type'] = 'entry';
+		}
+
+		$this['eventsData'] = isset($entryData) ? $entryData : null;
+
+
+		#file names
+		$filesData = Files::where('title','iLIKE','%'.$term.'%')->get()->toArray();;
+		foreach($filesData as $file){
+			$fileRubricData = Rubrics::where('id',$file['rubric_id'])->first();
+			$filePageData = Pages::where('id',$file['page_id'])->first();
+			if($fileRubricData || $filePageData){
+				$fileItems[$file['id']] = $fileRubricData ? $fileRubricData : $filePageData;
+				$fileItems[$file['id']]['title'] = $file['title'];
+				$fileItems[$file['id']]['content'] = '';
+				$fileItems[$file['id']]['url'] = $fileRubricData ? '/'.$lang.'/rubric/'.$fileRubricData['slug'] : '/'.$lang.'/'.$filePageData['slug'];
+				$fileItems[$file['id']]['type'] = 'file';
+			}
+		}
+
+
+		#media names
+		$mediaData = Media::where('title','iLIKE','%'.$term.'%')->get()->toArray();;
+		foreach($mediaData as $file){
+			$fileRubricData = Rubrics::where('id',$file['rubric_id'])->first();
+			$filePageData = Pages::where('id',$file['page_id'])->first();
+			if($fileRubricData || $filePageData){
+				$fileItems[$file['id']] = $fileRubricData ? $fileRubricData : $filePageData;
+				$fileItems[$file['id']]['title'] = $file['title'];
+				$fileItems[$file['id']]['content'] = '';
+				$fileItems[$file['id']]['url'] = $fileRubricData ? '/'.$lang.'/rubric/'.$fileRubricData['slug'] : '/'.$lang.'/'.$filePageData['slug'];
+				$fileItems[$file['id']]['type'] = 'media';
+			}
+		}
+
+		$this['filesData'] = isset($fileItems) ? $fileItems : null;
+
+    }              
+}
+?>
+==
+{% set results = searchResults.results %}
+
+
+{% if rubricData or pagesData or newsData or filesData or eventsData %}
+
+{% for result in rubricData %}
+    {# Display all results #}
+    {% partial searchResults ~ '::searchresult.htm' result = result %}
+{% endfor %}
+
+
+{% for result in newsData %}
+    {% partial searchResults ~ '::searchresult.htm' result = result %}
+{% endfor %}
+
+
+{% for result in pagesData %}
+    {# Display all results #}
+    {% partial searchResults ~ '::searchresult.htm' result = result %}
+{% endfor %}
+
+
+{% for result in filesData %}
+    {# Display all results #}
+    {% partial searchResults ~ '::searchresult.htm' result = result %}
+{% endfor %}
+
+
+{% for result in eventsData %}
+    {# Display all results #}
+    {% partial searchResults ~ '::searchresult.htm' result = result %}
+{% endfor %}
+
+
+{% else %}
+    {{'No records found'|_}}
+{% endif %}
+
+
+
+{% partial searchResults ~ '::pagination.htm' results = results %}

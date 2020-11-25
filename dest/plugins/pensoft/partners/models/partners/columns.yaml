@@ -1,0 +1,18 @@
+columns:
+    id:
+        label: ID
+        type: number
+    cover:
+        label: Image
+        relation: cover
+        type: partial
+        path: ~/plugins/pensoft/partners/partials/_cover_column.htm
+    content:
+        label: content
+        type: partial
+        searchable: true
+        path: ~/plugins/pensoft/partners/partials/_content_column.htm
+    created_at:
+        label: Date
+        type: timesince
+        ignoreTimezone: 'true'

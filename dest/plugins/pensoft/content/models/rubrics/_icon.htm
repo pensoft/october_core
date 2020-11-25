@@ -1,0 +1,12 @@
+<?php if(isset($record->my_cover_icon)){ ?>
+	<img src="<?php echo $record->my_cover_icon->getThumb(50,50); ?>" />
+<?php } ?>
+
+<?php if(isset($record->icon)){ ?>
+	<img src="<?php echo $record->icon->getThumb(50,50); ?>" />
+<?php } ?>
+
+
+<?php if(isset($record->coverly)){ ?>
+<img src="<?php echo $record->coverly->getThumb(50,50); ?>" />
+<?php } ?>

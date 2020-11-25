@@ -1,0 +1,52 @@
+{% if canRegister %}
+    <h3>Create your account</h3>
+
+    {{ form_ajax('onRegister') }}
+        <div class="ui form">
+            <div class="fields">
+                <div class="field">
+                    <label for="registerName">Full Name</label>
+                    <input
+                        name="name"
+                        type="text"
+                        id="registerName"
+                        placeholder="Enter your full name" />
+                </div>
+                <div class="field">
+                    <label for="registerEmail">Email</label>
+                    <input
+                        name="email"
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Enter your email" />
+                </div>
+                {% if loginAttribute == "username" %}
+                    <div class="field">
+                        <label for="registerUsername">Username</label>
+                        <input
+                            name="username"
+                            type="text"
+                            id="registerUsername"
+                            placeholder="Enter your username" />
+                    </div>
+                {% endif %}
+                <div class="field">
+                    <label for="registerPassword">Password</label>
+                    <input
+                        name="password"
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Choose a password" />
+                </div>
+            </div>
+        </div>
+        <div class="row middle-xs mt-1">
+			<div class="col-xs-2">            <button type="submit" class="btn btn-primary fluid">Register</button>
+			</div>
+			<div class="col-xs-3">            <a type="submit" class="btn btn-link" href="/login">I already have an account</a>
+			</div>
+        </div>
+    {{ form_close() }}
+{% else %}
+    <!-- Registration is disabled. -->
+{% endif %}

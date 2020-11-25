@@ -1,0 +1,28 @@
+columns:
+    id:
+        label: id
+        type: number
+        sortable: true
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        type: text
+        searchable: true
+        sortable: true
+    file:
+        label: 'pensoft.content::lang.plugin.file_upload'
+        type: partial
+        searchable: true
+        sortable: true
+        path: ~/plugins/pensoft/content/models/files/_file.htm
+    rubric:
+        label: 'pensoft.content::lang.plugin.rubric'
+        type: text
+        searchable: true
+        sortable: true
+        select: name
+        relation: rubric
+    page:
+        label: 'pensoft.content::lang.plugin.page'
+        type: text
+        select: title
+        relation: page

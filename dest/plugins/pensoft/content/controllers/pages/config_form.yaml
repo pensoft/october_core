@@ -1,0 +1,10 @@
+name: Pages
+form: $/pensoft/content/models/pages/fields.yaml
+modelClass: Pensoft\Content\Models\Pages
+defaultRedirect: pensoft/content/pages
+create:
+    redirect: 'pensoft/content/pages/update/:id'
+    redirectClose: pensoft/content/pages
+update:
+    redirect: pensoft/content/pages
+    redirectClose: pensoft/content/pages

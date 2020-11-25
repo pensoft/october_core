@@ -1,0 +1,23 @@
+<p class="lead text-center">
+    Password reset request
+</p>
+
+<form
+    class="ui form"
+    data-request="{{ __SELF__ }}::onRestorePassword"
+    data-request-update="'{{ __SELF__ }}::reset': '#partialUserResetForm'">
+    <div class="field">
+        <label for="userRestoreEmail">Email</label>
+        <input name="email" type="email" id="userRestoreEmail" placeholder="Enter your email">
+    </div>
+
+    <div class="mt-1 text-center">
+        <button type="submit" class="btn btn-primary fluid">Restore password</button>
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-link" href="/register">Create account</a>
+        <a class="btn btn-link" href="/login">Return to login</a>
+        
+    </div>
+</form>

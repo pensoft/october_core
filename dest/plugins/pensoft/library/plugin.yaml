@@ -1,0 +1,11 @@
+plugin:
+    name: 'pensoft.library::lang.plugin.name'
+    description: 'pensoft.library::lang.plugin.description'
+    author: Pensoft
+    icon: oc-icon-book
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Library
+        url: pensoft/library/library
+        icon: icon-book

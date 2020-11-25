@@ -1,0 +1,20 @@
+fields:
+    name:
+        label: Name
+        span: left
+        required: 1
+        type: text
+    slug:
+        label: Slug
+        span: right
+        required: 1
+        preset:
+            field: name
+            type: slug
+        type: text
+    description:
+        label: 'pensoft.content::lang.plugin.description'
+        size: autogrow
+        span: full
+        type: richeditor
+        toolbarButtons: fullscreen,bold,italic,underline,strikeThrough,subscript,superscript,|,color,emoticons,inlineStyle,paragraphStyle,|,paragraphFormat,align,formatOL,formatUL,outdent,indent,quote,insertHR,insertLink,insertImage,insertVideo,insertAudio,insertFile,insertTable,undo,redo,clearFormatting,selectAll,html

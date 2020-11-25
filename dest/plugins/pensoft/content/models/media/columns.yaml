@@ -1,0 +1,29 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+        sortable: true
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        type: text
+        searchable: true
+        sortable: true
+    url:
+        label: 'pensoft.content::lang.plugin.media_url'
+        type: text
+        searchable: true
+        sortable: true
+    rubric:
+        label: 'pensoft.content::lang.plugin.rubric'
+        type: text
+        searchable: true
+        sortable: true
+        select: name
+        relation: rubric
+    page:
+        label: 'pensoft.content::lang.plugin.page'
+        type: text
+        sortable: true
+        select: title
+        relation: page

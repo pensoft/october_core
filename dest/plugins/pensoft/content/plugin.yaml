@@ -1,0 +1,56 @@
+plugin:
+    name: 'pensoft.content::lang.plugin.name'
+    description: 'pensoft.content::lang.plugin.description'
+    author: Pensoft
+    icon: oc-icon-pencil-square
+    homepage: ''
+navigation:
+    main-menu-pages:
+        label: Pages
+        url: pensoft/content/pages
+        icon: icon-pagelines
+        permissions:
+            - pensoft.content.edit.pages
+    main-menu-rubrics:
+        label: Rubrics
+        url: pensoft/content/rubrics
+        icon: icon-table
+        permissions:
+            - pensoft.content.edit.rubrics
+    main-menu-content-types:
+        label: 'Content types'
+        url: pensoft/content/news
+        icon: icon-navicon
+        permissions:
+            - pensoft.content.edit.content.types
+        sideMenu:
+            side-menu-content-type-news:
+                label: News
+                url: pensoft/content/news
+                icon: icon-newspaper-o
+            side-menu-content-type-partners:
+                label: Partners
+                url: pensoft/content/partners
+                icon: icon-briefcase
+            side-menu-content-type-board:
+                label: Board
+                url: pensoft/content/board
+                icon: icon-user-md
+            side-menu-content-type-files:
+                label: FIles
+                url: pensoft/content/files
+                icon: icon-file
+            side-menu-content-type-media:
+                label: Media
+                url: pensoft/content/media
+                icon: icon-file-movie-o
+permissions:
+    pensoft.content.edit.content.types:
+        tab: 'pensoft.content::lang.Content types'
+        label: 'Manage content types'
+    pensoft.content.edit.rubrics:
+        tab: Rubrics
+        label: 'Manage rubrics'
+    pensoft.content.edit.pages:
+        tab: Pages
+        label: 'Manage pages'

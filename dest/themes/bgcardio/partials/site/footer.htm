@@ -1,0 +1,59 @@
+[viewBag]
+
+[staticMenuMultilingual aboutUsMenuMultilingual]
+code = "about"
+
+[staticMenuMultilingual infoMenuMultilingual]
+code = "info"
+
+[staticMenuMultilingual eventsMenuMultilingual]
+code = "events"
+
+[staticMenuMultilingual socialMenuMultilingual]
+code = "social"
+==
+<div class="container">
+    <div class="flex flex-column flex-lg-row justify-content-between">
+        <div class="footer-menu flex text-lg-left text-center row flex-lg-row justify-content-between align-items-start" style="flex-grow: 1;">
+            <div class="col-xs-6 col-sm-3 footer-menu-item">
+                <div class="list">
+                    {% if aboutUsMenuMultilingual.menuItems %}
+                        <div class="list-item header bold text small ">{{aboutUsMenuMultilingual.menuName}}</div>
+                        {% partial aboutUsMenuMultilingual ~ "::footer_items" items=aboutUsMenuMultilingual.menuItems %}
+                    {% endif %}
+                    
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 footer-menu-item">
+                <div class="list">
+                    {% if eventsMenuMultilingual.menuItems %}
+                        <div class="list-item header bold text small ">{{eventsMenuMultilingual.menuName}}</div>
+                        {% partial eventsMenuMultilingual ~ "::footer_items" items=eventsMenuMultilingual.menuItems %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 footer-menu-item">
+                <div class="list">
+                    {% if infoMenuMultilingual.menuItems %}
+                        <div class="list-item header bold text small ">{{infoMenuMultilingual.menuName}}</div>
+                        {% partial infoMenuMultilingual ~ "::footer_items" items=infoMenuMultilingual.menuItems %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 footer-menu-item">
+                <div class="list">
+                     {% partial 'contact-info' %}
+                </div>
+            </div>
+        </div>
+        <div class="footer-social footer-menu-item flex flex-column align-items-center align-items-lg-end">
+			{% if infoMenuMultilingual.menuItems %}
+            <div class="text-uppercase text small bold mb-1">{{socialMenuMultilingual.menuName}}</div>
+            <div class="flex rows justify-content-between fluid">
+                {% partial socialMenuMultilingual ~ "::social_items" items=socialMenuMultilingual.menuItems %}
+            </div>
+			{% endif %}
+        </div>
+    </div>
+
+</div>

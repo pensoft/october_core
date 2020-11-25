@@ -1,0 +1,97 @@
+description = "Default layout"
+==
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ this.theme.site_title }} - {{ this.page.title }}</title>
+        <meta name="description" content="{{ this.page.meta_description }}">
+        <meta name="title" content="{% if this.page.title == true %}{{this.page.title}}{% else %}{{this.page.meta_title }}{% endif %}">
+        <meta name="author" content="Bulgarian Society of Cardiology">
+        <meta name="keywords" content="кардиолог, кардиолози, сърце, лечение, инфаркт, хипертония, cardiologist, cardiologists, heart, treatment, stroke, hypertension,">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta property="og:title" content="{% if this.page.title == true %}{{this.page.title}}{% else %}{{this.page.meta_title }}{% endif %}" />
+        <meta property="og:site_name" content="{{ this.theme.site_name }}" />
+        <meta property="og:url" content="{{ ''|page }}" />
+        <meta property="og:description" content="{{ this.page.meta_description }}" />
+
+        <meta name="generator" content="Pensoft">
+        <link rel="icon" type="image/png" href="{{ 'assets/images/icon.svg'|theme }}">
+        <!-- <link href="{{ 'assets/css/vendor.css'|theme }}" rel="stylesheet"> -->
+        <link href="{{ 'assets/css/theme.css'|theme }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{'modules/backend/formwidgets/richeditor/assets/css/richeditor.css'|app}}">
+        {% styles %}
+        <script src="{{ 'assets/vendor/jquery.js'|theme }}"></script>
+        <script src="{{ 'assets/vendor/masonry.min.js'|theme }}"></script>
+    </head>
+    <body class="layout--{{ this.layout.id }} page--{{ this.page.id }}">
+        <!-- Header -->
+        
+        <header class="layout-header">
+            {% partial 'site/header' %}
+        </header>
+
+        
+            <div class="layout-headline-image">
+                {% partial 'site/headline-image' %}
+            </div>
+    
+            <!-- Content -->
+       
+            <section class="layout-content my-2">
+                <div class="container fr-view table">
+                    {% page %}
+                </div>
+            </section>
+        
+        {% if this.page.id == 'home' %}
+        <div class="accordion mt-2">
+            <div class="container">
+                <div class="accordion-label flex justify-content-center align-items-center text secondary text-center bold text-uppercase">{{'payment of membership fee'|_}} <i
+                        class="icon large icon-arrow-up"></i></div>
+                <div class="accordion-item" style="display: none;">
+                    <div class="text mt-2">{{'payment of membership fee description'|_}}</div>
+                
+                    <div class="text secondary mt-2">{{'payment tree fields'|_}}</div>
+                    
+                    <form action="https://www.epay.bg/" method="POST" class="form form-row mt-2 form-epay">
+                        <input type="hidden" name="PAGE" value="paylogin">
+                        <input type="hidden" name="MIN" value="4230219543">
+                        <input type="hidden" name="INVOICE">
+                        <input type="hidden" name="URL_OK" value="http://www.cardiobg.com/content/view/185">
+                        <input type="hidden" name="URL_CANCEL" value="http://www.cardiobg.com/content/view/186">
+
+                        <div class="form-field field-epay-fullname">
+                            <label for="">{{'Name Surname Familyname'|_}}</label>
+                            <input type="text" maxlength="100" name="DESCR" />
+                        </div>
+                        <div class="form-field">
+                            <label for="">{{'Payment value BGN'|_}}</label>
+                            <input type="text" name="TOTAL" />
+                        </div>
+                        <button name="BUTTON:EPAYNOW" type="submit" class="button secondary small button-epay">{{'Online Payment'|_}}</button>
+                        <div class="text small epay-descr">{{'ePay Payment message'|_}}</div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        {% endif %}
+        <div class="footer">
+            <!-- Footer -->
+            <div class="layout-footer">
+                {% partial 'site/footer' %}
+            </div>
+            <div class="layout-footer-info">
+                {% partial 'site/footer-info' %}
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="{{ 'assets/javascript/app.js'|theme }}"></script>
+        {% framework extras %}
+        {% scripts %}
+
+    </body>
+</html>

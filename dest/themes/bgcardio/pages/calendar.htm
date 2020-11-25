@@ -1,0 +1,171 @@
+title = "Events"
+url = "/events/:slug?"
+layout = "default"
+meta_title = "Събития"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[calendar]
+default = "true"
+limit = "null"
+category = "null"
+language = "en"
+
+[PastEvents]
+
+[alternateHrefLangElements]
+
+[viewBag]
+localeMeta_title[en] = "Events"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use ChristophHeich\Calendar\Models\Entry;
+use ChristophHeich\Calendar\Models\Category;
+use Illuminate\Support\Facades\DB;
+
+function onStart(){
+	if($this->param('slug')){
+		$this['entry'] =  Entry::select(
+			'*',
+			'title',
+			'place',
+			'description',
+			'url',
+
+			DB::raw("to_char(\"start\", 'DD') as start_day"),
+			DB::raw("to_char(\"start\", 'YYYY') as start_year"),
+			DB::raw("to_char(\"end\", 'DD') as end_day"),
+			DB::raw("to_char(\"end\", 'YYYY') as end_year"),
+			DB::raw("to_char(\"start\", 'month') as start_month"),
+			DB::raw("to_char(\"end\", 'month') as end_month"),
+			DB::raw("
+				\"end\" is not null as has_end
+			")
+			
+			
+		)->where('slug', $this->param('slug'))->first();
+	}
+
+	$categories = Category::orderBy('identifier', 'ASC')->get();
+
+	foreach($categories as $category){
+		$categoryData[$category['id']] = $category;
+		$categoryData[$category['id']]['entries'] = Entry::select(
+			'slug',
+			'id',
+			'title',
+			'description',
+			DB::raw("to_char(coalesce(\"start\", \"end\"), 'DD.MM') as start_formatted"),
+			DB::raw("to_char(coalesce(\"end\", \"start\"), 'DD.MM') as end_formatted"),
+			DB::raw("to_char(coalesce(\"end\", \"start\"), 'YYYY') as year"),
+			'*'
+		)
+		->where('end', '>=', date('Y-m-d 00:00:00'))
+		->where('identifier', $category['identifier'])->get();;
+	}
+
+	$this['data'] = isset($categoryData) ? ($categoryData) : null;
+
+	$this['SelectedLanguage'] = App::getLocale();
+
+}
+
+function onEnd()
+{
+	if(isset($this['entry'])){
+		$this->page->title = $this['entry']->title;
+	}
+}
+
+?>
+==
+{% if this.param.slug %}
+
+		{% if entry %}
+		<div itemscope itemtype="https://schema.org/Event" class="fr-view">
+			<h1 itemprop="name">{{ entry.title }}</h1>
+			<div class="text secondary mt-2">
+				{% if entry.has_end %}
+					{{entry.start_day}} <span class="text-capitalize">{{entry.start_month|_}}</span> {{entry.start_year}} - {{entry.end_day}} <span class="text-capitalize">{{entry.end_month|_}}</span> {{entry.end_year}}
+				{% else %}
+					{{entry.start_day}} <span class="text-capitalize">{{entry.start_month|_}}</span> {{entry.start_year}}
+				{% endif %}				
+			</div>
+			<div class="d-none" itemprop="location" itemscope itemtype="https://schema.org/Place">
+				<div itemprop="name" content="{{ entry.place }}"></div>
+				<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+					<div itemprop="streetAddress" content="{{ entry.place }}"></div>
+				</div>
+			</div>
+			<div class="d-none" itemprop="startDate" content="{{entry.start}}"></div>
+			<div class="d-none" itemprop="endDate" content="{{entry.end}}"></div>
+
+			<div itemprop="location" class="text bold mt-2">{{ entry.place }}</div>
+			<div class="mt-2 overflow-auto">
+				{% if entry.cover_image %}
+				<p><img itemprop="image" class="ml-2 mb-2 float-right" src="{{entry.cover_image.thumb(500,auto,{'mode':'crop'})}}" alt="{{entry.title}}" /></p>
+				{% endif %}
+				{{ entry.description|raw }}
+			</div>
+			{% if entry.url %}
+				<a itemprop="url" class="mt-2 button" href="{{ entry.url }}" target="_blank">{{ 'To the event'|_ }}</a>
+			{% endif %}
+		</div>
+
+		{% else %}
+		{% endif %}
+
+{% else %}
+    
+
+	
+	
+	{% if data %}
+		{% for category in data %}
+
+		{% if category.entries.count() %}
+			<div  class="topLevelContent">
+				<div class="holder">
+					<a id="category-{{category.identifier}}" name="category-{{category.identifier}}" class="item-anchor"></a>
+					<h2 class="mt-2">{{category.title}}</h2>
+					<div class="cards">
+						{% for entry in category.entries %}
+						<a itemscope itemtype="https://schema.org/Event" class="card animated card-events" href="/{{SelectedLanguage}}/events/{{entry.slug}}">
+							{%if entry.cover_image %}
+							<img itemprop="image" class="card-image rounded-l" src="{{entry.cover_image|crop_image|resize(305,200, { mode: 'crop' })}}" alt="{{entry.title}}" />
+							{% endif %}
+
+							<div class="d-none" itemprop="location" itemscope itemtype="https://schema.org/Place">
+								<div itemprop="name" content="{{ entry.place }}"></div>
+								<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+									<div itemprop="streetAddress" content="{{ entry.place }}"></div>
+								</div>
+							</div>
+							<div class="d-none" itemprop="startDate" content="{{entry.start}}"></div>
+							<div class="d-none" itemprop="endDate" content="{{entry.end}}"></div>
+							
+							<div class="card-body events">
+								<div itemprop="name" content="{{entry.title}}" class="card-title mb-2">{{entry.title|truncate(30, true)}}</div>
+								<div class="card-text no-gutter">
+									<div class="pt-1 flex flex-row justify-content-between text secondary">
+										<div>{{entry.start_formatted}} - {{entry.end_formatted}}</div>
+										<div>{{entry.year}}</div>
+									</div>
+								</div>
+							</div>
+						</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+					
+				{% endif %}
+		{% endfor %}
+	{% endif %}
+
+
+
+    {% component 'PastEvents' %}
+    
+{% endif %}

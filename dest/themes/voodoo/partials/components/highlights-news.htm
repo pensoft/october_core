@@ -1,0 +1,25 @@
+==
+
+==
+<div class="container highlights-news">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="base_heading">{{title}}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="card-carousel" class="card-carousel">
+				{% for highlight in highlights %}
+					{% partial "components/card.htm" 
+						title=highlight.title
+						body=highlight.content
+						class="mx-1 card-link card-new-item"
+						href=highlight.href
+						image=highlight.cover ? highlight.cover|crop_image|resize(280, 181, {'mode': 'crop'}) : false
+					%}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

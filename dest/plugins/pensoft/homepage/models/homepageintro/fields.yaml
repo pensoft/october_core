@@ -1,0 +1,32 @@
+fields:
+    title:
+        label: Text
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: 'Rich editor'
+        size: ''
+        span: auto
+        required: 1
+        type: richeditor
+    image:
+        label: Image
+        mode: image
+        useCaption: true
+        fileTypes: svg,png,jpg
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    mobile_image:
+        label: 'Image mobile version'
+        mode: image
+        useCaption: true
+        fileTypes: svg,png,jpg
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload

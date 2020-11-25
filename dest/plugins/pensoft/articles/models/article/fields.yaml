@@ -1,0 +1,54 @@
+fields:
+    title:
+        label: Title
+        span: left
+        type: text
+    slug:
+        label: Slug
+        span: right
+        preset:
+            field: title
+            type: slug
+        type: text
+    content:
+        label: Body
+        size: giant
+        span: left
+        type: richeditor
+    published_at:
+        label: 'Published at'
+        mode: datetime
+        span: auto
+        type: datepicker
+    keywords:
+        label: Tags
+        mode: string
+        separator: comma
+        customTags: true
+        useKey: false
+        span: right
+        type: taglist
+    allow_share:
+        label: 'Allow share buttons'
+        span: right
+        default: true
+        type: switch
+    cover:
+        label: Cover
+        span: right
+        mode: image
+        fileTypes: 'svg,png,jpg'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        imageWidth: '270'
+        type: fileupload
+    type:
+        label: Type
+        options:
+            1: Article
+            2: Publication
+        showSearch: true
+        span: auto
+        type: dropdown

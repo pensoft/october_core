@@ -1,0 +1,208 @@
+.events {
+        &.image {
+            display: none;
+        }
+    }
+ul.timeline {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 60px 0;
+    li {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        list-style-type: none;
+        text-align: center;
+        &:after {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 1px;
+            height: 100%;
+            background-color: $silver-dark;
+            z-index: -1;
+            top: 16px;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+        }
+    }
+
+    .timeline-header {
+        position: absolute;
+        top: 32px;
+        left: 0;
+        right: 0;
+        color: $secondary-color;
+        // display: none;
+        @include text-size($font-size-base * 0.9);
+        &.active {
+            display: block;
+        }
+    }
+
+    .timeline-footer {
+        cursor: pointer;
+        position: absolute;
+        top: -32px;
+        left: 0;
+        right: 0;
+        color: $silver-dark;
+        @include text-size($font-size-base * 0.8);
+        margin: 0 auto;
+
+        &:before {
+            position: absolute;
+            top: 32px;
+            left: 0;
+            right: 0;
+            content: "";
+            width: 20px;
+            height: 20px;
+            @include border-radius(50px);
+            display: block;
+            margin: 0 auto;
+            padding: $padding-vertical-base /2 ;
+            background-color: $white;
+            @include border;
+        }
+        &:hover:before {
+            background-color: $silver-dark;
+            font-weight: bold;
+        }
+        &:after{
+            cursor: pointer;
+            position: absolute;
+            top: 38px;
+            left: 0;
+            right: 0;
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            @include border-radius(50px);
+            margin: 0 auto;
+            background-color: $silver-dark;
+
+        }
+
+        &.forthcoming {
+            &:hover:before {
+                background-color: $secondary-color;
+            }
+            &:after{
+                background-color: $secondary-color;
+            }
+        }
+    }
+}
+
+@include respond-to('large') {
+    .events {
+        &.image {
+            display: block;
+            position: absolute;
+            top: 85px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            padding: $padding-vertical-base $padding-horizontal-base;
+            // @include border-radius($radius);
+            // @include border;
+            // background-color: data-get($colors, "silver");
+        }
+    }
+ ul.timeline {
+    height: 200px;
+    flex-direction: row;
+   
+    li {
+        height: auto;
+        &:after {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 100%;
+            height: $border-width-base;
+            background-color: $silver-dark;
+            z-index: -1;
+            top: 16px;
+        }
+    }
+
+    .timeline-header {
+        position: absolute;
+        top: 32px;
+        left: 0;
+        right: 0;
+        color: $secondary-color;
+        @include text-size($font-size-base * 0.9);
+        display: block;
+        
+        &.active {
+            display: block;
+            font-weight: bold;
+        }
+    }
+
+    .timeline-footer {
+        position: absolute;
+        top: -32px;
+        left: 0;
+        right: 0;
+        color: $silver-dark;
+        @include text-size($font-size-base * 0.8);
+        margin: 0 auto;
+
+        &:before {
+            position: absolute;
+            top: 32px;
+            left: 0;
+            right: 0;
+            content: "";
+            width: 20px;
+            height: 20px;
+            @include border-radius(50px);
+            display: block;
+            margin: 0 auto;
+            padding: $padding-vertical-base /2 ;
+            background-color: $white;
+            @include border;
+        }
+        
+        &:hover:before {
+            // background-color: $secondary-color;
+            background-color: $silver-dark;
+            font-weight: bold;
+        }
+        &:after{
+            position: absolute;
+            top: 38px;
+            left: 0;
+            right: 0;
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            @include border-radius(50px);
+            margin: 0 auto;
+            background-color: $silver-dark;
+
+        }
+
+        &.forthcoming {
+            &:hover:before {
+                background-color: $secondary-color;
+            }
+            &:after{
+                background-color: $secondary-color;
+            }
+        }
+    }
+}
+}
+

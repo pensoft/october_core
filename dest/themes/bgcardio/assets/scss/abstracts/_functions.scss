@@ -1,0 +1,21 @@
+@function data-get($list, $name, $default: null) {
+    $value: map-get($list, $name);
+   
+    @if $value {
+        @return $value;
+    }@else {
+        @return $default;
+    }
+}
+
+@function calculate-line-height($font-size) {
+    @return floor(($font-size * $line-height-base));
+}
+
+@function text-size($size){
+    $line-height : calculate-line-height($size);
+    @return (
+        font-size: $size,
+        line-height: $line-height
+    )
+}

@@ -1,0 +1,10 @@
+.accordion {
+    background-color: data-get($colors, 'silver');
+    @include padding(3, 'xy');
+    @include box-shadow(0px 0px 6px 3px $box-shadow-color);
+    margin: 0 auto;
+    
+}
+.accordion-label {
+    cursor: pointer;
+}

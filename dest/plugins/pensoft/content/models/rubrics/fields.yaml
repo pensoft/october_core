@@ -1,0 +1,44 @@
+fields:
+    name:
+        label: 'pensoft.content::lang.plugin.title'
+        span: left
+        required: 1
+        type: text
+    slug:
+        label: 'pensoft.content::lang.plugin.slug'
+        span: right
+        preset:
+            field: name
+            type: ''
+        required: 1
+        type: text
+    page:
+        label: 'pensoft.content::lang.plugin.page'
+        nameFrom: title
+        descriptionFrom: description
+        emptyOption: '-- Choose Page --'
+        span: left
+        required: 0
+        type: relation
+    template_id:
+        label: 'pensoft.content::lang.plugin.template_type'
+        options:
+            1: Portal
+            2: Board
+        showSearch: true
+        span: right
+        type: dropdown
+    description:
+        label: 'pensoft.content::lang.plugin.description'
+        span: left
+        size: autogrow
+        type: richeditor
+        toolbarButtons: fullscreen,bold,italic,underline,strikeThrough,subscript,superscript,|,color,emoticons,inlineStyle,paragraphStyle,|,paragraphFormat,align,formatOL,formatUL,outdent,indent,quote,insertHR,insertLink,insertImage,insertVideo,insertAudio,insertFile,insertTable,undo,redo,clearFormatting,selectAll,html
+    icon_class:
+        label: 'pensoft.content::lang.plugin.icon_class'
+        span: right
+        required: 0
+        preset:
+            field: slug
+            type: ''
+        type: text

@@ -1,0 +1,25 @@
+img, .img {
+    &.text {
+        //height: @font-size * @line-height;
+        height: @font-size;
+        width: auto;
+    }
+    &.fluid {
+        max-width: 100%;
+        width: 100%;
+        width: 100% \9;
+        height: auto;
+    }
+    &.thumbnail {
+        .rounded(@rounded-base);
+    }
+    &.rounded {
+        .rounded(@rounded-base);
+    }
+    &.float-left {
+        float: left;
+    }
+    &.float-right {
+        float: left;
+    }
+}

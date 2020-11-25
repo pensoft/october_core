@@ -1,0 +1,30 @@
+title = "Links"
+url = "/links"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[Pensoft\Links\Components\Items items]
+show-category-title = 1
+category = 1
+maxItems = 0
+
+[Pensoft\Links\Components\Items items3]
+show-category-title = 0
+category = 2
+maxItems = 0
+==
+<div class="container">
+    <div class="row center-xs">
+        <div class="col-xs">
+            {% component 'items3' %}
+        </div>
+    </div>
+
+    <div class="row center-xs">
+        <div class="col-xs">
+            {% component 'items' %}
+        </div>
+    </div>
+</div>

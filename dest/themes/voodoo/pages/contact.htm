@@ -1,0 +1,21 @@
+title = "Contact"
+url = "/contact"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[profile_records]
+show-category-title = 0
+category = 1
+maxItems = 10
+
+[siteSearchInclude]
+==
+{% component 'siteSearchInclude' %}
+
+<div class="container">
+    <div class="row">
+        {% component 'profile_records' %}
+    </div>
+</div>

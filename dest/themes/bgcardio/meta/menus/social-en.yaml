@@ -1,0 +1,20 @@
+items:
+    -
+        title: Facebook
+        type: url
+        url: 'https://www.facebook.com/Bulgarian-Society-of-Cardiology-333762330656245/'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: facebook
+            isExternal: '1'
+    -
+        title: Twitter
+        type: url
+        url: 'https://twitter.com/OfCardiology'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: twitter
+            isExternal: '1'
+name: 'Follow us'

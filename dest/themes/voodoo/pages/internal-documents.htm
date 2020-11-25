@@ -1,0 +1,118 @@
+title = "Internal repository"
+url = "/internal-repository/:slug?|[a-zA-Z\-0-9]/:parent_id?|[0-9]"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[session]
+security = "user"
+allowedUserGroups[] = "internal-users"
+redirect = "home"
+
+[filesform]
+==
+<?php
+use Pensoft\Internaldocuments\Models\Subfolders;
+	use System\Models\File;
+	use RainLab\User\Models\UserGroup;
+
+
+	public function onStart(){
+
+		if(!$this->user){
+			return Redirect::to('/');
+		}
+
+		if($this->param('slug')){
+			$this['folder'] = Subfolders::select('pensoft_internaldocuments_subfolders.*')
+										->where('slug', ''.$this->param('slug').'')
+										->first();
+		}else{
+			$this['folders'] = Subfolders::where('pensoft_internaldocuments_subfolders.parent_id', null)->get();
+		}
+
+		if($this->param('parent_id')){
+			$this['expand'] = $this->param('parent_id');
+		}
+	}
+
+
+	public function onDownloadHandler(){
+		$files = post('files');
+		return Redirect::to('trigger-download')->with('files', $files); // pass attributes in the session
+	}
+
+	public function onDeleteFile(){
+		$fileId = post('id');
+		$file = File::find($fileId);
+		if($file)
+			$file->delete();
+		return ['#delete_result_'.$fileId => ''];
+	}
+
+	public function onDeleteFolder(){
+		$folderId = post('id');
+		$folder = Subfolders::find($folderId);
+		if($folder){
+			$folder->delete();
+		}
+		return ['#delete_result_'.$folderId => ''];
+	}
+?>
+==
+{% component 'session' %}
+<div class="container">
+	{% if user %}
+	<div class="row middle-xs between-xs">
+		{% partial 'components/search-documents-search-form' folder=folder %}
+		<div class="col-xs-12">
+			<h1 class="base_heading inner-page">{{ folder.name }}</h1>
+			{% if folder.getParentsAndSelf.count %}
+			<p>
+				<a data-toggle="modal" class="modal-link" href="#contentBasicFolder{{ folder.id }}"><span class="circled_plus"></span> Create folder</a> &nbsp; &nbsp;
+				<a data-toggle="modal" class="modal-link" href="#contentBasicFiles{{ folder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Upload files</a>
+
+
+			</p>
+				{% partial __SELF__ ~ '::_popup-files-form' subfolder=folder %}
+				{% partial __SELF__ ~ '::_popup-folders-form' subfolder=folder partial_name='_folders_list'  %}
+
+			<div id="files_list_{{folder.id}}">
+				{% partial __SELF__ ~ '::_files_list' folder=folder group_id=folder.id %}
+			</div>
+
+			{% endif %}
+
+			<div id="accordion-documents" class="text-left relative ui-accordion ui-widget ui-helper-reset" role="tablist">
+				<div id="sortableFolders{{folder.id}}">
+					{% partial __SELF__ ~ '::_folders_list' folder=folder %}
+				</div>
+				<script>
+					initSort('sortableFolders{{folder.id}}', '{{folder.id}}', 'folders');
+				</script>
+			</div>
+			<script>
+				$(document).ready(function () {
+					initAccordeon('accordion-documents', '{{expand}}');
+				});
+			</script>
+		</div>
+
+
+		{% if folders.count %}
+		<div class="col-xs-12">
+			<div class="row">
+				{% for record in folders %}
+					<div class="col-xs-12 col-sm-3 card profile no-border" style="margin-bottom: 15px">
+						<a style="display:flex; background: url({{ record.cover.thumb(100,200,{'mode':'crop'}) }}) center center no-repeat; background-size: 100px; height: 200px" href="{{url('internal-repository')}}/{{ record.slug }}" title="{{ record.name }}"></a>
+						<h3 class="card-header"><a href="{{url('internal-repository')}}/{{ record.slug }}" title="{{ record.name }}" style="color: #fff;">{{ record.name }}</a></h3>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+
+	</div>
+	{% endif %}
+</div>

@@ -1,0 +1,26 @@
+columns:
+    title:
+        label: Title
+        type: text
+        searchable: true
+        sortable: true
+    category:
+        label: Category
+        relation: category
+        select: title
+        searchable: true
+        sortable: true
+    url:
+        label: URL
+        type: text
+        searchable: true
+    cover:
+        label: Image
+        type: partial
+        path: ~/plugins/pensoft/links/partials/_cover_column.htm
+    created_at:
+        label: 'Created at'
+        type: datetime
+    updated_at:
+        label: 'Updated at'
+        type: datetime

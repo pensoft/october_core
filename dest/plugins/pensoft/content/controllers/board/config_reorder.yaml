@@ -1,0 +1,5 @@
+title: Articles
+nameFrom: full_name_position
+modelClass: Pensoft\Content\Models\Board
+toolbar:
+    buttons: reorder_toolbar

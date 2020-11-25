@@ -1,0 +1,41 @@
+items:
+    -
+        title: 'Scientific calendar'
+        nesting: ''
+        type: url
+        url: '/en/events#category-1'
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Initiatives
+        nesting: ''
+        type: url
+        url: '/en/events#category-2'
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Past events'
+        nesting: ''
+        type: url
+        url: '/en/events#past_events'
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: Events

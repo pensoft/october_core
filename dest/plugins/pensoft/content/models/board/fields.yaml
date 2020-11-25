@@ -1,0 +1,38 @@
+fields:
+    full_name:
+        label: 'pensoft.content::lang.plugin.fullname'
+        span: left
+        required: 1
+        type: text
+    positoin_type:
+        label: 'pensoft.content::lang.plugin.position_type'
+        options:
+            1: 'Управителен съвет'
+            2: 'Други длъжностни лица'
+        showSearch: true
+        span: right
+        type: dropdown
+    picture:
+        label: 'pensoft.content::lang.plugin.cover'
+        mode: image
+        imageWidth: '200'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: right
+        type: fileupload
+    email:
+        label: 'pensoft.content::lang.plugin.email'
+        span: left
+        type: text
+    position:
+        label: 'pensoft.content::lang.plugin.position'
+        span: left
+        type: text
+    short_description:
+        label: CV
+        size: small
+        span: left
+        type: richeditor
+        comment: 'The maximum number of characters is 400'

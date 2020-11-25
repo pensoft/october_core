@@ -1,0 +1,33 @@
+{% for record in __SELF__.records %}
+<div class="library-container">
+    <h2>{{ record.title }}</h2>
+    {% partial "@content" label="Authors:" value=record.authors %}
+    {% partial "@content" label="Status:" value=record.status %}
+    {% partial "@content" label="Year:" value=record.year %}
+
+    {% partial "@content" label="Journal:" value=record.journal %}
+    {% partial "@content" label="Proceedings:" value=record.proceedings_title %}
+    {% partial "@content" label="Journal:" value=record.monograph_title %}
+    {% partial "@content" label="Journal:" value=record.deliverable_title %}
+    {% partial "@content" label="Journal:" value=record.project_title %}
+
+    {% partial "@content" label="Volume/Issue:" value=record.volume_issue %}
+    {% partial "@content" label="Publisher:" value=record.publisher  %}
+    {% partial "@content" label="Place:" value=record.place  %}
+    {% partial "@content" label="City:" value=record.city  %}
+    {% partial "@content" label="Pages:" value=record.pages  %}
+    {% partial "@content" label="URL/DOI:" value=record.doi  %}
+
+    {%if record.file%}
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="mt-1 d-flex justify-content-between align-items-center">
+                <a target="_blank" href="{{record.file.path()}}" class="btn btn-secondary">Download </a>
+                <span> ({{record.filesize}})</span>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+</div>
+{% endfor %}

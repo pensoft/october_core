@@ -1,0 +1,22 @@
+<div class="list" id="partnersListDiv">
+	<div class="row middle-xs mb-2">
+	{% for item in partners %}
+		{% partial "components/partners_list_logos.htm"
+			image=item.cover.getPath()
+		%}
+	{% endfor %}
+	</div>
+
+	{% for item in partners %}
+		{% partial "components/partners_list.htm"
+			image=item.cover.getPath()
+			body=item.content
+			title=item.title
+			city=item.city
+			country=item.country
+			email=item.email
+			inst=item.instituion
+		%}
+	{% endfor %}
+
+</div>

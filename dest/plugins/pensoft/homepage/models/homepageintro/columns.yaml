@@ -1,0 +1,23 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+        sortable: true
+    title:
+        label: Title
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: Ddescription
+        type: partial
+        path: ~/plugins/pensoft/homepage/partials/_description.htm
+        searchable: true
+        sortable: true
+    image:
+        label: Image
+        type: partial
+        path: ~/plugins/pensoft/homepage/partials/_image.htm
+        searchable: true
+        sortable: true

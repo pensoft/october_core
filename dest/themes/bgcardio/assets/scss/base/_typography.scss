@@ -1,0 +1,85 @@
+$font-size-small: ceil($font-size-base * 0.85) !default;
+$font-size-large: ceil($font-size-base * 1.25) !default;
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../fonts/NotoSans-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../fonts/NotoSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../fonts/NotoSans-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../fonts/NotoSans-Italic.ttf') format('truetype');
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-Italic.ttf') format('truetype');
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-Light.ttf') format('truetype');
+  font-weight: lighter;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-LightItalic.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Acari Sans';
+  src: url('../fonts/AcariSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+
+$font-family: "Acari Sans", fantasy !default;
+
+

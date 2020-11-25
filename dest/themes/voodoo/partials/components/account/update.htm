@@ -1,0 +1,58 @@
+<form method="post" data-request="onUpdate" data-request-files data-request-flash>
+    <div class="ui form">
+        <div class="fields">
+            <div class="field">
+                <label for="accountName">First Name</label>
+                <input name="name" type="text" class="" id="accountName" value="{{ user.name }}">
+            </div>
+            <div class="field">
+                <label for="accountLastName">Last Name</label>
+                <input name="surname" type="text" class="" id="accountLastName" value="{{ user.surname }}">
+            </div>
+        
+            <div class="field">
+                <label for="accountEmail">Email</label>
+                <input name="email" type="email" class="" id="accountEmail" value="{{ user.email }}">
+            </div>
+
+            <div class="field">
+				{% if user.avatar %}
+
+				<div id="userAvatar">
+					<img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" style="border-radius: 50%;" width="70" height="70">
+					<a href="javascript:;" class="upload-remove-button" data-request="onRemoveAvatar" data-request-confirm="Are you sure?" data-request-data="file_id: {{user.avatar.id}}" style="color: #9D6A6A;" alt="Delete avatar">X</a>
+				</div>
+				{% endif %}
+                <label for="accountAvatar">Avatar</label>
+                <input name="avatar" type="file" class="" id="accountAvatar" value="{{ user.avatar.file_name }}" accept="image/*">
+            </div>
+        
+            <div class="field">
+                <label for="accountPassword">New Password</label>
+                <input name="password" type="password" class="" id="accountPassword">
+            </div>
+        
+            <div class="field">
+                <label for="accountPasswordConfirm">Confirm New Password</label>
+                <input name="password_confirmation" type="password" class="" id="accountPasswordConfirm">
+            </div>
+        
+            {% if updateRequiresPassword %}
+                <p>To change these details, please confirm your current password.</p>
+                <div class="field">
+                    <label for="accountPasswordCurrent">Current Password <small class="text-danger">* required</small></label>
+                    <input name="password_current" type="password" class="" id="accountPasswordCurrent">
+                </div>
+            {% endif %}
+            
+            <div class="mt-1">
+				<div class="row middle-xs">
+					<div class="col-xs-2 center-xs">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+
+				</div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,14 @@
+.list {
+    display: block;
+
+    .list-item {
+        display: block;
+
+        &.header {
+            text-transform: uppercase;
+            margin-bottom: $margin-horizontal-base * 1.5;
+        }
+        text-align: left;
+        margin-bottom: $margin-horizontal-base;
+    }
+}

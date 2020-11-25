@@ -1,0 +1,5 @@
+title: Media
+nameFrom: title_page_rubric
+modelClass: Pensoft\Content\Models\Media
+toolbar:
+    buttons: reorder_toolbar

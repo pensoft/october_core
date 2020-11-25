@@ -1,0 +1,10 @@
+name: Partners
+form: $/pensoft/content/models/partners/fields.yaml
+modelClass: Pensoft\Content\Models\Partners
+defaultRedirect: pensoft/content/partners
+create:
+    redirect: 'pensoft/content/partners/update/:id'
+    redirectClose: pensoft/content/partners
+update:
+    redirect: pensoft/content/partners
+    redirectClose: pensoft/content/partners

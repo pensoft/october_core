@@ -1,0 +1,45 @@
+.form {
+    display: block;
+    &.form-row {
+        display: flex;
+        flex-direction: row;
+    }
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
+    label {
+        @include text-size($font-size-base * 0.70);
+        margin-top: $margin-vertical-base;
+        margin-bottom: $margin-vertical-base;
+    }
+}
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+.form-control, input {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+    margin-right: $margin-vertical-base;
+    padding-left: $padding-horizontal-base;
+    padding-right: $padding-horizontal-base;
+    padding-top: $padding-vertical-base;
+    padding-bottom: $padding-vertical-base;
+    @include border;
+}
+
+.form-control::placeholder {
+    color: $grey-white;
+}
+
+.form-icon {
+    &.search {
+        background-image: url('../images/icons/other_search.svg');
+        background-repeat: no-repeat;
+        background-position: 4px;
+        background-size: $padding-horizontal-base * 2.4 !important;
+        padding-left: $padding-horizontal-base * 3 !important;        
+    }
+}

@@ -1,0 +1,230 @@
+title = "About us"
+url = "/"
+layout = "default"
+meta_title = "За нас"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[alternateHrefLangElements]
+
+[viewBag]
+localeMeta_title[en] = "About us"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use Pensoft\Content\Models\News;
+use ChristophHeich\Calendar\Models\Entry;
+
+function onStart(){
+    $this['latestNews'] =  News::where('rubric_id', null)->where('page_id', null)->where('state', 1)->orderBy('publication_date', 'desc')->take(8)->get()
+    ->map(function($item){
+            if($item->cover_image){
+                $item->positions = 2;
+            }else{
+                $item->positions = 1;
+            }
+            return $item;
+    });
+    $rows = 2;
+    $elementsToRow = 4;
+    $data = [];
+
+    foreach($this['latestNews'] as $item){
+        if($rows <= 0){
+            continue;
+        }
+
+        $elementsToRow -= $item->positions;
+        
+        if($elementsToRow >= 0){
+            $data[] = $item;
+            if($elementsToRow == 0){
+                $elementsToRow = 4;
+                $rows--;
+            }
+        }else{
+            $item->positions = 1;
+            $item->cover_image = null;
+            $data[] = $item;
+            $elementsToRow = 4;
+            $rows--;
+        }
+    }
+    $this['data'] = $data;
+
+    
+
+	$this['latestNewsDoctors'] =  News::select('pensoft_content_news.slug as news_slug', '*')->join('pensoft_content_rubrics', 'pensoft_content_news.rubric_id', '=', 'pensoft_content_rubrics.id')->where('pensoft_content_rubrics.page_id', 3)->where('state', 1)->orderBy('publication_date', 'desc')->take(4)->get();
+	$this['latestNewsPatients'] =  News::select('pensoft_content_news.slug as news_slug', '*')->join('pensoft_content_rubrics', 'pensoft_content_news.rubric_id', '=', 'pensoft_content_rubrics.id')->where('pensoft_content_rubrics.page_id', 5)->where('state', 1)->orderBy('publication_date', 'desc')->take(4)->get();
+	$this['forthcomingEvents'] =  array_map(function($data){
+        $data['cover_image'] = Entry::find($data['id'])->cover_image;
+        return $data;
+    }, Entry::forthcoming());
+	$this['SelectedLanguage'] = App::getLocale();
+
+}
+?>
+==
+<div class="news">
+    <a class="d-block text-right grey-white" href="/{{SelectedLanguage}}/{{'news'}}">{{ 'See more'|_ }}</a>
+    <div class="cards">
+		{% for news in data %}
+        <div itemscope itemtype="https://schema.org/NewsArticle" class="card card-news animated card-icon card-min-height">
+            <div class="d-none" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                <div itemprop="name">Bulgarian Society of Cardiology</div>
+            </div>
+            <div class="d-none" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                    <div itemprop="url" content="{{'assets/images/logo_en.svg'|theme}}"></div>
+                </div>
+                <div itemprop="name" content="Bulgarian Society of Cardiology"></div>
+            </div>
+            {% if news.cover_image %}
+            <a itemprop="url" class="card-image rounded-l" href="/{{ SelectedLanguage }}/news/{{news.slug}}">
+                <img itemprop="image" src="{{news.cover_image|crop_image|resize(305,200, { mode: 'crop' })}}" alt="{{news.title}}" />
+            </a>
+            {% endif %}
+            <div class="card-body news">
+                <a class="card-icon-link" href="/{{SelectedLanguage}}/{{'news'}}/{{news.slug}}"></a>
+                <a itemprop="headline" content="{{news.title}}" href="/{{SelectedLanguage}}/{{'news'}}/{{news.slug}}" class="card-text grey">{{ news.title|truncate(70, true) }}</a>
+            </div>
+            <meta itemprop="datePublished" content="{{news.publication_date}}">
+        </div>
+		{% endfor %}
+    </div>
+</div>
+
+<div class="mt-2">
+    <div class="text-uppercase bold text-center">{{ 'Scientific Statements of the DCB'|_ }}</div>
+    <ul class="timeline">
+		{% for event in forthcomingEvents %}
+        <li>
+            <a itemscope itemtype="https://schema.org/Event" itemprop="url" href="/{{SelectedLanguage}}/events/{{event.slug}}">
+                <div class="d-none" itemprop="location" itemscope itemtype="https://schema.org/Place">
+                    <div itemprop="name" content="{{ event.place }}"></div>
+                    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <div itemprop="streetAddress" content="{{ event.place }}"></div>
+                    </div>
+                </div>
+                <div class="d-none" itemprop="startDate" content="{{event.start}}"></div>
+                <div class="d-none" itemprop="endDate" content="{{event.end}}"></div>
+                <div itemprop="name" content="{{event.title}}" class="timeline-header">{{ event.title|truncate(30, true, '...') }}</div>
+                {% if event.cover_image %}
+                    <div class="events image">
+                        <img itemprop="image" src="{{event.cover_image|crop_image|resize(305,200, { mode: 'crop' })}}" alt="{{event.title}}" />
+                    </div>
+                {% endif %}
+                <div class="timeline-footer {% if event.is_forthcoming %}forthcoming{% endif %}">
+                    {% if event.has_end %}
+                        {{event.start_day}}.{{event.start_month|_}}.{{event.start_year}}-{{event.end_day}}.{{event.end_month|_}}.{{event.end_year}}
+                    {% else %}
+                        {{event.start_day}}.{{event.start_month|_}}.{{event.start_year}}
+                    {% endif %}
+                </div>
+            </a>
+        </li>
+		{% endfor %}
+    </ul>
+</div>
+
+<div class="portals rows flex flex-row mt-2">
+    <div class="portal colxs-12 collg-6 cards no-margin-x">
+        <div class="card card-magazine">
+
+                <a class="card-image-text rounded-l" style="padding: 0px !important;" href="https://journal.bgcardio.org/">
+                    <img class="fluid" src="{{'assets/images/bulgarian_cardiology.png'|theme}}" />
+                </a>    
+				<div class="card-body flex fluid">
+					<div class="card-text"><p class="text-uppercase bold"><a href="https://journal.bgcardio.org/" target="_blank">{{'Bulgarian Cardiology Magazine'|_}}</a></p></div>
+				</div>
+
+        </div>
+    </div>
+    <div class="portal collg-6 colxs-12 pt-1">
+		{{'Bulgarian Cardiology Magazine Description'|_}}
+    </div>
+</div>
+
+<div class="portals flex flex-row rows mt-2">
+    <div class="portal colxs-12 collg-6">
+        <div class="flex justify-content-between">
+            <h2 class="text-left text-uppercase bold">{{'Portal Patients'|_}}</h2>
+            <a class="grey-white" href="/{{SelectedLanguage}}/patients">{{ 'See more'|_ }}</a>
+        </div>
+        <div class="cards">
+			{% if latestNewsPatients.count() %}
+				{% for pNews in latestNewsPatients %}
+					<div itemscope itemtype="https://schema.org/NewsArticle" class="card card-news animated card-icon  card-min-height">
+                        <div class="d-none" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <div itemprop="name">Bulgarian Society of Cardiology</div>
+                        </div>
+                        <div class="d-none" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                                <div itemprop="url" content="{{'assets/images/logo_en.svg'|theme}}"></div>
+                            </div>
+                            <div itemprop="name" content="Bulgarian Society of Cardiology"></div>
+                        </div>
+						<div class="card-body news">
+                            <a itemprop="url" class="card-icon-link" href="/{{SelectedLanguage}}/{{'news'}}/{{pNews.news_slug}}"></a>
+                            <a itemprop="headline" content="{{pNews.title}}" href="/{{SelectedLanguage}}/{{'news'}}/{{pNews.news_slug}}" class="card-text grey">{{ pNews.title|truncate(70, true) }}</a>
+                        </div>
+                        <meta itemprop="datePublished" content="{{pNews.publication_date}}">
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="mt-1" style="margin-left: auto; margin-right: auto;">{{ 'No records found'|_ }}</div>
+			{% endif %}
+
+        </div>
+    </div>
+    <div class="portal colxs-12 collg-6">
+
+        <div class="flex justify-content-between">
+            <h2 class="text-left text-uppercase bold">{{'Portal Doctors'|_}}</h2>
+            <a class="grey-white" href="/{{SelectedLanguage}}/doctors">{{ 'See more'|_ }}</a>
+        </div>
+        
+        <div class="cards">
+			{% if latestNewsDoctors.count() %}
+				{% for dNews in latestNewsDoctors %}
+					<div itemscope itemtype="https://schema.org/NewsArticle" class="card card-news animated card-icon secondary card-min-height">
+                        <div class="d-none" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <div itemprop="name">Bulgarian Society of Cardiology</div>
+                        </div>
+                        <div class="d-none" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                                <div itemprop="url" content="{{'assets/images/logo_en.svg'|theme}}"></div>
+                            </div>
+                            <div itemprop="name" content="Bulgarian Society of Cardiology"></div>
+                        </div>
+                        <div class="card-body news">
+                            <a itemprop="url" class="card-icon-link" href="/{{SelectedLanguage}}/{{'news'}}/{{dNews.news_slug}}"></a>
+                            <a itemprop="headline" content="{{dNews.title}}" href="/{{SelectedLanguage}}/{{'news'}}/{{dNews.news_slug}}" class="card-text grey">{{ dNews.title|truncate(70, true) }}</a>
+                        </div>
+                        <meta itemprop="datePublished" content="{{dNews.publication_date}}">
+                        </div>
+				{% endfor %}
+            {% else %}
+                <div class="mt-1" style="margin-left: auto; margin-right: auto;">{{ 'No records found'|_ }}</div>
+			{% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+
+        $('.timeline-footer').on('mouseover', function(el){
+            $(this).parent().find('.timeline-header').addClass('active');
+        })
+
+        $('.timeline-footer').on('mouseleave', function (el) {
+            $(this).parent().find('.timeline-header').removeClass('active');
+        })
+
+        $('.accordion-label').on('click', function(){
+            $(this).find('.icon').toggleClass('icon-rotated-180');
+            $(this).next('.accordion-item').slideToggle();
+        })
+    });
+</script>

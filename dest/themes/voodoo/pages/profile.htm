@@ -1,0 +1,34 @@
+title = "Profile"
+url = "/profile"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[account]
+redirect = "internal-documents"
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+==
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-12 mt-1 mt-lg-0">
+            {% if user %}
+
+                {% partial 'components/account/activation_check' %}
+
+                {% partial 'components/account/update' %}
+
+            {% endif %}
+			{% if  not user %}
+
+				<a class="btn btn-link" href="/register">Create account</a>
+
+			{% endif %}
+
+
+        </div>
+    </div>
+</div>

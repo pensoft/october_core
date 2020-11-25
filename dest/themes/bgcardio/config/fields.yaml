@@ -1,0 +1,5 @@
+fields:
+  site_title:
+    label: Site Title
+    commend: ''
+    default: Bg cardio

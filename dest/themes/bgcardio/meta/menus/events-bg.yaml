@@ -1,0 +1,29 @@
+items:
+    -
+        title: 'Научен календар'
+        type: url
+        url: '/bg/events#category-1'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Инициативи
+        type: url
+        url: '/bg/events#category-2'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Минали събития'
+        type: url
+        url: '/bg/events#past_events'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: Събития

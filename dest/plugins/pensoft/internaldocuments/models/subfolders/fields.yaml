@@ -1,0 +1,60 @@
+fields:
+    name:
+        label: Name
+        span: left
+        type: text
+    parent:
+        label: 'Parent folder'
+        emptyOption: 'NO Parent Folder'
+        showSearch: true
+        span: auto
+        defaultFrom: name
+        type: relation
+    slug:
+        label: Slug
+        span: auto
+        defaultFrom: name
+        preset:
+            field: name
+            type: ''
+        type: text
+    images:
+        label: Images
+        mode: image
+        useCaption: true
+        fileTypes: svg,png,jpg
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    files:
+        label: Files
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    cover:
+        label: 'Cover image'
+        mode: image
+        useCaption: true
+        fileTypes: svg,png,jpg
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: full
+        type: fileupload
+        comment: 'for root folders only'
+    user:
+        label: User
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        readOnly: 0
+        required: 1
+        containerAttributes:
+            1: Admin
+        type: relation

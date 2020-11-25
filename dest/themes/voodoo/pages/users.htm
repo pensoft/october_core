@@ -1,0 +1,46 @@
+title = "Users"
+url = "/users"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use Rainlab\User\Models\User;
+use RainLab\User\Models\UserGroup;
+
+function onStart(){
+	$users = User::where('is_activated', true)->get();
+	if ( count ($users) ) {
+		$this['users'] = $users->filter(function ( $user ) {
+				return $user->inGroup( UserGroup::getInternalUsersGroup() ) ;
+		});
+	}
+}
+?>
+==
+<div class="container">
+	{% for user in users %}
+	<div class="row middle-xs userBox">
+		<div class="col-xs-3 col-md-1 userPic">
+			{% if user.avatar %}
+				<img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.thumb(70,70,{'mode':'crop'})}}">
+			{% else %}
+				<img alt="{{ user.name }} {{ user.surname }}" src="{{ 'CMS_icons_avatar.svg'|media }}" width="70" height="70">
+			{% endif %}
+
+		</div>
+		<div class="col-xs-6 col-md-9 leftBox">
+			<div class="username">{{ user.name }} {{ user.surname }}</div>
+
+		</div>
+		<div class="col-xs-6 col-md-10 leftBox" style="margin-top: 20px">
+			<div class="info">Email: <span class="email"><a href="mailto:{{ user.email }}">{{ user.email }}</a></span></div>
+			<div class="info">Partner: <span>{{ user.partner.title }}</span></div>
+		</div>
+		<div class="col-xs-12 col-md-2 end-md center-xs">
+			<a href="mailto:{{ user.email }}"><img src="{{'mail.svg'|media}}" style="width: 21px; position: relative; top: 2px;" /> Send message</a>
+		</div>
+	</div>
+	{% endfor %}
+</div>

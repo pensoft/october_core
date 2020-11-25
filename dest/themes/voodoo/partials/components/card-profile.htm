@@ -1,0 +1,10 @@
+
+<div class="card contacts col-sm-4 col-xs-12">
+    <div class="card-body">
+		<img class="card-img-top" src="{% if avatar %}{{avatar|resize(290, 290, {'mode': 'crop'})}}{% else %}{{'pensoft/profile.png'|media}}{% endif %}" alt="{{fullname}}" />
+		<h3 class="card-title">{{fullname}}</h3>
+		<div class="info"><i class="pr normal p-location"></i> {{department}}</div>
+        <div class="info"><i class="pr normal p-{{country.code}}"></i>{{country.name}}</div>
+        <div class="info"><i class="pr normal p-mail"></i><a href="mailto:{{email}}">{{email}}</a></div>
+    </div>
+</div>

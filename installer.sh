@@ -8,7 +8,7 @@ then
     mkdir "./projects"
 fi
 
-composer create-project october/october $tmp_dir
+composer create-project october/october $tmp_dir 1.0.469
 
 if [ ${#git} -gt 0 ]
 then

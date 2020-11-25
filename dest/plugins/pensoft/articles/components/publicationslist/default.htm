@@ -1,0 +1,15 @@
+
+<div class="news">
+	{% for item in __SELF__.getPublications() %}
+	{% partial "components/card-publications.htm"
+	url=__SELF__.getUrl(item, this.page.id)
+	readmore=__SELF__.getReadmoreLink(item, this.page.id)
+	title=item.title
+	published_at=item.published_at
+	body=item.content
+	border=false
+	allow_share=item.allow_share
+	slug=item.slug
+	%}
+	{% endfor %}
+</div>

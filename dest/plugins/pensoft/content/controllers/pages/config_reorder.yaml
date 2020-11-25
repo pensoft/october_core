@@ -1,0 +1,5 @@
+title: Pages
+nameFrom: title_parent
+modelClass: Pensoft\Content\Models\Pages
+toolbar:
+    buttons: reorder_toolbar

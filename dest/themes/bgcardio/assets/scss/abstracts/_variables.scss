@@ -1,0 +1,92 @@
+//== Colors
+
+$default-color: #2b2b2b;
+$primary-color: #0099d2 !default;
+$secondary-color: #b31c35 !default;
+$white          : #FFFFFF !default;
+$silver         : #f7f7f7 !default;
+$silver-dark    : #d8d8d8 !default;
+$grey           : #2b2b2b !default;
+$grey-white     : #505050 !default;
+$black          : #000000 !default;
+$red            : #B31C35 !default;
+
+$colors: (
+  'grey'           : $grey,
+  'grey-white'     : $grey-white,
+  'black'          : $black,
+  'white'          : $white,
+  'silver'         : $silver,
+  'silver-dark'    : $silver-dark,
+  'red'            : $red,
+);
+
+$background-color: $white !default;
+
+//== Typography
+$line-height-base:        1.55 !default;
+$text-color:              $grey-white !default;
+$font-size-base:          18px !default;
+$line-height:             calculate-line-height($font-size-base) !default;
+$text-sizes: (
+  'extra-small': $font-size-base * 0.60,
+  'small': $font-size-base * 0.70,
+  'medium': $font-size-base,
+  'large': $font-size-base * 1.1,
+  'extra-large': $font-size-base * 1.5
+);
+
+//== Space
+$margin-vertical-base:      15px !default;
+$margin-horizontal-base:    15px !default;
+
+$padding-vertical-base:     10px !default;
+$padding-horizontal-base:   10px !default;
+
+$radius:                    3px !default;
+
+$border-color-base:         $silver-dark !default;
+$border-width-base:         1px !default;
+$border-style-base:         solid !default;
+
+$box-shadow-offsets:        0px 6px 6px !default;
+$box-shadow-blur-radius:    $radius !default;
+$box-shadow-color:          rgba(0, 0, 0, 0.16) !default;
+$box-shadow:                $box-shadow-offsets $box-shadow-blur-radius $box-shadow-color;
+
+//== Buttons
+$button-sizes: (
+  'extra-small': (font-size: ceil($font-size-base * 0.65)),
+  'small': (font-size: ceil($font-size-base * 0.85)),
+  'large': (font-size: ceil($font-size-base * 1.25))
+);
+$button-is-rounded: true !default;
+$button-border: 1px !default;
+
+
+//== Icons
+$icon-sizes: (
+  'extra-small': (padding: $padding-vertical-base * 0.5 $padding-horizontal-base * 0.5),
+  'small': (padding: $padding-vertical-base * 0.8 $padding-horizontal-base * 0.8),
+  'medium': (padding: $padding-vertical-base $padding-horizontal-base),
+  'large': (padding: $padding-vertical-base * 2 $padding-horizontal-base * 2),
+  'huge': (padding: $padding-vertical-base * 4 $padding-horizontal-base * 4),
+);
+
+//== Media queries breakpoints
+
+$breakpoints: (
+  'small': (min-width: 540px),
+  'medium': (min-width: 720px),
+  'large': (min-width: 960px),
+  'huge': (min-width: 1220px),
+) !default;
+
+//== Browser supports
+
+$browser-prefixes: (
+    '-moz-', 
+    '-webkit-', 
+    '-ms-', 
+    '-o-'
+) !default;

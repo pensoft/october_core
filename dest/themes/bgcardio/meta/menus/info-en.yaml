@@ -1,0 +1,50 @@
+items:
+    -
+        title: News
+        nesting: ''
+        type: url
+        url: /en/news
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Management board'
+        nesting: ''
+        type: url
+        url: /en/rubric/management-board
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'European recommendations'
+        nesting: ''
+        type: url
+        url: /en/rubric/evropeiski-preporyki
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Useful links'
+        type: url
+        url: /en/rubric/polezni-vruzki
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: Information

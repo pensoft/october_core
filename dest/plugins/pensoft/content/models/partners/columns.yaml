@@ -1,0 +1,22 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        type: text
+        searchable: true
+    slug:
+        label: 'pensoft.content::lang.plugin.slug'
+        type: text
+        searchable: true
+    website:
+        label: 'pensoft.content::lang.plugin.website'
+        type: text
+        searchable: true
+    logo:
+        label: 'pensoft.content::lang.plugin.logo'
+        type: partial
+        sortable: true
+        path: ~/plugins/pensoft/content/models/partners/_icon.htm

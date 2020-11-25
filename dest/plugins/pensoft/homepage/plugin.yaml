@@ -1,0 +1,12 @@
+plugin:
+    name: 'pensoft.homepage::lang.plugin.name'
+    description: 'pensoft.homepage::lang.plugin.description'
+    author: pensoft
+    icon: icon-leaf
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Homepage
+        url: pensoft/homepage/homepageintrocontroller
+        icon: icon-home
+        order: '1'

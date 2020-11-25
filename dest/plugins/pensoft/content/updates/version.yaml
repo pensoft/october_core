@@ -1,0 +1,275 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table pensoft_content_categories'
+    - builder_table_create_pensoft_content_categories.php
+1.0.3:
+    - 'Created table pensoft_content_pages'
+    - builder_table_create_pensoft_content_pages.php
+1.0.4:
+    - 'Created table pensoft_content_rubrics'
+    - builder_table_create_pensoft_content_rubrics.php
+1.0.5:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics.php
+1.0.6:
+    - 'Created table pensoft_content_rubric_type_portal'
+    - builder_table_create_pensoft_content_rubric_type_portal.php
+1.0.7:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_2.php
+1.0.8:
+    - 'Created table pensoft_content_rubric_types'
+    - builder_table_create_pensoft_content_rubric_types.php
+1.0.9:
+    - 'Created table pensoft_content_rubric_type_board'
+    - builder_table_create_pensoft_content_rubric_type_board.php
+1.0.10:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_3.php
+1.0.11:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal.php
+1.0.12:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal_2.php
+1.0.13:
+    - 'Created table pensoft_content_content_types'
+    - builder_table_create_pensoft_content_content_types.php
+1.0.14:
+    - 'Created table pensoft_content_content_types_articles'
+    - builder_table_create_pensoft_content_content_types_articles.php
+1.0.15:
+    - 'Created table pensoft_content_content_type_events'
+    - builder_table_create_pensoft_content_content_type_events.php
+1.0.16:
+    - 'Created table pensoft_content_content_type_news'
+    - builder_table_create_pensoft_content_content_type_news.php
+1.0.17:
+    - 'Updated table pensoft_content_content_type_news'
+    - builder_table_update_pensoft_content_content_type_news.php
+1.0.18:
+    - 'Updated table pensoft_content_content_types_articles'
+    - builder_table_update_pensoft_content_content_types_articles.php
+1.0.19:
+    - 'Updated table pensoft_content_content_type_events'
+    - builder_table_update_pensoft_content_content_type_events.php
+1.0.20:
+    - 'Updated table pensoft_content_content_type_news'
+    - builder_table_update_pensoft_content_content_type_news_2.php
+1.0.21:
+    - 'Created table pensoft_content_content_type_partners'
+    - builder_table_create_pensoft_content_content_type_partners.php
+1.0.22:
+    - 'Updated table pensoft_content_content_type_events'
+    - builder_table_update_pensoft_content_content_type_events_2.php
+1.0.23:
+    - 'Updated table pensoft_content_content_type_news'
+    - builder_table_update_pensoft_content_content_type_news_3.php
+1.0.24:
+    - 'Updated table pensoft_content_content_type_partners'
+    - builder_table_update_pensoft_content_content_type_partners.php
+1.0.25:
+    - 'Updated table pensoft_content_content_type_events'
+    - builder_table_update_pensoft_content_content_type_events_3.php
+1.0.26:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal_3.php
+1.0.27:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal_4.php
+1.0.28:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal_5.php
+1.0.29:
+    - 'Updated table pensoft_content_content_type_events'
+    - builder_table_update_pensoft_content_content_type_events_4.php
+1.0.30:
+    - 'Updated table pensoft_content_content_type_partners'
+    - builder_table_update_pensoft_content_content_type_partners_2.php
+1.0.31:
+    - 'Updated table pensoft_content_categories'
+    - builder_table_update_pensoft_content_categories.php
+1.0.32:
+    - 'Updated table pensoft_content_categories'
+    - builder_table_update_pensoft_content_categories_2.php
+1.0.33:
+    - 'Updated table pensoft_content_categories'
+    - builder_table_update_pensoft_content_categories_3.php
+1.0.34:
+    - 'Updated table pensoft_content_content_types_articles'
+    - builder_table_update_pensoft_content_content_types_articles_2.php
+1.0.35:
+    - 'Updated table pensoft_content_rubric_type_board'
+    - builder_table_update_pensoft_content_rubric_type_board.php
+1.0.36:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal_6.php
+1.0.37:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal_7.php
+1.0.38:
+    - 'Updated table pensoft_content_rubric_type_board'
+    - builder_table_update_pensoft_content_rubric_type_board_2.php
+1.0.39:
+    - 'Updated table pensoft_content_rubric_type_board'
+    - builder_table_update_pensoft_content_rubric_type_board_3.php
+1.0.40:
+    - 'Updated table pensoft_content_pages'
+    - builder_table_update_pensoft_content_pages.php
+1.0.41:
+    - 'Updated table pensoft_content_content_type_news'
+    - builder_table_update_pensoft_content_content_type_news_4.php
+1.0.42:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_4.php
+1.0.43:
+    - 'Updated table pensoft_content_rubric_type_portal'
+    - builder_table_update_pensoft_content_rubric_type_portal_8.php
+1.0.44:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_5.php
+1.0.45:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_6.php
+1.0.46:
+    - 'Updated table pensoft_content_pages'
+    - builder_table_update_pensoft_content_pages_2.php
+1.0.47:
+    - 'Updated table pensoft_content_content_type_news'
+    - builder_table_update_pensoft_content_content_type_news_5.php
+1.0.48:
+    - 'Updated table pensoft_content_rubric_type_board'
+    - builder_table_update_pensoft_content_rubric_type_board_4.php
+1.0.49:
+    - 'Updated table pensoft_content_rubric_type_board'
+    - builder_table_update_pensoft_content_rubric_type_board_5.php
+1.0.50:
+    - 'Updated table pensoft_content_content_type_partners'
+    - builder_table_update_pensoft_content_content_type_partners_3.php
+1.0.51:
+    - 'Updated table pensoft_content_categories'
+    - builder_table_update_pensoft_content_categories_4.php
+1.0.52:
+    - 'Updated table pensoft_content_pages'
+    - builder_table_update_pensoft_content_pages_3.php
+1.0.53:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_7.php
+1.0.54:
+    - 'Updated table pensoft_content_content_types_articles'
+    - builder_table_update_pensoft_content_content_types_articles_3.php
+1.0.55:
+    - 'Drop table pensoft_content_content_type_events'
+    - builder_table_delete_pensoft_content_content_type_events.php
+1.0.56:
+    - 'Updated table pensoft_content_content_type_partners'
+    - builder_table_update_pensoft_content_partners.php
+1.0.57:
+    - 'Updated table pensoft_content_content_types_articles'
+    - builder_table_update_pensoft_content_articles.php
+1.0.58:
+    - 'Updated table pensoft_content_rubric_type_board'
+    - builder_table_update_pensoft_content_board.php
+1.0.59:
+    - 'Updated table pensoft_content_content_type_news'
+    - builder_table_update_pensoft_content_news.php
+1.0.60:
+    - 'Updated table pensoft_content_articles'
+    - builder_table_update_pensoft_content_articles_2.php
+1.0.61:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_8.php
+1.0.62:
+    - 'Updated table pensoft_content_partners'
+    - builder_table_update_pensoft_content_partners_2.php
+1.0.63:
+    - 'Drop table pensoft_content_content_types'
+    - builder_table_delete_pensoft_content_content_types.php
+1.0.64:
+    - 'Drop table pensoft_content_rubric_type_portal'
+    - builder_table_delete_pensoft_content_rubric_type_portal.php
+1.0.65:
+    - 'Drop table pensoft_content_rubric_types'
+    - builder_table_delete_pensoft_content_rubric_types.php
+1.0.66:
+    - 'Updated table pensoft_content_pages'
+    - builder_table_update_pensoft_content_pages_4.php
+1.0.67:
+    - 'Created table pensoft_content_files'
+    - builder_table_create_pensoft_content_files.php
+1.0.68:
+    - 'Created table pensoft_content_media'
+    - builder_table_create_pensoft_content_media.php
+1.0.69:
+    - 'Updated table pensoft_content_files'
+    - builder_table_update_pensoft_content_files.php
+1.0.70:
+    - 'Updated table pensoft_content_media'
+    - builder_table_update_pensoft_content_media.php
+1.0.71:
+    - 'Updated table pensoft_content_pages'
+    - builder_table_update_pensoft_content_pages_5.php
+1.0.72:
+    - 'Updated table pensoft_content_pages'
+    - builder_table_update_pensoft_content_pages_6.php
+1.0.73:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_9.php
+1.0.74:
+    - 'Updated table pensoft_content_news'
+    - builder_table_update_pensoft_content_news_2.php
+1.0.75:
+    - 'Updated table pensoft_content_board'
+    - builder_table_update_pensoft_content_board_2.php
+1.0.76:
+    - 'Updated table pensoft_content_pages'
+    - builder_table_update_pensoft_content_pages_7.php
+1.0.77:
+    - 'Updated table pensoft_content_partners'
+    - builder_table_update_pensoft_content_partners_3.php
+1.0.78:
+    - 'Updated table pensoft_content_articles'
+    - builder_table_update_pensoft_content_articles_3.php
+1.0.79:
+    - 'Updated table pensoft_content_board'
+    - builder_table_update_pensoft_content_board_3.php
+1.0.80:
+    - 'Updated table pensoft_content_news'
+    - builder_table_update_pensoft_content_news_3.php
+1.0.81:
+    - 'Updated table pensoft_content_files'
+    - builder_table_update_pensoft_content_files_2.php
+1.0.82:
+    - 'Updated table pensoft_content_media'
+    - builder_table_update_pensoft_content_media_2.php
+1.0.83:
+    - 'Updated table pensoft_content_partners'
+    - builder_table_update_pensoft_content_partners_4.php
+1.0.84:
+    - 'Updated table pensoft_content_news'
+    - builder_table_update_pensoft_content_news_4.php
+1.0.85:
+    - 'Updated table pensoft_content_rubrics'
+    - builder_table_update_pensoft_content_rubrics_10.php
+1.0.86:
+    - 'Updated table pensoft_content_news'
+    - builder_table_update_pensoft_content_news_5.php
+1.0.87:
+    - 'Updated table pensoft_content_files'
+    - builder_table_update_pensoft_content_files_3.php
+1.0.88:
+    - 'Updated table pensoft_content_media'
+    - builder_table_update_pensoft_content_media_3.php
+1.0.89:
+    - 'Updated table pensoft_content_board'
+    - builder_table_update_pensoft_content_board_4.php
+1.0.90:
+    - 'Updated table pensoft_content_board'
+    - builder_table_update_pensoft_content_board_5.php
+1.0.91:
+    - 'Updated table pensoft_content_board'
+    - builder_table_update_pensoft_content_board_6.php
+1.0.92:
+    - 'Updated table pensoft_content_board'
+    - builder_table_update_pensoft_content_board_7.php

@@ -1,0 +1,23 @@
+<div class="all_images_container" id="sortableImages{{group_id}}">
+	{% for image in images %}
+
+	<div id="delete_result_{{image.id}}" class="documents_images_list">
+		<img  src="{{image.thumb(150,120,{'mode':'crop'})}}" alt="{{image.file_name}}" style="margin: 5px;" id="tipContainer{{image.id}}" />
+
+		<script>
+			initRightclickDeleteTippy('{{image.id}}', 'image', '{{image}}', '{{image.user_id == user.id}}');
+		</script>
+	</div>
+	{% endfor %}
+</div>
+<div style="clear: both;"></div>
+<p>
+	<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  {{images}}" target="_blank" class="download-icon">Download all</a>
+	{% if images.count > 7 %}
+	&nbsp;&nbsp;&nbsp;
+	<a href="javascript:;" onclick="toggleImages('{{group_id}}');" class="show_all_btn{{group_id}}">Show all</a>
+	{% endif %}
+</p>
+<script>
+	initSort('sortableImages{{group_id}}', '{{group_id}}', 'images');
+</script>

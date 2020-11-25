@@ -1,0 +1,5 @@
+title: Files
+nameFrom: title_page_rubric
+modelClass: Pensoft\Content\Models\Files
+toolbar:
+    buttons: reorder_toolbar

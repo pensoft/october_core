@@ -1,0 +1,5 @@
+title: 'Order'
+nameFrom: name
+modelClass: Pensoft\Content\Models\Categories
+toolbar:
+  buttons: reorder_toolbar

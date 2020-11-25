@@ -1,0 +1,193 @@
+@include rounds;
+@include margins;
+@include paddings;
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+.overflow-auto {
+    overflow: auto;
+}
+.fluid {
+    width: 100% !important;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+.no-gutter {
+    margin: 0 !important;
+}
+.no-background {
+    background: none !important;
+}
+.no-border {
+    border: 0 !important;
+}
+
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+
+.text-justify { text-align: justify; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.text-capitalize { text-transform: capitalize; }
+.text-uppercase { text-transform: uppercase; }
+.text-lowercase { text-transform: lowercase; }
+
+.text {
+    &.primary {color: $primary-color}
+    &.secondary {color: $secondary-color}
+    @include colors($colors);
+    @include text-sizes($text-sizes);
+}
+.d-inline {
+    display: inline-block;
+}
+.d-block {
+    display: block;
+}
+.rows {
+    margin-left: -$margin-vertical-base;
+    margin-right: -$margin-vertical-base;
+}
+.flex {
+    display: flex !important;  
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+.flex-inline {
+    display: inline-flex  !important;
+}
+.flex-column {
+    flex-direction: column;
+}
+.flex-column-reverse {
+    flex-direction: column-reverse;
+}
+.flex-row {
+    flex-direction: row;
+}
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+.justify-content-center {
+    justify-content: center;
+}
+.justify-content-start {
+    justify-content: start;
+}
+.justify-content-end {
+    justify-content: end;
+}
+.justify-content-between {
+    justify-content: space-between;
+}
+.justify-content-around {
+    justify-content: space-around;
+}
+.align-items-baseline {
+    align-items: baseline;
+}
+.align-items-center {
+    align-items: center;
+}
+.align-items-end {
+    align-items: flex-end;
+}
+.align-items-start {
+    align-items: flex-start;
+}
+.align-items-stretch {
+    align-items: stretch;
+}
+
+.align-self-baseline {
+    align-self: baseline;
+}
+.align-self-center {
+    align-self: center;
+}
+.align-self-end {
+    align-self: flex-end;
+}
+.align-self-start {
+    align-self: flex-start;
+}
+.align-self-stretch {
+    align-self: stretch;
+}
+
+$font-size-h1:            ceil(($font-size-base * 1.1)) !default;
+$font-size-h2:            ceil(($font-size-base * 1.1)) !default;
+$font-size-h3:            ceil(($font-size-base * 1.1)) !default;
+$font-size-h4:            ceil(($font-size-base * 1.1)) !default;
+$font-size-h5:            ceil(($font-size-base * 1.1)) !default;
+$font-size-h6:            ceil(($font-size-base * .85)) !default;
+
+h1 {
+    @include text-size($font-size-h1);
+    letter-spacing: -0.04rem;
+    font-weight: bold;
+}
+h2 {
+    @include text-size($font-size-h2);
+    letter-spacing: -0.04rem;
+}
+h3 {
+    @include text-size($font-size-h3);
+    letter-spacing: -0.04rem;
+}
+h4 {
+    @include text-size($font-size-h4);
+    letter-spacing: -0.04rem;
+}
+h5 {
+    @include text-size($font-size-h5);
+    letter-spacing: -0.04rem;
+}
+h6 {
+    @include text-size($font-size-h6);
+    letter-spacing: -0.04rem;
+}
+
+p {
+    margin-top: $margin-vertical-base;
+    margin-bottom: $margin-vertical-base;
+}
+
+a {
+    color: $primary-color;
+    text-decoration: none;
+    cursor: pointer;
+    &.secondary {
+        color: $secondary-color !important;
+    }
+    
+    @include colors($colors);
+    @include sizes($text-sizes);
+}
+
+.bkg {
+    background-color: $primary-color;
+
+    &.primary {
+        background-color: $primary-color;
+    }
+    &.secondary {
+        background-color: $secondary-color;
+    }
+    @include backgrounds;
+}

@@ -1,0 +1,7 @@
+name: BG Cardio
+description: 'Bg Cardio OctoberCMS theme.'
+author: Pensoft
+homepage: 'https://pensoft.net/'
+code: ''
+previewImage: assets/images/theme-preview.png
+form: config/fields.yaml

@@ -1,0 +1,12 @@
+{% for item in items if not item.viewBag.isHidden %}
+<div class="list-item text small">
+	{% if item.url %}
+	<a href="{{ item.url }}">
+		{{ item.title }}
+	</a>
+	{% else %}
+	{{ item.title }}
+	{% endif %}
+</div>
+
+{% endfor %}

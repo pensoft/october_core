@@ -1,0 +1,15 @@
+name: News
+form: $/pensoft/content/models/news/fields.yaml
+modelClass: Pensoft\Content\Models\News
+defaultRedirect: pensoft/content/news
+
+create:
+    redirect: 'pensoft/content/news/update/:id'
+    redirectClose: pensoft/content/news
+
+update:
+    redirect: pensoft/content/news
+    redirectClose: pensoft/content/news
+
+preview:
+    title: View News Post

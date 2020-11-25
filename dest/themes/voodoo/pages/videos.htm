@@ -1,0 +1,69 @@
+title = "Videos"
+url = "/media-center/videos"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList mediaVideosList]
+modelClass = "pensoft\Media\Models\Videos"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\Videos;
+
+function onStart(){
+	$this['mediaVideosList'] =  Videos::get();
+}
+?>
+==
+<div class="container">
+	<div class="row">
+		{% set records = mediaVideosList %}
+		{% set displayColumn = mediaVideosList.displayColumn %}
+		{% set noRecordsMessage = mediaVideosList.noRecordsMessage %}
+		{% set detailsPage = mediaVideosList.detailsPage %}
+		{% set detailsKeyColumn = mediaVideosList.detailsKeyColumn %}
+		{% set detailsUrlParameter = mediaVideosList.detailsUrlParameter %}
+
+		{% for record in records %}
+		{# Use spaceless tag to remove spaces inside the A tag. #}
+		{% spaceless %}
+		<div class="col-xs-12">
+			<p>{{record.name}}</p>
+			{% if record.file %}
+			<video controls="" height="360px" width="640px"><source src="{{record.file.path}}" type="video/mp4"></video>
+
+			<p>Attachment: {{record.file.file_name}}</p>
+
+			<div class="row"><div class="col-xs-12 col-md-2"><p><a class=" btn btn-secondary large fluid download" href="{{record.file.path}}">Download</a></p></div></div>
+
+			<p>&nbsp;</p>
+			{% endif %}
+
+			{% if record.youtube_url %}
+			<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="640" height="360"></iframe>
+
+			<p>&nbsp;</p>
+			{% endif %}
+
+			{% if record.vimeo_url %}
+			<iframe width="640" height="360" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+					src="{{record.vimeo_url}}">
+			</iframe>
+			<p>&nbsp;</p>
+			{% endif %}
+		</div>
+
+		{% endspaceless %}
+		{% else %}
+		{{ noRecordsMessage }}
+		{% endfor %}
+	</div>
+</div>

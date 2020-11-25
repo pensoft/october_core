@@ -1,0 +1,32 @@
+==
+function onStart()
+{
+    $this['card_horizontal'] = true;
+    $this['border'] = $this['border'] ?: true;
+    $this['image_position'] = $this['image_position'] ?: "card-img-top";
+    $this['encoded_title'] = trim(urlencode($this['title']));
+    if($this['card_horizontal']){
+        $this['class'] .= $this['class'] ? " card-horizontal" : "card-horizontal";
+    }
+    $this['content'] = strip_tags($this['body']);
+}
+==
+<div class="news-item">
+    
+
+    <div class="news-container">
+        <div class="news-title">
+            <h3 class="card-title"><a href="{{url}}">{{title}}</a></h3>
+            {% if allow_share == 'yes' %}
+                <div class="share-btn" aria-describedby="social-tooltip">
+                    <span id="share-{{slug}}" class="pr big p-share1"></span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="text-published">{{published_at}}</div>
+        <div class="body">{{str_limit(content, 150, readmore)|raw}}</div>
+    </div>
+    <script>
+        createTippy('#share-{{slug}}', { content: '<div class="icons">{% if this.theme.facebook %}<a class="fb-xfbml-parse-ignore pr p-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url}}&amp;src=sdkpreparse" target="_blank" ></a>{% endif %}{% if this.theme.twitter %}<a class="pr p-twitter" href="https://twitter.com/intent/tweet?text={{encoded_title}}{{url}}" target="_blank"></a>{% endif %}{% if this.theme.linkedin %}<a class="fb-xfbml-parse-ignore pr p-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{url}}" target="_blank" ></a>{% endif %}</div>'})
+    </script>
+</div>

@@ -1,0 +1,11 @@
+name: Rubrics
+modelClass: Pensoft\Content\Models\Rubrics
+form: $/pensoft/content/models/rubrics/fields.yaml
+defaultRedirect: pensoft/content/rubrics
+create:
+    redirect: 'pensoft/content/rubrics/update/:id'
+    redirectClose: pensoft/content/rubrics
+update:
+    redirect: pensoft/content/rubrics
+    redirectClose: pensoft/content/rubrics
+preview: {  }

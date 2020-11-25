@@ -1,0 +1,26 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+        sortable: true
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: 'pensoft.content::lang.plugin.slug'
+        type: text
+        searchable: true
+        sortable: true
+    parent:
+        label: 'pensoft.content::lang.plugin.parent'
+        type: text
+        sortable: true
+        select: title
+        relation: parent
+    sort_order:
+        label: Order
+        type: text
+        sortable: true

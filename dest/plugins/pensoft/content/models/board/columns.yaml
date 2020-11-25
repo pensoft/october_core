@@ -1,0 +1,31 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+        sortable: true
+    full_name:
+        label: 'pensoft.content::lang.plugin.fullname'
+        type: text
+        searchable: true
+        sortable: true
+    email:
+        label: 'pensoft.content::lang.plugin.email'
+        type: text
+        searchable: true
+        sortable: true
+    position:
+        label: position
+        type: text
+        searchable: true
+        sortable: true
+    positoin_type:
+        label: 'pensoft.content::lang.plugin.position_type'
+        type: text
+        searchable: false
+        sortable: true
+    picture:
+        label: 'pensoft.content::lang.plugin.cover'
+        type: partial
+        sortable: true
+        path: ~/plugins/pensoft/content/models/board/_icon.htm

@@ -1,0 +1,5 @@
+<?php if($record->cover) { ?>
+    <img src="<?php echo $record->cover->getThumb(100, 100, ['mode' => 'crop']); ?>" />
+<?php }else{ ?>
+    empty
+<?php } ?>

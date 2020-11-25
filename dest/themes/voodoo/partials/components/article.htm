@@ -1,0 +1,26 @@
+<!-- Params
+id, url, title, cover, published_at, content
+-->
+
+<div class="article category-{{category}} article-{{id}}">
+    <div class="article-cover">
+        <a href="{{url}}" title="{{title}}">
+            <img src="{{cover}}" alt="{{title}}"/>
+        </a>
+    </div>
+    <div class="article-body">
+        <div class="article-header">
+            <h2 class="article-title">
+                <a href="{{url}}" class="article-link">{{title}}</a>
+            </h2>
+            <div class="article-share">
+                <div>share</div>
+                <div class="icons">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="article-published">{{published_at}}</div>
+        <div class="article-content">{{content|raw}}</div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+fields:
+    title:
+        label: 'pensoft.content::lang.plugin.title'
+        span: left
+        required: 1
+        type: text
+    slug:
+        label: 'pensoft.content::lang.plugin.slug'
+        span: right
+        required: 1
+        preset:
+            field: title
+            type: ''
+        type: text
+    description:
+        label: 'pensoft.content::lang.plugin.description'
+        size: autogrow
+        span: left
+        type: richeditor
+        toolbarButtons: fullscreen,bold,italic,underline,strikeThrough,subscript,superscript,|,color,emoticons,inlineStyle,paragraphStyle,|,paragraphFormat,align,formatOL,formatUL,outdent,indent,quote,insertHR,insertLink,insertImage,insertVideo,insertAudio,insertFile,insertTable,undo,redo,clearFormatting,selectAll,html
+    website:
+        label: 'pensoft.content::lang.plugin.website'
+        span: right
+        type: text
+    logo:
+        label: 'pensoft.content::lang.plugin.logo'
+        mode: image
+        imageWidth: '200'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: right
+        type: fileupload

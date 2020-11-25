@@ -1,0 +1,10 @@
+name: Media
+form: $/pensoft/content/models/media/fields.yaml
+modelClass: Pensoft\Content\Models\Media
+defaultRedirect: pensoft/content/media
+create:
+    redirect: 'pensoft/content/media/update/:id'
+    redirectClose: pensoft/content/media
+update:
+    redirect: pensoft/content/media
+    redirectClose: pensoft/content/media

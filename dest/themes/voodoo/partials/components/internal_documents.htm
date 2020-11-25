@@ -1,0 +1,22 @@
+
+
+<br xmlns="http://www.w3.org/1999/html">
+<a data-toggle="modal" class="modal-link" href="#contentBasicFolder{{ subfolder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Create subfolder</a>
+&nbsp;&nbsp;&nbsp;
+<a data-toggle="modal"  class="modal-link" href="#contentBasicFiles{{ subfolder.id }}" style="margin-left: 0;"><span class="circled_plus"></span> Upload files</a>
+
+
+	{% partial __SELF__ ~ '::_popup-files-form' subfolder=subfolder %}
+	{% partial __SELF__ ~ '::_popup-folders-form' subfolder=subfolder partial_name='_subfolders_list' %}
+
+
+
+<div id="files_list_{{subfolder.id}}">
+	{% partial __SELF__ ~ '::_files_list' folder=subfolder group_id=subfolder.id %}
+</div>
+<div id="sortableFolders{{subfolder.id}}">
+	{% partial __SELF__ ~ '::_subfolders_list' folder=subfolder %}
+</div>
+<script>
+	initSort('sortableFolders{{subfolder.id}}', '{{subfolder.id}}', 'folders');
+</script>

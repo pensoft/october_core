@@ -1,0 +1,14 @@
+is_link=false
+==
+{% if value %}
+<div>
+    {% if label %}
+    <span class="text-bold">{{label}}</span>
+    {% endif %}
+    {% if is_link %}
+        <span class="text-ligth"><a target="_blank" href="{{value}}" class="break-word">{{value}}</a></span>
+    {% else %}
+        <span class="text-ligth">{{value|replace({",": ", "})}}</span>
+    {% endif %}
+</div>
+{% endif %}

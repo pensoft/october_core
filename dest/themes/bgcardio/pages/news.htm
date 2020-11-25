@@ -1,0 +1,144 @@
+title = "news"
+url = "/news/:page?/:slug?"
+layout = "default"
+meta_title = "Новини"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[builderDetails newsDetails]
+modelClass = "Pensoft\Content\Models\News"
+identifierValue = "{{ :page }}"
+modelKeyColumn = "slug"
+displayColumn = "description"
+notFoundMessage = "Record not found"
+
+[builderList newsList]
+modelClass = "Pensoft\Content\Models\News"
+scope = "-"
+scopeValue = "scopeNotAsignedTo"
+displayColumn = "title"
+noRecordsMessage = "{{ 'No records found'|_}}"
+detailsPage = "news"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+recordsPerPage = 1
+pageNumber = "{{ :page }}"
+sortColumn = "publication_date"
+sortDirection = "desc"
+
+[viewBag]
+localeMeta_title[en] = "News"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use Pensoft\Content\Models\News;
+
+function onStart(){
+    $page = (int)$this->param('page') ? (int)$this->param('page') : 1;
+    $this['newsList'] =  News::where('rubric_id', null)->where('page_id', null)->where('state', 1)->orderBy('publication_date', 'desc')->paginate(10, $page);
+	$this['SelectedLanguage'] = App::getLocale();
+
+    $this['param'] = !(is_numeric($this->param('page')) || $this->param('page') == null);
+}
+
+function onEnd()
+{
+    if(isset($this->components['newsDetails']->record)){
+        $this->page->title = $this->components['newsDetails']->record->title;
+    }
+}
+
+?>
+==
+{% if param %}
+	{% set record = newsDetails.record %}
+	{% set displayColumn = newsDetails.displayColumn %}
+    {% set notFoundMessage = newsDetails.notFoundMessage %}
+
+    {% if record %}
+    <div itemscope itemtype="https://schema.org/NewsArticle">  
+        <div class="d-none" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <div itemprop="name">Bulgarian Society of Cardiology</div>
+        </div>
+        <div class="d-none" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <div itemprop="url" content="{{'assets/images/logo_en.svg'|theme}}"></div>
+            </div>
+            <div itemprop="name" content="Bulgarian Society of Cardiology"></div>
+        </div>
+
+        {% if record.cover_image %}
+        <img itemprop="image" class="mr-2 mb-2 float-left" src="{{record.cover_image|crop_image|resize(305,auto, { mode: 'crop' })}}" alt="{{record.title}}">
+        {% endif %}
+		<h1 itemprop="headline" class="mb-2">{{record.title}}</h1>
+		<div itemprop="datePublished" class="text primary bold mb-2">{{record.publication_date}}</div>
+        <div itemprop="text">
+            {{ attribute(record, displayColumn)|raw }}
+        </div>
+    </div>
+	{% else %}
+		{{ notFoundMessage }}
+	{% endif %}
+
+
+{% else %}
+
+    <div class="cards justify-content-start">
+        {% set records = newsList %}
+		{% set displayColumn = newsList.displayColumn %}
+		{% set noRecordsMessage = newsList.noRecordsMessage %}
+		{% set detailsPage = newsList.detailsPage %}
+		{% set detailsKeyColumn = newsList.detailsKeyColumn %}
+		{% set detailsUrlParameter = newsList.detailsUrlParameter %}
+
+    {% for record in records %}
+            {# Use spaceless tag to remove spaces inside the A tag. #}
+            {% spaceless %}
+
+                <div itemscope itemtype="https://schema.org/NewsArticle" class="card animated card-news card-icon card-min-height">
+                    <div class="d-none" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <div itemprop="name">Bulgarian Society of Cardiology</div>
+                    </div>
+                    <div class="d-none" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                        <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                            <div itemprop="url" content="{{'assets/images/logo_en.svg'|theme}}"></div>
+                        </div>
+                        <div itemprop="name" content="Bulgarian Society of Cardiology"></div>
+                    </div>
+                    {% if record.cover_image %}
+                    <a itemprop="url" title="{{record.title}}" href="/{{ SelectedLanguage }}/news/{{record.slug}}" class="card-image rounded-l">
+                        <img itemprop="image" src="{{record.cover_image|crop_image|resize(305,200, { mode: 'crop' })}}" title="{{record.title}}"  alt="{{record.cover_image.title}}" />
+                    </a>
+                    {% endif %}
+                    <div class="card-body news">
+                        <a class="card-icon-link" href="/{{ SelectedLanguage }}/news/{{record.slug}}"></a>
+                        <a itemprop="headline" content="{{record.title}}" href="/{{ SelectedLanguage }}/news/{{record.slug}}" class="card-title text grey-white">{{ record.title|truncate(70, true) }}</a>
+                    </div>
+                    <meta itemprop="datePublished" content="{{record.publication_date}}">
+                </div>
+            {% endspaceless %}
+    {% else %}
+        {{ noRecordsMessage }}
+    {% endfor %}
+    
+    </div>
+
+    {% if records.lastPage > 1 %}
+    <ul class="pagination">
+        {% if records.currentPage > 1 %}
+        <li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage-1) }) }}">{{'prev'|_}}</a></li>
+        {% endif %}
+    
+        {% for page in 1..records.lastPage %}
+        <li class="{{ records.currentPage == page ? 'active' : null }}">
+            <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+        </li>
+        {% endfor %}
+    
+        {% if records.lastPage > records.currentPage %}
+        <li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage+1) }) }}">{{ 'next'|_ }}</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+
+{% endif %}

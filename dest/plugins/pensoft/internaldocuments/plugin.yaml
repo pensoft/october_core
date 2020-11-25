@@ -1,0 +1,20 @@
+plugin:
+    name: 'pensoft.internaldocuments::lang.plugin.name'
+    description: 'pensoft.internaldocuments::lang.plugin.description'
+    author: 'Kremena Kaleva'
+    icon: oc-icon-files-o
+    homepage: ''
+navigation:
+    internal-documents:
+        label: 'pensoft.internaldocuments::lang.plugin.name'
+        url: pensoft/internaldocuments/subfolders
+        icon: icon-files-o
+        sideMenu:
+            subfolders:
+                label: Folders
+                url: pensoft/internaldocuments/subfolders
+                icon: icon-folder-open-o
+            side-menu-item:
+                label: 'Reorder folders'
+                url: pensoft/internaldocuments/subfolders/reorder
+                icon: icon-sitemap

@@ -1,0 +1,87 @@
+description = "Header menu"
+
+[viewBag]
+
+[builderList pagesList]
+modelClass = "Pensoft\Content\Models\Pages"
+scope = "-"
+scopeValue = "{{ :slug }}"
+displayColumn = "title"
+noRecordsMessage = "{{ 'No records found'|_}}"
+detailsPage = "page"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
+sortColumn = "sort_order"
+sortDirection = "asc"
+
+[alternateHrefLangElements]
+==
+<?php
+use Pensoft\Content\Models\Pages;
+use RainLab\Translate\Classes\Translator;
+
+protected $translator;
+
+
+function onStart(){
+    $pages = Pages::where('hide_from_menu', '=', 0)->orWhereNull('hide_from_menu')->where('parent_id', null)->orderBy('sort_order')->get()->toArray();
+    foreach($pages as $k => $page){
+		$pages[$k] = $page;
+		$pages[$k]['subpages'] = Pages::where('parent_id', (int)$page['id'])->get()->toArray();
+    }
+    
+    $this['pages'] = $pages;
+
+	$this['SelectedLanguage'] = App::getLocale();
+
+
+}
+?>
+==
+{% set records = pagesList.records %}
+{% set currentLang = SelectedLanguage %}
+{% set displayColumn = pagesList.displayColumn %}
+{% set noRecordsMessage = pagesList.noRecordsMessage %}
+{% set detailsPage = pagesList.detailsPage %}
+{% set detailsKeyColumn = pagesList.detailsKeyColumn %}
+{% set detailsUrlParameter = pagesList.detailsUrlParameter %}
+
+<ul class="nav py-2 overflow-y-auto overflow-lg-y-unset">
+	{% for record in pages %}
+		{% if record.type == 1 %}
+			{% set type = '' %}
+		{% else %}
+			{% set type = '/rubric' %}
+		{% endif %}
+		<li role="presentation" class="nav-item">
+			{% if record.external_link %}
+				<a href="{{ record.external_link }}"
+				   class="nav-link dropdown-toggle text-uppercase {% if record.important %} secondary {% endif %}" target="_blank">
+					{{ record.title }}
+				</a>
+			{% else %}
+				<a href="/{{ currentLang }}{{ type }}/{{ record.slug }}"
+				   class="nav-link dropdown-toggle text-uppercase {% if record.important %} secondary {% endif %}">
+					{{ record.title }}
+				</a>
+			{% endif %}
+
+			{% if record.subpages %}
+			<div class="dropdown-menu">
+				{% for page in record.subpages %}
+					{% if page.type == 1 %}
+						{% set type = '' %}
+					{% else %}
+						{% set type = '/rubric' %}
+					{% endif %}
+					<a href="/{{ currentLang }}{{ type }}/{{ page.slug }}" class="dropdown-item {% if record.important %} secondary {% endif %}"}>
+						{{ page.title }}
+					</a>
+				{% endfor %}
+			</div>
+			{% endif %}
+		</li>
+	{% endfor %}
+	
+</ul>

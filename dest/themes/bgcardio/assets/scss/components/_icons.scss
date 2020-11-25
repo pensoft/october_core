@@ -1,0 +1,126 @@
+.icon {
+    display: inline-block;
+    padding: $padding-vertical-base $padding-horizontal-base;
+    background-repeat: no-repeat;
+    background-position: center;
+    @include sizes($icon-sizes);
+    
+    &.search {
+        background-image: url('../images/icons/other_search.svg');
+    }
+
+    &.brand {
+        background-image: url('../images/logo_bg.svg');
+        height: 100%;
+        padding: 0px 80px;
+        
+        &.en {
+            background-image: url('../images/logo_en.svg');
+        }
+    }
+    &.twitter {
+        background-image: url('../images/icons/other_twitter.svg');
+    }
+    &.facebook {
+        background-image: url('../images/icons/other_facebook.svg');
+    }
+    &.linkedin {
+        background-image: url('../images/icons/other_linkedin.svg');
+    }
+
+    &.flag-bg {
+        background-image: url('../images/icons/other_bg_flag.svg');
+    }
+    &.flag-en {
+        background-image: url('../images/icons/other_en_flag.svg');
+    }
+    &.icon-esc {
+        background-image: url('../images/icons/esc.svg');
+        background-size: 100px;
+        width: 50px;
+        height: 50px;
+        flex-basis: 170px;
+        padding: 0;
+
+    }
+
+    &.icon-arterialna-hipertonia {
+        background-image: url('../images/icons/90x90_arterialna_hipertonia.svg');
+    }
+    &.icon-ekspertni-stanovishta {
+        background-image: url('../images/icons/90x90_ekspertni_stanovishta.svg');
+    }
+    &.icon-istoria {
+        background-image: url('../images/icons/90x90_istoria.svg');
+    }
+    &.icon-logo {
+        background-image: url('../images/icons/90x90_logo.svg');
+    }
+    &.icon-konsensusi {
+        background-image: url('../images/icons/90x90_konsensusi.svg');
+    }
+    &.icon-konspekti {
+        background-image: url('../images/icons/90x90_konspekti.svg');
+    }
+    &.icon-koronaren-sindrom {
+        background-image: url('../images/icons/90x90_koronaren_sindrom.svg');
+    }
+    &.icon-miokarden-infarkt {
+        background-image: url('../images/icons/90x90_miokarden_infarkt.svg');
+    }
+    &.icon-obuchitelni-materiali {
+        background-image: url('../images/icons/90x90_obuchitelni_materiali.svg');
+    }
+    &.icon-otcheti {
+        background-image: url('../images/icons/90x90_otcheti.svg');
+    }
+    &.icon-prakticheska-informaciq {
+        background-image: url('../images/icons/90x90_prakticheska_informaciq.svg');
+    }
+    &.icon-prevencii {
+        background-image: url('../images/icons/90x90_prevencii.svg');
+    }
+    &.icon-syrdechna-nedostatuchnost {
+        background-image: url('../images/icons/90x90_syrdechna_nedostatuchnost.svg');
+    }
+    &.icon-upravitelen-suvet {
+        background-image: url('../images/icons/90x90_upravitelen_suvet.svg');
+    }
+    &.icon-ustav {
+        background-image: url('../images/icons/90x90_ustav.svg');
+    }
+    &.icon-web-kastove {
+        background-image: url('../images/icons/90x90_web_kastove.svg');
+    }
+    &.icon-rabotni-grupi {
+        background-image: url('../images/icons/90x90-05_rabotni_grupi.svg');
+    }
+    &.icon-evropeiski-direktivi {
+        background-image: url('../images/icons/90x90-07_evropeiski_direktivi.svg');
+    }
+
+    &.icon-other_missing_profile_pic {
+        background-image: url('../images/icons/other_missing_profile_pic.svg');
+    }
+    &.icon-other-open-news {
+        background-image: url('../images/icons/other_open_news.svg');
+    }
+    &.icon-other-see-more {
+        background-image: url('../images/icons/other_see-more.svg');
+    }
+    &.icon-hamburger {
+        background-image: url('../images/icons/hamburger.svg');
+    }
+    &.icon-close {
+        background-image: url('../images/icons/close.svg');
+    }
+    &.icon-pdf {
+        background-image: url('../images/icons/pdf.svg');
+    }
+    &.icon-arrow-up {
+        background-image: url('../images/icons/arrow.svg');
+    }
+    &.icon-rotated-180 {
+        transform: rotate(180deg);
+    }
+}

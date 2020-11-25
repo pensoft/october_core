@@ -1,0 +1,10 @@
+name: Files
+form: $/pensoft/content/models/files/fields.yaml
+modelClass: Pensoft\Content\Models\Files
+defaultRedirect: pensoft/content/files
+create:
+    redirect: 'pensoft/content/files/update/:id'
+    redirectClose: pensoft/content/files
+update:
+    redirect: pensoft/content/files
+    redirectClose: pensoft/content/files

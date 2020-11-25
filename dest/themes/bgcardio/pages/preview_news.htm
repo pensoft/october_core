@@ -1,0 +1,53 @@
+title = "news"
+url = "/preview/news/:id"
+layout = "default"
+meta_title = "Новина"
+meta_description = "Дружество на кардиолозите в България, Bulgarian Society of Cardiology"
+is_hidden = 0
+
+[builderDetails previewNews]
+modelClass = "Pensoft\Content\Models\News"
+identifierValue = "{{ :id }}"
+modelKeyColumn = "id"
+displayColumn = "description"
+notFoundMessage = "Record not found"
+
+[viewBag]
+localeMeta_title[en] = "News"
+localeMeta_description[en] = "Bulgarian Society of Cardiology"
+==
+<?php
+use Pensoft\Content\Models\News;
+use Backend\Facades\Backend; 
+function onStart(){
+    $page = (int)$this->param('id');
+	$this['SelectedLanguage'] = App::getLocale();
+	$this['backend_url'] = Backend::url('pensoft/content/news/update/'.$page);
+	$this['user'] = BackendAuth::getUser();
+}
+?>
+==
+{% set record = previewNews.record %}
+	{% set displayColumn = previewNews.displayColumn %}
+	{% set notFoundMessage = previewNews.notFoundMessage %}
+	
+	{% if user %}
+	<div class="text-right">
+			<a href="{{backend_url}}">Return to admin</a>
+		</div>
+		
+		{% if record %}
+			{% if record.cover_image %}
+			<img class="mr-2 mb-2 float-left" src="{{record.cover_image|crop_image|resize(305,200, { mode: 'crop' })}}" alt="record.cover_image.title">
+			{% endif %}
+			<h1 class="mb-2">{{record.title}}</h1>
+
+			<div class="text primary bold mb-2">{{record.publication_date}}</div>
+
+			{{ attribute(record, displayColumn)|raw }}
+		{% else %}
+			{{ notFoundMessage }}
+		{% endif %}
+	{% else %}
+		{{ notFoundMessage }}
+	{% endif %}
