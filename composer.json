@@ -1,0 +1,7 @@
+{
+    "name": "pensoft/octobercms",
+    "require": {
+        "offline/oc-bootstrapper": "^0.9.1"
+    },
+    "minimum-stability": "stable"
+}

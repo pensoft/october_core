@@ -1,4 +1,0 @@
-1.0.1: 'First version of ImageCropper'
-1.0.2:
-    - 'Created table zakir_imagecropper_cropper'
-    - builder_table_create_zakir_imagecropper_cropper.php

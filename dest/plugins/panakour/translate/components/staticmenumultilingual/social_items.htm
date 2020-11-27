@@ -1,5 +1,0 @@
-{% for item in items %}
-	{% if item.viewBag.isHidden == '0' %}
-		<a href="{{item.url}}" {% if item.viewBag.isExternal %} target="_blank" {% endif %} class="icon {{item.viewBag.cssClass}} large rounded bkg primary mx-1"></a>
-	{% endif %}
-{% endfor %}

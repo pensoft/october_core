@@ -10,8 +10,6 @@ composer.lock
 selenium.php
 /bootstrap/compiled.php
 .phpunit.result.cache
-/plugins
-/themes
 
 # Hosting ignores
 php_errors.log

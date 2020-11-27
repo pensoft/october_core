@@ -1,3 +1,0 @@
-{% for name, value in __SELF__.tags() %}
-    <meta name="{{ name }}" content="{% if __SELF__.property('escape') == false %}{{ value|raw }}{% else %}{{ value }}{% endif %}">
-{% endfor %}
