@@ -4,8 +4,8 @@
 
 <form
     class="ui form"
-    data-request="{{ __SELF__ }}::onRestorePassword"
-    data-request-update="'{{ __SELF__ }}::reset': '#partialUserResetForm'">
+	method="post"
+    data-request="onRestorePassword">
     <div class="field">
         <label for="userRestoreEmail">Email</label>
         <input name="email" type="email" id="userRestoreEmail" placeholder="Enter your email">
@@ -16,7 +16,6 @@
     </div>
 
     <div class="text-center">
-        <a class="btn btn-link" href="/register">Create account</a>
         <a class="btn btn-link" href="/login">Return to login</a>
         
     </div>

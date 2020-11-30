@@ -3,6 +3,8 @@
 use Auth;
 use Lang;
 use Mail;
+use Flash;
+use Redirect;
 use Validator;
 use ValidationException;
 use ApplicationException;
@@ -85,6 +87,7 @@ class ResetPassword extends ComponentBase
 
         $data = [
             'name' => $user->name,
+            'surname' => $user->surname,
             'username' => $user->username,
             'link' => $link,
             'code' => $code
@@ -93,6 +96,8 @@ class ResetPassword extends ComponentBase
         Mail::send('rainlab.user::mail.restore', $data, function($message) use ($user) {
             $message->to($user->email, $user->full_name);
         });
+		return Redirect::to('/login')->with('message', 'Please check your email!');
+
     }
 
     /**
@@ -133,6 +138,7 @@ class ResetPassword extends ComponentBase
         if (!$user->attemptResetPassword($code, post('password'))) {
             throw new ValidationException($errorFields);
         }
+		return Redirect::to('/login')->with('message', 'Password reset!');
     }
 
     //

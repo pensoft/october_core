@@ -4,12 +4,11 @@
 
 <form
     class="ui form"
-    data-request="{{ __SELF__ }}::onResetPassword"
-    data-request-update="'{{ __SELF__ }}::complete': '#partialUserResetForm'">
+    data-request="onResetPassword">
     <div class="fields">
         <div class="field">
             <label for="resetCode">Activation Code</label>
-            <input name="code" type="text" id="resetCode" placeholder="Enter the activation code" value="{{ __SELF__.code }}">
+            <input name="code" type="text" id="resetCode" placeholder="Enter the activation code" value="{{ code }}">
         </div>
     
         <div class="field">

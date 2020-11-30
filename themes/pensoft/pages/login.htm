@@ -12,7 +12,16 @@ paramCode = "code"
 forceSecure = 0
 requirePassword = 0
 ==
+<?php
+	function onStart(){
+		$this['message'] = Session::get('message');
+	}
+?>
+==
 <div class="container">
+	{% if message %}
+		<h1 style="color: #639442;">{{ message }}</h1>
+	{% endif %}
     {% if not user %}
     
         <div class="row">

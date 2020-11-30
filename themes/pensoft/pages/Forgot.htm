@@ -20,7 +20,7 @@ paramCode = "code"
             {% if resetPassword.code == null %}
                 {% partial 'components/resetpassword/restore' %}
             {% else %}
-            {% partial 'components/resetpassword/reset' %}
+            	{% partial 'components/resetpassword/reset' code=resetPassword.code %}
             {% endif %}
         </div>
 
