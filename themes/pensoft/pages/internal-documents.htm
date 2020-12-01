@@ -25,11 +25,23 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 		}
 
 		if($this->param('slug')){
-			$this['folder'] = Subfolders::select('pensoft_internaldocuments_subfolders.*')
-										->where('slug', ''.$this->param('slug').'')
-										->first();
+		if($this->user->inGroup(UserGroup::getSteeringCommitteeUsersGroup())){
+				$this['folder'] = Subfolders::select('pensoft_internaldocuments_subfolders.*')
+											->where('slug', ''.$this->param('slug').'')
+											->first();
 		}else{
-			$this['folders'] = Subfolders::where('pensoft_internaldocuments_subfolders.parent_id', null)->get();
+				$this['folder'] = Subfolders::select('pensoft_internaldocuments_subfolders.*')
+											->where('slug', ''.$this->param('slug').'')
+											->where('slug', '!=', 'steering-committee')
+											->first();
+		}
+
+		}else{
+			if($this->user->inGroup(UserGroup::getSteeringCommitteeUsersGroup())){
+				$this['folders'] = Subfolders::where('pensoft_internaldocuments_subfolders.parent_id', null)->get();
+			}else{
+				$this['folders'] = Subfolders::where('pensoft_internaldocuments_subfolders.parent_id', null)->where('pensoft_internaldocuments_subfolders.slug', '!=', 'steering-committee')->get();
+			}
 		}
 
 		if($this->param('parent_id')){

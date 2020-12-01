@@ -11,6 +11,7 @@ class UserGroup extends GroupBase
     const GROUP_GUEST = 'guest';
     const GROUP_REGISTERED = 'registered';
 	const CODE_INTERNAL_USERS = 'internal-users';
+	const GROUP_STEERING_COMMITTEE = 'steering-committee';
 
     /**
      * @var string The database table used by the model.
@@ -44,6 +45,7 @@ class UserGroup extends GroupBase
 
     protected static $guestGroup = null;
     protected static $internalUsersGroup = null;
+    protected static $steeringCommitteeUsersGroup = null;
     protected static $canEditUsersGroup = null;
 
     /**
@@ -71,5 +73,17 @@ class UserGroup extends GroupBase
 		$group = self::where('code', self::CODE_INTERNAL_USERS)->first() ?: false;
 
 		return self::$internalUsersGroup = $group;
+	}
+
+
+	public static function getSteeringCommitteeUsersGroup()
+	{
+		if (self::$steeringCommitteeUsersGroup !== null) {
+			return self::$steeringCommitteeUsersGroup;
+		}
+
+		$group = self::where('code', self::GROUP_STEERING_COMMITTEE)->first() ?: false;
+
+		return self::$steeringCommitteeUsersGroup = $group;
 	}
 }
