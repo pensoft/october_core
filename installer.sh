@@ -8,7 +8,7 @@ then
     mkdir "./projects"
 fi
 
-# composer create-project october/october $tmp_dir
+composer create-project october/october $tmp_dir
 
 if [ ${#git} -gt 0 ]
 then
@@ -18,7 +18,7 @@ fi
 cp -r "$tmp_dir/." "./projects/$project_name/"
 rm -rf "$tmp_dir"
 cd ./projects/$project_name/
-# php artisan october:install
+php artisan october:install
 
 yes | cp -rf ../../dest/themes/. ./themes
 yes | cp -f ../../dest/README.md ./

@@ -29,6 +29,16 @@ Change:
 - `APP_DEBUG=true` to `APP_DEBUG=false`
 - `APP_URL=http://localhost`
 
-3. Start configurator
+3. Dump database from development machine and copy to production database.
+
+```
+pg_dump --host=192.168.83.21 --dbname=my_project --port=5432 --username=postgres --password > my_project
+```
+copy file to production and execute
+```
+psql --host= --port=5432 --username= --password dbname < my_project
+```
+
+4. Start configurator
 ```bash configurator.sh my_project```
 
